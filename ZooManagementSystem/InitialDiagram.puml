@@ -35,6 +35,25 @@ class AquariumFish {
     + ageOneYear(): boolean
 }
 
+enum Pattern {
+    DOTS
+    STRIPES
+    SPOTS
+    CLEAR
+}
+
+enum Colour {
+    BLACK
+    GOLD
+    ORANGE
+    YELLOW
+    WHITE
+    GREEN
+    BLUE
+    BROWN
+    RED
+    CYAN
+}
 
 class CarnivorousAnimal {
     - name: String
@@ -59,31 +78,11 @@ class CarnivorousAnimal {
     + ageOneYear(): boolean
 }
 
-class ClownFish extends AquariumFish {
-    - pattern: Pattern = Pattern.STRIPES
-    - colour: Colour[] = {Colour.ORANGE, Colour.BLACK, Colour.WHITE}
-    - LifeSpan: int <<static>>
-    
-    + ClownFish(age: int, length: double)
-    + feed(): double
-    + toString(): String
-    + getColours(): String
-    + getPattern(): Pattern
-    + ageOneYear(): boolean
+enum Gender{
+    Male
+    Female
 }
 
-enum Colour {
-    BLACK
-    GOLD
-    ORANGE
-    YELLOW
-    WHITE
-    GREEN
-    BLUE
-    BROWN
-    RED
-    CYAN
-}
 
 class Dog {
     - name: String
@@ -122,10 +121,48 @@ enum DogType{
     Terriers
 }
 
-enum Gender{
-    Male
-    Female
+class Penguin {
+  - height: double
+  - age: int
+  - name: String
+  - LastSortWayused: int = 2
+  - LifeSpan: int = 6
+  - happiness: int
+  - P_noise: String = "squack"
+
+  + Penguin(name: String, age: int, height: double)
+  + SortByHeight(arr: List<Penguin>): List<Penguin>
+  + SortByAge(arr: List<Penguin>): List<Penguin>
+  + SortByName(arr: List<Penguin>): List<Penguin>
+  + getLastSortWayused(): int
+  + setLastSortWayused(lastSortWayused: int): void
+  + Feed_Penguins(fishes: AquariumFish[]): AquariumFish[]
+  + feed(): double
+  + makeNoise(): String
+  + getHeight(): double
+  + setHeight(height: double): void
+  + getAge(): int
+  + setAge(age: int): void
+  + getName(): String
+  + setName(name: String): void
+  + getHappiness(): int
+  + setHappiness(happiness: int): void
+  + ageOneYear(): boolean
 }
+
+class ClownFish extends AquariumFish {
+    - pattern: Pattern = Pattern.STRIPES
+    - colour: Colour[] = {Colour.ORANGE, Colour.BLACK, Colour.WHITE}
+    - LifeSpan: int <<static>>
+    
+    + ClownFish(age: int, length: double)
+    + feed(): double
+    + toString(): String
+    + getColours(): String
+    + getPattern(): Pattern
+    + ageOneYear(): boolean
+}
+
 
 class GoldFish extends AquariumFish {
     - colour: Colour <<static>>
@@ -175,41 +212,6 @@ class Lynx extends CarnivorousAnimal {
   + feed(): double
 }
 
-enum Pattern {
-    DOTS
-    STRIPES
-    SPOTS
-    CLEAR
-}
-
-class Penguin {
-  - height: double
-  - age: int
-  - name: String
-  - LastSortWayused: int = 2
-  - LifeSpan: int = 6
-  - happiness: int
-  - P_noise: String = "squack"
-
-  + Penguin(name: String, age: int, height: double)
-  + SortByHeight(arr: List<Penguin>): List<Penguin>
-  + SortByAge(arr: List<Penguin>): List<Penguin>
-  + SortByName(arr: List<Penguin>): List<Penguin>
-  + getLastSortWayused(): int
-  + setLastSortWayused(lastSortWayused: int): void
-  + Feed_Penguins(fishes: AquariumFish[]): AquariumFish[]
-  + feed(): double
-  + makeNoise(): String
-  + getHeight(): double
-  + setHeight(height: double): void
-  + getAge(): int
-  + setAge(age: int): void
-  + getName(): String
-  + setName(name: String): void
-  + getHappiness(): int
-  + setHappiness(happiness: int): void
-  + ageOneYear(): boolean
-}
 
 class Tiger extends CarnivorousAnimal {
   - Tiger_Noise: String = "roar"
@@ -282,7 +284,11 @@ class Zoo {
   + ageOneYearAll(): String
 }
 
-
+class AgeException extends Exception {
+  + AgeException()
+  + AgeException(String message)
+  + AgeValidator(int age) <<throws AgeException>>
+}
 
 }
 @enduml

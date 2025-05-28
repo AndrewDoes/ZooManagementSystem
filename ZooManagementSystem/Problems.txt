@@ -1,0 +1,6 @@
+1. Class Dog gak masuk ke Carnivorous Animals (Missing Abstraction & Incorrect Hierarchy)
+    - Dog punya banyak atribut sama kayak Carnivorous
+    - Dog juga makannya daging
+    - harusnya masuk CarnivorousAnimal intinya
+
+2. 
