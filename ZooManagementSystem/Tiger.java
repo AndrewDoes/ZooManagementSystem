@@ -9,4 +9,8 @@ public class Tiger extends CarnivorousAnimal{
         public String makeNoise(){
             return "roar";
         }
+
+        public String toString(){
+            return "Tiger.";
+        }
 }

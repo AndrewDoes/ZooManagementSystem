@@ -26,4 +26,8 @@ public class Lion extends CarnivorousAnimal{
             else return meat;
         }
     }
+
+    public String toString(){
+        return "Lion.";
+    }
 }

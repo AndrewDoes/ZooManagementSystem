@@ -6,7 +6,7 @@ public class Lynx extends CarnivorousAnimal{
     	 super(name, age, 15, weight, gender, 1.1, 1.3);
      }
      
-     public double howMuchMeatToEat() {
+     public double feed() {
     	 double meat = (getWeight()*0.1 + getAge()*2);
     	 if(getGender() == Gender.Male) {
     		 meat *= getMeatCalcMale();
@@ -21,4 +21,8 @@ public class Lynx extends CarnivorousAnimal{
      public String makeNoise() {
     	 return "RAAAHHH";
      }
+
+	 public String toString() { 
+		 return "Lynx."; 
+	 }
 }

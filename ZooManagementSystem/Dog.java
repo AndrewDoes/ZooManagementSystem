@@ -17,4 +17,8 @@ public class Dog extends CarnivorousAnimal{
     public String makeNoise(){
         return "BARK";
     }
+
+    public String toString(){
+        return "Dog.";
+    }
 }

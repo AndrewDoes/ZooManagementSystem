@@ -5,22 +5,13 @@ import java.util.List;
 
 public class Penguin extends Animal{
 	private double height;
-	private int age;
 	private String name;
-
-	private static int LastSortWayused=2; // Defult is by height
-
-	private static int LifeSpan= 6;
-
-	private int happiness ;
-	private final String P_noise;
-
+	public static int LastSortWayused;
 	//Constructor
 	public Penguin(String name, int age, double height) {
 		super(age, 6);
 		this.name = name;
 		this.height = height;
-		this.P_noise= "squack";
 		this.happiness=100;
 	}
 	
@@ -93,24 +84,12 @@ public class Penguin extends Animal{
 		return 1.0;
 	}
 
-	public String makeNoise(){
-		return P_noise;
-	}
-
 	public double getHeight() {
 		return height;
 	}
 
 	public void setHeight(double height) {
 		this.height = height;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
 	}
 
 	public String getName() {
@@ -121,16 +100,12 @@ public class Penguin extends Animal{
 		this.name = name;
 	}
 
-	public int getHappiness() {
-		return happiness;
-	}
+	public String toString() { 
+		return "Penguin."; 
+	 }
 
-	public void setHappiness(int happiness) {
-		this.happiness = happiness;
-	}
-	public boolean ageOneYear(){
-		this.age+=1;
-		return this.age <= LifeSpan;
-	}
+	 public String makeNoise() {
+		 return "squack";
+	 }
 }
 

@@ -47,4 +47,8 @@ public class Fish extends Animal{
     public String makeNoise(){
         return "blob";
     }
+
+    public String toString(){
+        return "Fish.";
+    }
 }

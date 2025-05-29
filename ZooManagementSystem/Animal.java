@@ -51,4 +51,5 @@ public abstract class Animal {
 
     public abstract String makeNoise();
     public abstract double feed();
+    public abstract String toString();
 }
