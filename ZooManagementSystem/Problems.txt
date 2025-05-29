@@ -1,6 +1,48 @@
+Initial Design Smell:
 1. Class Dog gak masuk ke Carnivorous Animals (Missing Abstraction & Incorrect Hierarchy)
     - Dog punya banyak atribut sama kayak Carnivorous
     - Dog juga makannya daging
     - harusnya masuk CarnivorousAnimal intinya
+    --> bisa nambahin possible new design smell (point 1 additional design smell)
 
-2. 
+    Possible Solution : 
+    -   Carnivorous jadi interface aja soalnya ikan dan penguin juga bisa carnivorous
+    -   Tambahin abstract class Animals untuk jadi awalan
+    -   Ubah CarnivorousAnimals jadi Mammal
+    -   Ubah AquaticAnimals jadi Fish
+    -   Tambahin Abstract class Bird untuk penguin
+
+2. Class Zoo handle terlalu banyak responsibilities (Multifaceted Abstraction || Large Class)
+    Responsibilities:
+    -   ngatur Database semua hewan + CRUD (Lion, Penguin, Tiger, dll)
+    -   print semua hewan
+    -   mengecek height penguin
+    -   feed hewan
+    -   nambahin umur semua hewan setaun
+    -   listen to all animals in the Zoo
+    -   mencari most popular fish colour
+    Possible Solution :
+
+3. Class Main terlalu banyak responsibilities (Multifaceted Abstraction || Large Class)
+
+4. Hierarchy utama abstract class "Animals" tidak terdapat (missing hierarchy)
+    - Semua class hewan memiliki atribut dan function yang sama seperti:
+        - age
+        - happiness
+        - Lifespan
+        - Noise
+        - getter setter dari atribut di atas
+        - feed()
+        - toString()
+        - ageOneYear()
+        - makeNoise()
+
+5. Atribut tambahan di class yang extend carnivorous memiliki atribut sama
+sebaiknya di move attribute ke superclassnya.
+
+6. Beberapa hall seperti noise dan MeatCalcFemale/MeatCalcMale sebaiknya menjadi behavior saja bukan attribute
+
+Tahapan Benerin:
+    - bikin Abstract Class Animal buat top Abstraction (Design Smell-3)
+    - bikin Abstract Class Mammal, Fish, Bird
+    - bikin Interface untuk sikap2 tertentu (nameable, )
