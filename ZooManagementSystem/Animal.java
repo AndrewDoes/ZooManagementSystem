@@ -11,14 +11,12 @@ package ZooManagementSystem;
 // - makeNoise()
 
 public abstract class Animal {
-    private int age;
-    private Gender gender;
-    private int happiness;
-    private int lifeSpan;
+    protected int age;
+    protected int happiness = 100;
+    protected int lifeSpan;
     
-    public Animal(int age, int happiness, String Noise, int lifeSpan) {
+    public Animal(int age, int lifeSpan) {
         this.age = age;
-        this.happiness = happiness;
         this.lifeSpan = lifeSpan;
     }
 
@@ -28,14 +26,6 @@ public abstract class Animal {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
     }
 
     public int getHappiness() {
@@ -52,6 +42,11 @@ public abstract class Animal {
 
     public void setLifeSpan(int lifeSpan) {
         this.lifeSpan = lifeSpan;
+    }
+
+    public boolean ageOneYear(){
+        this.age+=1;
+        return this.age <= lifeSpan;
     }
 
     public abstract String makeNoise();
