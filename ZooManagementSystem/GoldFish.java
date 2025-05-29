@@ -1,35 +1,15 @@
 package ZooManagementSystem;
 
-public class GoldFish extends AquariumFish{
-	
-	private static Colour colour;
-	private Pattern pattern = Pattern.CLEAR;
+import java.util.List;
 
-	private static int LifeSpan= 12;
-	
-	
+public class GoldFish extends Fish{	
 	//Constructor,  a random colour will be chosen.
 	public GoldFish(int age, double length) {
-		super(age, length);
-		Colour[] allColours = {Colour.BLACK, Colour.GOLD, Colour.ORANGE, Colour.YELLOW};
-		int num = (int)(Math.random()*3)+1;
-		colour = allColours[num];
-		Zoo.numOfFishColours[num]++;
-		
+		super(age, 12, length , List.of(Colour.BLACK, Colour.GOLD, Colour.ORANGE, Colour.YELLOW), Pattern.CLEAR);
 	}
-	
 	
 	public double feed() {
 		return 1.0;
-	}
-
-
-	public static Colour getColour() {
-		return colour;
-	}
-
-	public static void setColour(Colour colour) {
-		GoldFish.colour = colour;
 	}
 
 	public Pattern getPattern() {
@@ -39,17 +19,4 @@ public class GoldFish extends AquariumFish{
 	public String toString() {
 		return "GoldFish.";
 	}
-	
-	public String getColours() {
-		String x = ""+colour;
-		
-		return x;
-	}
-
-	@Override
-	public boolean ageOneYear(){
-		this.setAge(this.getAge()+1);
-		return this.getAge() <= LifeSpan;
-	}
-
 }

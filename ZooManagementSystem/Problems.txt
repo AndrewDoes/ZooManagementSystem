@@ -26,6 +26,8 @@ Initial Design Smell:
 3. Class Main terlalu banyak responsibilities (Multifaceted Abstraction || Large Class)
 
 4. Hierarchy utama abstract class "Animals" tidak terdapat (missing hierarchy)
+   Hal ini dideteksi dari adanya Data Clumps di hampir seluruh class
+   Solusi : di Extract SuperClass baru (Animal)
     - Semua class hewan memiliki atribut dan function yang sama seperti:
         - age
         - happiness
@@ -45,4 +47,4 @@ sebaiknya di move attribute ke superclassnya.
 Tahapan Benerin:
     - bikin Abstract Class Animal buat top Abstraction (Design Smell-3)
     - bikin Abstract Class Mammal, Fish, Bird
-    - bikin Interface untuk sikap2 tertentu (nameable, )
+    - bikin Interface untuk sikap2 tertentu (nameable, carnivorous)

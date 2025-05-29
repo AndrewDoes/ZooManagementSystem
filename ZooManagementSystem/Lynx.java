@@ -1,39 +1,24 @@
 package ZooManagementSystem;
 
 public class Lynx extends CarnivorousAnimal{
-	
-	
-	 private final String Lynx_Noise = "RAAAHHH";
-
-	 private final double MeatCalcMale = 1.1;
-	 private final double MeatCalcFemale= 1.3;
-     public Lynx(){
-         super();
-     }
-     
+	 
      public Lynx(String name, int age, double weight, Gender gender) {
-    	 super(name,age,weight,gender);
+    	 super(name, age, 15, weight, gender, 1.1, 1.3);
      }
      
-     public int howMuchMeatDoesLynxEat() {
-    	 double meat = (int)(getWeight()*0.1 + getAge()*2);
+     public double howMuchMeatToEat() {
+    	 double meat = (getWeight()*0.1 + getAge()*2);
     	 if(getGender() == Gender.Male) {
-    		 meat *= MeatCalcMale;
-    		 return (int)(meat);
+    		 meat *= getMeatCalcMale();
+    		 return (meat);
     	 }
     	 else {
-    		 meat *= MeatCalcFemale;
-    		 return (int)(meat);
+    		 meat *= getMeatCalcFemale();
+    		 return (meat);
     	 }
      }
 
      public String makeNoise() {
-    	 return Lynx_Noise;
+    	 return "RAAAHHH";
      }
-     
-     public double feed() {
-    	 return howMuchMeatDoesLynxEat();
-     }
-     
-	
 }

@@ -3,7 +3,7 @@ package ZooManagementSystem;
 
 import java.util.List;
 
-public class Penguin {
+public class Penguin extends Animal{
 	private double height;
 	private int age;
 	private String name;
@@ -17,8 +17,8 @@ public class Penguin {
 
 	//Constructor
 	public Penguin(String name, int age, double height) {
+		super(age, 6);
 		this.name = name;
-		this.age = age;
 		this.height = height;
 		this.P_noise= "squack";
 		this.happiness=100;

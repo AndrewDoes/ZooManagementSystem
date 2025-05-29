@@ -1,13 +1,10 @@
 package ZooManagementSystem;
 
-public class ClownFish extends AquariumFish {
+import java.util.List;
 
-	private Pattern pattern = Pattern.STRIPES;
-	private Colour[] colour = {Colour.ORANGE, Colour.BLACK, Colour.WHITE};
-
-	private static int LifeSpan= 8;
+public class ClownFish extends Fish {
 	public ClownFish(int age, double length) {
-		super(age, length);
+		super(age, 8, length, List.of(Colour.ORANGE, Colour.BLACK, Colour.WHITE), Pattern.STRIPES);
 		Zoo.numOfFishColours[0]++;
 		Zoo.numOfFishColours[2]++;
 		Zoo.numOfFishColours[4]++;
@@ -16,26 +13,13 @@ public class ClownFish extends AquariumFish {
 	public double feed() {
 		return 2.0;
 	}
+	
 	public String toString() {
 		return "ClownFish.";
-	}
-	
-	public String getColours() {
-		String x = "";
-		for(int i = 0; i < colour.length; i++) {
-			x+=colour[i]+  " ";
-		}
-		return x;
 	}
 
 	@Override
 	public Pattern getPattern() {
 		return pattern;
-	}
-
-	@Override
-	public boolean ageOneYear(){
-		this.setAge(this.getAge()+1);
-		return this.getAge() <= LifeSpan;
 	}
 }
