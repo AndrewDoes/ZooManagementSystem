@@ -44,7 +44,28 @@ sebaiknya di move attribute ke superclassnya.
 
 6. Beberapa hall seperti noise dan MeatCalcFemale/MeatCalcMale sebaiknya menjadi behavior saja bukan attribute
 
+7. Multifaceted Abstraction and Refused Bequest di AquariumFish
+    - method seperti randomizeColour dan randomizePattern bukan responsibility AquariumFish
+    - Subclass yang extend dari AquariumFish tidak 
+
 Tahapan Benerin:
     - bikin Abstract Class Animal buat top Abstraction (Design Smell-3)
-    - bikin Abstract Class Mammal, Fish, Bird
-    - bikin Interface untuk sikap2 tertentu (nameable, carnivorous)
+    - correspond semua class di bawahnya dengan Hierarchy baru
+        - rename AquariumFish jadi Fish saja
+        - CarnivorousAnimal, Fish, dan Penguin extends Animal
+        - Dog masuk ke CarnivorousAnimal
+    - Perbaiki SRP untuk class Fish
+        - di dalam class Fish terdapat method randomizeColour dan randomizePattern
+        - buat Class FishAttributeRandomizer untuk handle responsibility tersebut
+    - Perbaiki Zoo class
+        - di dalam Zoo Class terdapat banyak sekali responsibilities, menjadikan class itu hampir God Class
+        - Zoo Class sebaiknya memiliki responsibility untuk menghandle request dari Main saja
+            - lakukan Extract Class, untuk semua method yang berhubungan dengan Fish akan ditaruh di class FishService
+                - addNewFish
+                - addRandomFish
+                - getAllFish
+            - lakukan yang sama untuk setiap hewan lainnya juga (tambahin setiap add dan get di Service)
+            - Print logic bikin di ZooPrinter
+        - Zoo Class tetap memiliki responsibility untuk
+            - add, feed, dan lain-lain namun hanya sebatas sebagai tampilan saja
+            - listenToAll, feedAll, ageOneYearAll, dll
