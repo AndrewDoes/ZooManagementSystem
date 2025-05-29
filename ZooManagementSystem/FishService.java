@@ -37,7 +37,9 @@ public class FishService extends Services<Fish>{
 			if(type == 3) {
 				new_fish = new ClownFish(age, length);
 			} else if(type == 2) {
-				new_fish = new GoldFish(age, length);
+                List<Colour> colours = Arrays.asList(Colour.BLACK, Colour.GOLD, Colour.ORANGE, Colour.YELLOW);
+                Colour colour = FishAttributeRandomizer.randomSingleColour(colours);
+				new_fish = new GoldFish(age, length, colour);
 			} else if (type == 1) {
 				new_fish = new Fish(age,length, singularFishColours, Pattern);
 			}
@@ -57,9 +59,12 @@ public class FishService extends Services<Fish>{
                 fish = new Fish(ageTemp, lengthTemp, FishAttributeRandomizer.randomColour(), FishAttributeRandomizer.randomPattern());
             }
             if(typeOfFish == 2) {
-                fish = new GoldFish(ageTemp, lengthTemp);
+                List<Colour> colours = Arrays.asList(Colour.BLACK, Colour.GOLD, Colour.ORANGE, Colour.YELLOW);
+                Colour colour = FishAttributeRandomizer.randomSingleColour(colours);
+                fish = new GoldFish(ageTemp, lengthTemp, colour);
             }
             if(typeOfFish == 3) {
+
                 fish = new ClownFish(ageTemp, lengthTemp);
             }
             addNewAnimal(fish);

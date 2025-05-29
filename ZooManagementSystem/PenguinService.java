@@ -125,7 +125,7 @@ public class PenguinService extends Services<Penguin> {
 	}
 
     	// Deleting a fish after it was eaten by a penguin
-	public void Feed_Penguins(List<Fish> fishes){
+	public List<Fish> Feed_Penguins(List<Fish> fishes){
 		int lastFish= fishes.size()-1;
 		// Removing from the aquarium the last fish that was eaten
 		Fish Fish_to_eat = fishes.get(lastFish);
@@ -133,11 +133,7 @@ public class PenguinService extends Services<Penguin> {
 			System.out.println("Successfully deleted " + Fish_to_eat);
 		fishes.remove(lastFish);
 
+        return fishes;
         //ini code smell feature envy, ganti nanti
-        this.getRepo().clearAnimals("Fishes");
-        FishService fService = new FishService(this.getRepo());
-        for (Fish fish : fishes) {
-            fService.addNewAnimal(fish);
-        }
 	}
 }

@@ -33,6 +33,11 @@ public static List<Colour> randomColour() {
     return singularFishColours;
 }
 
+public static Colour randomSingleColour(List<Colour> colour){
+    int num = (int)(Math.random()*3)+1;
+	return colour.get(num);
+}
+
 	//Returns a random enum value of pattern.
 	public static Pattern randomPattern() {
 		List<Pattern> allPatterns = Arrays.asList(Pattern.values());

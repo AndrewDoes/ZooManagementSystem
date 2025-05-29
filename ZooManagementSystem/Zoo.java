@@ -7,6 +7,7 @@ import static ZooManagementSystem.Gender.*;
 
 
 public class Zoo {
+	private static final int max_happiness = 100;
 	private static String name;
 	private static String location;
 	private AnimalRepository repo = new AnimalRepository();
@@ -29,16 +30,18 @@ public class Zoo {
 	private static String getLocation() {
 		return location;
 	}
-	public static String zooDetails() {
+	public String printZooDetails() {
 		String forPrint = "Name of the Zoo: " + name + " \nAddress: " + location + "\nin the Zoo there are: \n"
-				+ numberOfLions + " Lions,\n" + numberOfTigers+" Tigers,\n" + numberOfLynxes+" Lynxes,\n" + numberOfDogs +" Dogs,\n" +numberOfPenguins + " Penguins,\n" + numberOfFishes + " Fishes.";
+				+ lionService.getAll().size() + " Lions,\n" + tigerService.getAll().size()+" Tigers,\n" 
+				+ lynxService.getAll().size()+" Lynxes,\n" + dogService.getAll().size() +" Dogs,\n" 
+				+penguinService.getAll().size() + " Penguins,\n" + fishService.getAll().size() + " Fishes.";
 
 		return forPrint;
 
 	}
 	
 	public String printFishes() {
-		List<Fish> fishes = fishService.getAllFish();
+		List<Fish> fishes = fishService.getAll();
 		int numberOfFishes = repo.getAnimals("Fish").size();
 		if(numberOfFishes>0) {
 			String Fishes_D="";
@@ -48,7 +51,7 @@ public class Zoo {
 				Fishes_D+= (i+1)+")Type Of Fish: "+ fishes.get(i).toString()+" Age: "+ fishes.get(i).getAge() + " Length: " + String.format("%.2f",fishes.get(i).getLength()) + " Pattern: " + fishes.get(i).getPattern()+ " Happiness: "+ fishes.get(i).getHappiness() + ".\n";
 				All_colors += fishes.get(i).getColours() + " ";
 			}
-			All_colors = AquariumFish.removeDuplicateWords(All_colors);
+			All_colors = fishService.removeDuplicateWords(All_colors);
 			return Fishes_D+ toPrint + All_colors;
 		}
 		else {
@@ -57,7 +60,8 @@ public class Zoo {
 		}
 	}
 
-	public static String printPenguins() {
+	public String printPenguins() {
+		List<Penguin> penguins = penguinService.getAll();
 		String forPrint = "The penguins in the Zoo are as follows:\n";
 		for (Penguin p : penguins){
 			forPrint += "Name: " + p.getName() +  " Age: " + p.getAge() +  " Height: "
@@ -66,112 +70,123 @@ public class Zoo {
 		return forPrint;
 	}
 
-	public static String printLions() {
+	public String printLions() {
+		List<Lion> lions = lionService.getAll();
 		String forPrint = "The lions in the Zoo are as follows:\n";
-		for (int i = 0; lions[i] != null; i++) {
-			forPrint += "Name: " + lions[i].getName() + " Age: " + lions[i].getAge() + " Weight: "
-					+ lions[i].getWeight() + " Happiness: "+ lions[i].getHappiness() + ".\n";
+		for (Lion lion : lions) {
+			forPrint += "Name: " + lion.getName() + " Age: " + lion.getAge() + " Weight: "
+					+ lion.getWeight() + " Happiness: "+ lion.getHappiness() + ".\n";
 		}
 		return forPrint;
 	}
 
-	public static String printTigers(){
+	public String printTigers(){
+		List<Tiger> tigers = tigerService.getAll();
 		String T_forPrint= "The Tigers in the zoo are:\n";
-		for(int i=0 ; tigers[i]!=null;i++){
-			T_forPrint+="Name: " + tigers[i].getName() + " Age: " + tigers[i].getAge() + " Weight: "
-					+ tigers[i].getWeight() + "Happiness: "+ tigers[i].getHappiness() + ".\n";
+		for(Tiger tiger : tigers){
+			T_forPrint+="Name: " + tiger.getName() + " Age: " + tiger.getAge() + " Weight: "
+					+ tiger.getWeight() + "Happiness: "+ tiger.getHappiness() + ".\n";
 		}
 		return T_forPrint;
 	}
 
-	public static String printLynxes() {
+	public String printLynxes() {
+		List<Lynx> lynxes = lynxService.getAll();
 		String forPrint = "The lynxes in the Zoo are as follows:\n";
-		for (int i = 0; lynxes[i] != null; i++) {
-			forPrint += "Name: " + lynxes[i].getName() + " Age: " + lynxes[i].getAge() + " Weight: "
-					+ lynxes[i].getWeight() + " Happiness: "+ lynxes[i].getHappiness() + ".\n";
+		for (Lynx lynx : lynxes) {
+			forPrint += "Name: " + lynx.getName() + " Age: " + lynx.getAge() + " Weight: "
+					+ lynx.getWeight() + " Happiness: "+ lynx.getHappiness() + ".\n";
 		}
 		return forPrint;
 	}
 
-	public static String printDogs(){
+	public String printDogs(){
+		List<Dog> dogs = dogService.getAll();
 		String forPrint = "The dogs in the zoo are as follows:\n";
-		for(int i=0; dogs[i]!=null;i++){
-			forPrint += "Name: " + dogs[i].getName() + " Age: " + dogs[i].getAge() + " Weight: "
-					+ dogs[i].getWeight() +" Gender: "+ dogs[i].getGender() + " Type: "+ dogs[i].getType() + " Happiness: "+ dogs[i].getHappiness() + ".\n";
+		for(Dog dog : dogs){
+			forPrint += "Name: " + dog.getName() + " Age: " + dog.getAge() + " Weight: "
+					+ dog.getWeight() +" Gender: "+ dog.getGender() + " Type: "+ dog.getType() + " Happiness: "+ dog.getHappiness() + ".\n";
 		}
 		return forPrint;
 	}
 	
 	public  int Feed_lions(){
+		List<Lion> lions = lionService.getAll();
 		int food_lions=0;
 		for (Lion lion : lions) {
 			if(lion==null)
 				break;
-			food_lions += lion.howMuchMeatToEat();
+			food_lions += lion.feed();
 			lion.setHappiness(max_happiness);
 		}
 		return food_lions;
 	}
 
+
 	public int Feed_tigers(){
+		List<Tiger> tigers = tigerService.getAll();
 		int food_tigers=0;
 		for(Tiger tiger : tigers){
 			if(tiger==null)
 				break;
-			food_tigers+=tiger.howMuchMeatToEat();
+			food_tigers+=tiger.feed();
 			tiger.setHappiness(max_happiness);
 		}
 		return food_tigers;
 	}
 
 	public int Feed_lynxes() {
+		List<Lynx> lynxes = lynxService.getAll();
 		int food_lynxes=0;
 		for(Lynx lynx : lynxes) {
 			if(lynx == null)
 				break;
-			food_lynxes += lynx.howMuchMeatToEat();
+			food_lynxes += lynx.feed();
 			lynx.setHappiness(max_happiness);
 		}
 		return food_lynxes;
 	}
 
 	public int FeedDogs() {
+		List<Dog> dogs = dogService.getAll();
 		int food_dogs=0;
 		for(Dog dog : dogs) {
 			if(dog == null)
 				break;
-			food_dogs += dog.howMuchMeatToEat();
+			food_dogs += dog.feed();
 			dog.setHappiness(max_happiness);
 		}
 		return food_dogs;
 	}
 	
 	public double Feed_Fishes(){
+		List<Fish> fishes = fishService.getAll();
 		double food_fishes=0;
-		for (AquariumFish fish : fishes) {
+		for (Fish fish : fishes) {
 			if(fish==null)
 				break;
-			food_fishes += fish.HowMuchMealFish();
+			food_fishes += fish.feed();
 			fish.setHappiness(max_happiness);
 		}
 		return food_fishes;
 	}
 
 	public int Feed_penguins(){
+		List<Penguin> penguins = penguinService.getAll();
 		int count_food_p=0;
+		List<Fish> fishes = fishService.getAll();
 		// For Each Penguin a Fish was Eaten
 		for (Penguin penguin : penguins){
-			if(penguin==null)
-				break;
-			fishes = penguin.Feed_Penguins(fishes);
-			if(numberOfFishes>0) {
-				numberOfFishes--;
-				count_food_p+=1;
-				penguin.setHappiness(max_happiness); // Just the penguin that ate will return to level 100 of Happiness
-			}
-			else {
+			if(penguin==null){
 				break;
 			}
+			fishes = penguinService.Feed_Penguins(fishes);
+			repo.clearAnimals("Fishes");
+			FishService fService = new FishService(this.getRepo());
+			for (Fish fish : fishes) {
+				fService.addNewAnimal(fish);
+			}
+			penguin.setHappiness(max_happiness); // Just the penguin that ate will return to level 100 of Happiness
 		}
 		return count_food_p;
 	}

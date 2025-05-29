@@ -4,7 +4,7 @@ import java.util.List;
 
 public class GoldFish extends Fish{	
 	//Constructor,  a random colour will be chosen.
-	public GoldFish(int age, double length) {
+	public GoldFish(int age, double length, Colour colour) {
 		super(age, 12, length , List.of(Colour.BLACK, Colour.GOLD, Colour.ORANGE, Colour.YELLOW), Pattern.CLEAR);
 	}
 	
