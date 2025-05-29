@@ -11,9 +11,9 @@ package ZooManagementSystem;
 // - makeNoise()
 
 public abstract class Animal {
-    protected int age;
-    protected int happiness = 100;
-    protected int lifeSpan;
+    private int age;
+    private int happiness = 100;
+    private int lifeSpan;
     
     public Animal(int age, int lifeSpan) {
         this.age = age;
