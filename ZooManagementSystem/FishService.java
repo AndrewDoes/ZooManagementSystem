@@ -1,5 +1,6 @@
 package ZooManagementSystem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FishService {
@@ -8,7 +9,19 @@ public class FishService {
     public FishService(AnimalRepository repo){
         this.repo = repo;
     };
-    
+
+    public List<Fish> getAllFish(){
+        List<Animal> animals = repo.getAnimals("Fish");
+        List<Fish> fishes = new ArrayList<Fish>();
+
+        for(Animal animal : animals){
+            if(animal instanceof Fish){
+                fishes.add((Fish) animal);
+            }
+        }
+        return fishes;
+    }
+
     public void AddFish(int type, int age, double length, List<Colour> singularFishColours,Pattern Pattern){
 		Fish new_fish=null;
         // int age, int lifeSpan, double length, List<Colour> colours, Pattern pattern
@@ -25,7 +38,7 @@ public class FishService {
 	//Type of Fish 1 = Reg Fish
 	//Type of Fish 2 = GoldFish
 	//Type of Fish 3 = ClownFish
-	public List<Animal> addRandomFish(int num) {
+	public List<Fish> addRandomFish(int num) {
 		for (int i = 0; i < num; i++) {
 				int ageTemp = (int)(Math.random() * 10 + 1);
 				double lengthTemp = Math.random() * 10 + 1;
@@ -41,7 +54,7 @@ public class FishService {
                 Fish fish = new Fish(ageTemp, lengthTemp, FishAttributeRandomizer.randomColour(), FishAttributeRandomizer.randomPattern());
                 repo.addAnimal("Fish", fish);
 			}
-        return repo.getAnimals("Fish");
+        return getAllFish();
     }
 
 
