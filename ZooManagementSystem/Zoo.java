@@ -2,7 +2,10 @@ package ZooManagementSystem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import static ZooManagementSystem.Gender.*;
 
 
@@ -268,135 +271,96 @@ public class Zoo {
 	
 	public String ListentoAllAnimalsinZoo(){
 		String out="";
-		out+= "1)Lions Noise: "+ lions[0].makeNoise() + " 2)Tigers Noise: " + tigers[0].makeNoise() + " 3)Penguins Noise: " + penguins.get(0).makeNoise() + " 4)Fishes Noise: " + fishes[0].makeNoise() + "5)Lynxes Noise: " + lynxes[0].makeNoise() + "6)Dogs Noise: " + dogs[0].makeNoise();
+		out+= "1)Lions Noise: "+ lionService.getAll().get(0).makeNoise() + " 2)Tigers Noise: " + tigerService.getAll().get(0).makeNoise() +
+		 " 3)Penguins Noise: " + penguinService.getAll().get(0).makeNoise() + " 4)Fishes Noise: " + fishService.getAll().get(0).makeNoise() +
+		  "5)Lynxes Noise: " + lynxService.getAll().get(0).makeNoise() + "6)Dogs Noise: " + dogService.getAll().get(0).makeNoise();
 		return out;
 	}
 	
-	public static String MostPopularFishColour() {
-		int index = -1;
-		int secondIndex = -1;
-		int max = 0;
-		int secondMax = 0;
-		for(int i = 0; i < numOfFishColours.length; i++) {
-			if(numOfFishColours[i] >= max) {
-				secondMax = max;
-				max = numOfFishColours[i];
-				secondIndex = index;
-				index = i;
-			}
+	public String MostPopularFishColour() {
+    List<Fish> fishes = fishService.getAll();
+    Map<Colour, Integer> colourCounts = new HashMap<>();
+    assignColourMap(fishes, colourCounts);
+    // Find the two most common colours
+    Colour mostCommonColour = null;
+    Colour secondMostCommonColour = null;
+    int maxCount = 0;
+    int secondMaxCount = 0;
+    return find2MostPopularColour(colourCounts, mostCommonColour, secondMostCommonColour, maxCount, secondMaxCount);
+}
+
+	private String find2MostPopularColour(Map<Colour, Integer> colourCounts, Colour mostCommonColour, Colour secondMostCommonColour,
+			int maxCount, int secondMaxCount) {
+		for (Map.Entry<Colour, Integer> entry : colourCounts.entrySet()) {
+		    int count = entry.getValue();
+		    if (count > maxCount) {
+		        secondMaxCount = maxCount;
+		        maxCount = count;
+		        secondMostCommonColour = mostCommonColour;
+		        mostCommonColour = entry.getKey();
+		    } else if (count > secondMaxCount) {
+		        secondMaxCount = count;
+		        secondMostCommonColour = entry.getKey();
+		    }
 		}
-		
-		return "The most common colour in the aquarium are:\n"+Colour.values()[index]+" & " + Colour.values()[secondIndex];
-		
+		return "The most common colour in the aquarium are:\n" + mostCommonColour + " & " + secondMostCommonColour;
 	}
 
+	private void assignColourMap(List<Fish> fishes, Map<Colour, Integer> colourCounts) {
+		for (Fish fish : fishes) {
+		    List<Colour> colours = fish.getColours();
+		    for (Colour colour : colours) {
+		        colourCounts.put(colour, colourCounts.getOrDefault(colour, 0) + 1);
+		    }
+		}
+	}
+
+
 	public String ageOneYearAll(){
+		List<Animal> animals = repo.getAllAnimal();
 		String PrintAllDead="";
-		for(int i=0;i<numberOfLynxes;i++){
-			if(!lynxes[i].ageOneYear()){
-				PrintAllDead+=lynxes[i].getName()+" is Dead because of his age\n";
-				lynxes[i]=null;
-				lynxes[i]=lynxes[numberOfLynxes-1];
-				numberOfLynxes--;
-				i--;
-			} else{
-				lynxes[i].setHappiness(lynxes[i].getHappiness()-(int)(Math.random() * 20 + 1));
-				if(lynxes[i].getHappiness()<=0){
-					PrintAllDead+=lynxes[i].getName() +" is Dead because of his Sadness:(\n";
-					lynxes[i]=lynxes[numberOfLynxes-1];
-					lynxes[numberOfLynxes-1]=null;
-					numberOfLynxes--;
-					i--;
+		int index = 0;
+		PrintAllDead = ageAll(animals, PrintAllDead, index);
+		return PrintAllDead;
+	}
+
+	private String ageAll(List<Animal> animals, String PrintAllDead, int index) {
+		for(Animal animal : animals){
+			if(!animal.ageOneYear()){
+				PrintAllDead = reportDeathByAge(PrintAllDead, animal);
+				animals.remove(index);
+			}
+			else{
+				animal.setHappiness(animal.getHappiness()-(int)(Math.random() * 20 + 1));
+				if(animal.getHappiness()<=0){
+					PrintAllDead = reportDeathBySadness(PrintAllDead, animal);
+					animals.remove(index);
 				}
 			}
+			index++;
 		}
-		for(int i=0;i<numberOfDogs;i++){
-			if(!dogs[i].ageOneYear()){
-				PrintAllDead+=dogs[i].getName()+" is Dead because of his age\n";
-				dogs[i]=null;
-				dogs[i]=dogs[numberOfDogs-1];
-				numberOfDogs--;
-				i--;
-			} else{
-				dogs[i].setHappiness(dogs[i].getHappiness()-(int)(Math.random() * 20 + 1));
-				if(dogs[i].getHappiness()<=0){
-					PrintAllDead+=dogs[i].getName() +" is Dead because of his Sadness:(\n";
-					dogs[i]=dogs[numberOfDogs-1];
-					dogs[numberOfDogs-1]=null;
-					numberOfDogs--;
-					i--;
-				}
-			}
+		return PrintAllDead;
+	}
+
+	private String reportDeathBySadness(String PrintAllDead, Animal animal) {
+		if(animal instanceof CarnivorousAnimal){
+			PrintAllDead+=((CarnivorousAnimal) animal).getName() +" is Dead because of his Sadness:(\n";
+		}else if(animal instanceof Penguin){
+			PrintAllDead+=((Penguin) animal).getName() +" is Dead because of his Sadness:(\n";
 		}
-		for(int i=0;i<numberOfTigers;i++){
-			if(!tigers[i].ageOneYear()){
-				PrintAllDead+=tigers[i].getName()+" is Dead because of his age\n";
-				tigers[i]=null;
-				tigers[i]=tigers[numberOfTigers-1];
-				numberOfTigers--;
-				i--;
-			} else{
-				tigers[i].setHappiness(tigers[i].getHappiness()-(int)(Math.random() * 20 + 1));
-				if(tigers[i].getHappiness()<=0){
-					PrintAllDead+=tigers[i].getName() +" is Dead because of his Sadness:(\n";
-					tigers[i]=tigers[numberOfTigers-1];
-					tigers[numberOfTigers-1]=null;
-					numberOfTigers--;
-					i--;
-				}
-			}
+		else if(animal instanceof Fish){
+			PrintAllDead+=((Fish) animal).toString() +" is Dead because of his Sadness:(\n";
 		}
-		for(int i=0;i<numberOfLions;i++){
-			if(!lions[i].ageOneYear()){
-				PrintAllDead+=lions[i].getName()+" is Dead because of his age\n";
-				lions[i]=null;
-				lions[i]=lions[numberOfLions-1];
-				numberOfLions--;
-				i--;
-			} else{
-				lions[i].setHappiness(lions[i].getHappiness()-(int)(Math.random() * 20 + 1));
-				if(lions[i].getHappiness()<=0){
-					PrintAllDead+=lions[i].getName() +" is Dead because of his Sadness:(\n";
-					lions[i]=lions[numberOfLions-1];
-					lions[numberOfLions-1]=null;
-					numberOfLions--;
-					i--;
-				}
-			}
-		}
-		for (int i=0;i<numberOfFishes;i++){
-			if(!fishes[i].ageOneYear()){
-				PrintAllDead+=fishes[i].toString()+" is Dead because of his age\n";
-				fishes[i]=fishes[numberOfFishes-1];
-				fishes[numberOfFishes-1]=null;
-				numberOfFishes--;
-				i--;
-			} else {
-				fishes[i].setHappiness(fishes[i].getHappiness()-(int)(Math.random() * 20 + 1));
-				if(fishes[i].getHappiness()<=0){
-					PrintAllDead+= fishes[i].toString() +" is Dead because of his Sadness:(\n";
-					fishes[i]=fishes[numberOfFishes-1];
-					fishes[numberOfFishes-1]=null;
-					numberOfFishes--;
-					i--;
-				}
-			}
-		}
-		for(int i=0;i<numberOfPenguins;i++){
-			if(!penguins.get(i).ageOneYear()){
-				PrintAllDead+=penguins.get(i).getName()+" is Dead because of his age\n";
-				penguins.remove(i);
-				numberOfPenguins--;
-				i--;
-			} else {
-				penguins.get(i).setHappiness(penguins.get(i).getHappiness()-(int)(Math.random()*20+1));
-				if(penguins.get(i).getHappiness()<=0){
-					PrintAllDead+=penguins.get(i).getName()+" is Dead because of his Sadness\n";
-					penguins.remove(i);
-					numberOfPenguins--;
-					i--;
-				}
-			}
+		return PrintAllDead;
+	}
+
+	private String reportDeathByAge(String PrintAllDead, Animal animal) {
+		if(animal instanceof CarnivorousAnimal){
+			PrintAllDead+=((CarnivorousAnimal) animal).getName()+" is Dead because of his age\n";
+		}else if(animal instanceof Penguin){
+			PrintAllDead+=((Penguin) animal).getName()+" is Dead because of his age\n";
+		}else if(animal instanceof Fish){
+			PrintAllDead+=((Fish) animal).toString()+" is Dead because of his age\n";
 		}
 		return PrintAllDead;
 	}
