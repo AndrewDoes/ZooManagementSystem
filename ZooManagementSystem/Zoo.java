@@ -1,18 +1,13 @@
 package ZooManagementSystem;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ZooManagementSystem.Gender.*;
-
 
 public class Zoo {
 	private static final int max_happiness = 100;
-	private static String name;
-	private static String location;
+	private String name;
+	private String location;
 	private AnimalRepository repo = new AnimalRepository();
 	private FishService fishService = new FishService(repo);
 	private PenguinService penguinService = new PenguinService(repo);
@@ -26,13 +21,17 @@ public class Zoo {
 		this.location = "Tel Aviv-Yaffo";
 	}
 
-	private static String getName() {
+	
+	public String getName() {
 		return name;
 	}
 
-	private static String getLocation() {
+
+	public String getLocation() {
 		return location;
 	}
+
+
 	public String printZooDetails() {
 		String forPrint = "Name of the Zoo: " + name + " \nAddress: " + location + "\nin the Zoo there are: \n"
 				+ lionService.getAll().size() + " Lions,\n" + tigerService.getAll().size()+" Tigers,\n" 
@@ -365,12 +364,12 @@ public class Zoo {
 		return PrintAllDead;
 	}
 
-	public static void setName(String name) {
-		Zoo.name = name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public static void setLocation(String location) {
-		Zoo.location = location;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public AnimalRepository getRepo() {
