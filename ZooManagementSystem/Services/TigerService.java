@@ -1,7 +1,11 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Services;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ZooManagementSystem.Animals.Animal;
+import ZooManagementSystem.Animals.Tiger;
+import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class TigerService extends Services<Tiger> {
     public TigerService(AnimalRepository repo) {

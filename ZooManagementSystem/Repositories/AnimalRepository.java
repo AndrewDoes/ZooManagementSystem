@@ -1,9 +1,19 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Repositories;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import ZooManagementSystem.Animals.Animal;
+import ZooManagementSystem.Animals.Dog;
+import ZooManagementSystem.Animals.Lion;
+import ZooManagementSystem.Animals.Lynx;
+import ZooManagementSystem.Animals.Penguin;
+import ZooManagementSystem.Animals.Tiger;
+import ZooManagementSystem.Enums.DogType;
+import ZooManagementSystem.Enums.Gender;
+import ZooManagementSystem.Services.FishService;
 
 public class AnimalRepository {
     private Map<String, List<Animal>> animalMap;
@@ -37,6 +47,14 @@ public class AnimalRepository {
 
     public List<Animal> getAnimals(String animalType) {
         return animalMap.get(animalType);
+    }
+
+    public List<Animal> getAllAnimal(){
+        List<Animal> allAnimals = new ArrayList<>();
+        for (List<Animal> animals : animalMap.values()) {
+            allAnimals.addAll(animals);
+        }
+        return allAnimals;
     }
 
     public void removeAnimal(String animalType, Animal animal) {

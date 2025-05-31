@@ -1,6 +1,9 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Animals;
 
 import java.util.List;
+
+import ZooManagementSystem.Enums.Colour;
+import ZooManagementSystem.Enums.Pattern;
 
 public class GoldFish extends Fish{	
 	//Constructor,  a random colour will be chosen.

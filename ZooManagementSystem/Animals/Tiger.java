@@ -1,4 +1,6 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Animals;
+
+import ZooManagementSystem.Enums.Gender;
 
 public class Tiger extends CarnivorousAnimal{
         public Tiger(String name,int age, double weight,Gender gender){

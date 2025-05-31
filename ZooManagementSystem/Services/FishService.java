@@ -1,9 +1,18 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import ZooManagementSystem.FishAttributeRandomizer;
+import ZooManagementSystem.Animals.Animal;
+import ZooManagementSystem.Animals.ClownFish;
+import ZooManagementSystem.Animals.Fish;
+import ZooManagementSystem.Animals.GoldFish;
+import ZooManagementSystem.Enums.Colour;
+import ZooManagementSystem.Enums.Pattern;
+import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class FishService extends Services<Fish>{
     private AnimalRepository repo;
@@ -72,7 +81,7 @@ public class FishService extends Services<Fish>{
         return getAll();
     }
 
-	public static String removeDuplicateWords(String inputString) {
+	public String removeDuplicateWords(String inputString) {
 		String[] words = inputString.split("\\s+");
 		String result = Arrays.stream(words)
 				.distinct()

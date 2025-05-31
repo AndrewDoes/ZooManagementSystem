@@ -2,6 +2,14 @@ package ZooManagementSystem;
 
 import java.util.ArrayList;
 
+import ZooManagementSystem.Animals.Dog;
+import ZooManagementSystem.Animals.Lion;
+import ZooManagementSystem.Animals.Lynx;
+import ZooManagementSystem.Animals.Penguin;
+import ZooManagementSystem.Animals.Tiger;
+import ZooManagementSystem.Enums.DogType;
+import ZooManagementSystem.Enums.Gender;
+
 public class ZooService {
 	private ArrayList<Penguin> penguins = new ArrayList<Penguin>();
     private ArrayList<Lion> lions = new ArrayList<Lion>();

@@ -1,6 +1,10 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Animals;
 
 import java.util.List;
+
+import ZooManagementSystem.Zoo;
+import ZooManagementSystem.Enums.Colour;
+import ZooManagementSystem.Enums.Pattern;
 
 public class ClownFish extends Fish {
 	public ClownFish(int age, double length) {

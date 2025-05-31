@@ -1,7 +1,23 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Services;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import ZooManagementSystem.Animals.Animal;
+import ZooManagementSystem.Animals.CarnivorousAnimal;
+import ZooManagementSystem.Animals.Dog;
+import ZooManagementSystem.Animals.Fish;
+import ZooManagementSystem.Animals.Lion;
+import ZooManagementSystem.Animals.Lynx;
+import ZooManagementSystem.Animals.Penguin;
+import ZooManagementSystem.Animals.Tiger;
+import ZooManagementSystem.Enums.Colour;
+import ZooManagementSystem.Enums.DogType;
+import ZooManagementSystem.Enums.Gender;
+import ZooManagementSystem.Exceptions.AgeException;
+import ZooManagementSystem.Exceptions.HeightException;
+import ZooManagementSystem.Repositories.AnimalRepository;
+import ZooManagementSystem.Views.Main;
 
 
 public class Zoo {
@@ -30,177 +46,13 @@ public class Zoo {
 	public String getLocation() {
 		return location;
 	}
-
-
-	public String printZooDetails() {
-		String forPrint = "Name of the Zoo: " + name + " \nAddress: " + location + "\nin the Zoo there are: \n"
-				+ lionService.getAll().size() + " Lions,\n" + tigerService.getAll().size()+" Tigers,\n" 
-				+ lynxService.getAll().size()+" Lynxes,\n" + dogService.getAll().size() +" Dogs,\n" 
-				+penguinService.getAll().size() + " Penguins,\n" + fishService.getAll().size() + " Fishes.";
-
-		return forPrint;
-
-	}
 	
-	public String printFishes() {
-		List<Fish> fishes = fishService.getAll();
-		int numberOfFishes = repo.getAnimals("Fish").size();
-		if(numberOfFishes>0) {
-			String Fishes_D="";
-			String toPrint = "Number of fishes in the Aquarium: " + numberOfFishes + "\n";
-			String All_colors = "The Colors of the Fishes: ";
-			for (int i = 0; fishes.get(i) != null; i++) {
-				Fishes_D+= (i+1)+")Type Of Fish: "+ fishes.get(i).toString()+" Age: "+ fishes.get(i).getAge() + " Length: " + String.format("%.2f",fishes.get(i).getLength()) + " Pattern: " + fishes.get(i).getPattern()+ " Happiness: "+ fishes.get(i).getHappiness() + ".\n";
-				All_colors += fishes.get(i).getColours() + " ";
-			}
-			All_colors = fishService.removeDuplicateWords(All_colors);
-			return Fishes_D+ toPrint + All_colors;
-		}
-		else {
-			String toPrint = "There is no Fishes in the Aquarium!";
-			return toPrint;
-		}
-	}
-
-	public String printPenguins() {
-		List<Penguin> penguins = penguinService.getAll();
-		String forPrint = "The penguins in the Zoo are as follows:\n";
-		for (Penguin p : penguins){
-			forPrint += "Name: " + p.getName() +  " Age: " + p.getAge() +  " Height: "
-					+ p.getHeight() + " Happiness: "+ p.getHappiness() + ".\n";
-		}
-		return forPrint;
-	}
-
-	public String printLions() {
-		List<Lion> lions = lionService.getAll();
-		String forPrint = "The lions in the Zoo are as follows:\n";
-		for (Lion lion : lions) {
-			forPrint += "Name: " + lion.getName() + " Age: " + lion.getAge() + " Weight: "
-					+ lion.getWeight() + " Happiness: "+ lion.getHappiness() + ".\n";
-		}
-		return forPrint;
-	}
-
-	public String printTigers(){
-		List<Tiger> tigers = tigerService.getAll();
-		String T_forPrint= "The Tigers in the zoo are:\n";
-		for(Tiger tiger : tigers){
-			T_forPrint+="Name: " + tiger.getName() + " Age: " + tiger.getAge() + " Weight: "
-					+ tiger.getWeight() + "Happiness: "+ tiger.getHappiness() + ".\n";
-		}
-		return T_forPrint;
-	}
-
-	public String printLynxes() {
-		List<Lynx> lynxes = lynxService.getAll();
-		String forPrint = "The lynxes in the Zoo are as follows:\n";
-		for (Lynx lynx : lynxes) {
-			forPrint += "Name: " + lynx.getName() + " Age: " + lynx.getAge() + " Weight: "
-					+ lynx.getWeight() + " Happiness: "+ lynx.getHappiness() + ".\n";
-		}
-		return forPrint;
-	}
-
-	public String printDogs(){
-		List<Dog> dogs = dogService.getAll();
-		String forPrint = "The dogs in the zoo are as follows:\n";
-		for(Dog dog : dogs){
-			forPrint += "Name: " + dog.getName() + " Age: " + dog.getAge() + " Weight: "
-					+ dog.getWeight() +" Gender: "+ dog.getGender() + " Type: "+ dog.getType() + " Happiness: "+ dog.getHappiness() + ".\n";
-		}
-		return forPrint;
-	}
-	
-	public  int Feed_lions(){
-		List<Lion> lions = lionService.getAll();
-		int food_lions=0;
-		for (Lion lion : lions) {
-			if(lion==null)
-				break;
-			food_lions += lion.feed();
-			lion.setHappiness(max_happiness);
-		}
-		return food_lions;
-	}
-
-
-	public int Feed_tigers(){
-		List<Tiger> tigers = tigerService.getAll();
-		int food_tigers=0;
-		for(Tiger tiger : tigers){
-			if(tiger==null)
-				break;
-			food_tigers+=tiger.feed();
-			tiger.setHappiness(max_happiness);
-		}
-		return food_tigers;
-	}
-
-	public int Feed_lynxes() {
-		List<Lynx> lynxes = lynxService.getAll();
-		int food_lynxes=0;
-		for(Lynx lynx : lynxes) {
-			if(lynx == null)
-				break;
-			food_lynxes += lynx.feed();
-			lynx.setHappiness(max_happiness);
-		}
-		return food_lynxes;
-	}
-
-	public int FeedDogs() {
-		List<Dog> dogs = dogService.getAll();
-		int food_dogs=0;
-		for(Dog dog : dogs) {
-			if(dog == null)
-				break;
-			food_dogs += dog.feed();
-			dog.setHappiness(max_happiness);
-		}
-		return food_dogs;
-	}
-	
-	public double Feed_Fishes(){
-		List<Fish> fishes = fishService.getAll();
-		double food_fishes=0;
-		for (Fish fish : fishes) {
-			if(fish==null)
-				break;
-			food_fishes += fish.feed();
-			fish.setHappiness(max_happiness);
-		}
-		return food_fishes;
-	}
-
-	public int Feed_penguins(){
-		List<Penguin> penguins = penguinService.getAll();
-		int count_food_p=0;
-		List<Fish> fishes = fishService.getAll();
-		// For Each Penguin a Fish was Eaten
-		for (Penguin penguin : penguins){
-			if(penguin==null){
-				break;
-			}
-			fishes = penguinService.Feed_Penguins(fishes);
-			repo.clearAnimals("Fishes");
-			FishService fService = new FishService(this.getRepo());
-			for (Fish fish : fishes) {
-				fService.addNewAnimal(fish);
-			}
-			penguin.setHappiness(max_happiness); // Just the penguin that ate will return to level 100 of Happiness
-		}
-		return count_food_p;
-	}
-
-
-
 	public String Add_New_Penguin(String name_p,double height_p,int age_p) throws HeightException, AgeException {
 		if(penguinService.getAll().size()>0){
 			try {
 			AgeException ageException = new AgeException();
 			ageException.AgeValidator(age_p);
-			HeightException heightException = new HeightException();
+			HeightException heightException = new HeightException(penguinService);
 			heightException.HeightIsIllegal(height_p);
 			}
 			catch (HeightException e0){

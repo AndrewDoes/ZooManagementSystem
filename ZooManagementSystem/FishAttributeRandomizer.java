@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import ZooManagementSystem.Enums.Colour;
+import ZooManagementSystem.Enums.Pattern;
+
 public class FishAttributeRandomizer{
 public static List<Integer> generateUniqueRandomList(int length) {
     Set<Integer> uniqueNumbers = new HashSet<>();
@@ -27,7 +30,7 @@ public static List<Colour> randomColour() {
 
     for (Integer index : randomUniqueNumberList) {
         singularFishColours.add(allColours.get(index));
-        Zoo.numOfFishColours[index]++;
+        // Zoo.numOfFishColours[index]++;
     }
 
     return singularFishColours;

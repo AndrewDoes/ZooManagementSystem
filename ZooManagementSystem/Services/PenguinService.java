@@ -1,7 +1,14 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Services;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ZooManagementSystem.Animals.Animal;
+import ZooManagementSystem.Animals.Fish;
+import ZooManagementSystem.Animals.Penguin;
+import ZooManagementSystem.Exceptions.AgeException;
+import ZooManagementSystem.Exceptions.HeightException;
+import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class PenguinService extends Services<Penguin> {
     public PenguinService(AnimalRepository repo) {
@@ -34,7 +41,7 @@ public class PenguinService extends Services<Penguin> {
 			try {
 			AgeException ageException = new AgeException();
 			ageException.AgeValidator(age);
-			HeightException heightException = new HeightException();
+			HeightException heightException = new HeightException(this);
 			heightException.HeightIsIllegal(height);
 			}
 			catch (HeightException e0){
@@ -135,5 +142,13 @@ public class PenguinService extends Services<Penguin> {
 
         return fishes;
         //ini code smell feature envy, ganti nanti
+	}
+
+	public Penguin getLeader(){
+		return getAll().get(0);
+	}
+
+	public double getLeaderHeight(){
+		return getLeader().getHeight();
 	}
 }

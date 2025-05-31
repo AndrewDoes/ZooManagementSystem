@@ -1,4 +1,4 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Animals;
 
 
 import java.util.ArrayList;

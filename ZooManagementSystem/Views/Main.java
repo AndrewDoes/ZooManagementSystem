@@ -1,19 +1,25 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Views;
 
 import java.util.Scanner;
 
+import ZooManagementSystem.Services.*;
+import ZooManagementSystem.Animals.Penguin;
+import ZooManagementSystem.Enums.Colour;
+import ZooManagementSystem.Enums.Pattern;
+import ZooManagementSystem.Exceptions.AgeException;
+import ZooManagementSystem.Exceptions.HeightException;
 
-import static ZooManagementSystem.Pattern.*;
-import static ZooManagementSystem.Zoo.*;
+import static ZooManagementSystem.Enums.Pattern.*;
 
 public class Main {
-    private static int choice;
-    
+    Zoo zoo = new Zoo();
 
     public static void main(String[] args) throws HeightException, AgeException {
         Zoo zoo = new Zoo();
         Scanner input= new Scanner(System.in);
-        System.out.println("\n1)Show The Zoo Details & Number of pets in it\n"
+        int choice = 0;
+        while(choice!=14) {
+            System.out.println("\n1)Show The Zoo Details & Number of pets in it\n"
                 + "2)Show all Penguins in the zoo\n"
                 + "3)Add Penguin\n"
                 + "4)Show all the carnivorous animals\n"
@@ -27,32 +33,31 @@ public class Main {
                 + "12)Show all Dogs in the Zoo\n"
                 + "13)Add a new Dog\n"
                 + "14)Exit\n"
-        );
-        System.out.println("Enter your option:");
-        choice = input.nextInt();
-        while(choice!=14) {
+            );
+            System.out.println("Enter your option:");
+            choice = input.nextInt();
             switch(choice) {
                 case 1:
-                    System.out.println(zooDetails());
+                    System.out.println(zoo.printZooDetails());
                     break;
                 case 2:
-                    System.out.println(printPenguins());;
+                    System.out.println(zoo.printPenguins());;
                     break;
                 case 3:
                     add_penguin(zoo);
                     break;
                 case 4:
                     System.out.println("All carnivorous animals: \n");
-                    System.out.println(printLions());
-                    System.out.println(printTigers());
-					System.out.println(printLynxes());
+                    System.out.println(zoo.printLions());
+                    System.out.println(zoo.printTigers());
+					System.out.println(zoo.printLynxes());
                     break;
                 case 5:
                     AddCarnivorousAnimal(zoo);
                     break;
                 case 6:
-                    System.out.println(printFishes());
-                    System.out.println(MostPopularFishColour());
+                    System.out.println(zoo.printFishes());
+                    System.out.println(zoo.MostPopularFishColour());
                     break;
                 case 7:
                     add_new_fishes();
@@ -75,7 +80,7 @@ public class Main {
                     SortPenguins();
                     break;
                 case 12:
-                    System.out.println(printDogs());
+                    System.out.println(zoo.printDogs());
                     break;
                 case 13:
                     AddNewDog(zoo);
@@ -86,23 +91,6 @@ public class Main {
                 default:
                     throw new IllegalStateException("Unexpected value: " + input);
             }
-            System.out.println("\n1)Show The Zoo Details & Number of pets in it\n"
-                    + "2)Show all Penguins in the zoo\n"
-                    + "3)Add Penguin\n"
-                    + "4)Show all the carnivorous animals\n"
-                    + "5)Add a new carnivorous animal\n"
-                    + "6)Show all Fishies\n"
-                    + "7)Add Fishies to the Aquarium\n"
-                    + "8)Feed all pets in the zoo\n"
-                    + "9)Listen to all Animals in the Zoo\n"
-                    + "10)Make All Animals in the Zoo age One Year\n"
-                    + "11)Choose a way to sort the Penguins\n"
-                    + "12)Show all Dogs in the Zoo\n"
-                    + "13)Add a new Dog\n"
-                    + "14)Exit\n"
-            );
-            System.out.println("Enter your option:");
-            choice=input.nextInt();
         }
       //  return 0;
     }

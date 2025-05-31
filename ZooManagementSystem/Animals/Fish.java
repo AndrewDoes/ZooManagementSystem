@@ -1,6 +1,9 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Animals;
 
 import java.util.List;
+
+import ZooManagementSystem.Enums.Colour;
+import ZooManagementSystem.Enums.Pattern;
 
 public class Fish extends Animal{
     protected double length;
@@ -23,13 +26,18 @@ public class Fish extends Animal{
     public void setLength(double length) {
         this.length = length;
     }
-    public String getColours() {
+    public String getColoursString() {
         String x = "";
 		for(int i = 0; i < colours.size(); i++) {
 			x+=colours.get(i)+  " ";
 		}
 		return x;
     }
+
+    public List<Colour> getColours() {
+        return colours;
+    }  
+
     public void setColours(List<Colour> colours) {
         this.colours = colours;
     }

@@ -1,7 +1,11 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Services;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ZooManagementSystem.Animals.Animal;
+import ZooManagementSystem.Animals.Lynx;
+import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class LynxService extends Services<Lynx> {
     public LynxService(AnimalRepository repo) {

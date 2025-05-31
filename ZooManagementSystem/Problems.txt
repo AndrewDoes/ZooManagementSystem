@@ -69,3 +69,6 @@ Tahapan Benerin:
         - Zoo Class tetap memiliki responsibility untuk
             - add, feed, dan lain-lain namun hanya sebatas sebagai tampilan saja
             - listenToAll, feedAll, ageOneYearAll, dll
+        - Tambahin class ZooPrinter
+        - Remove semua message chains yang ada karena logic baru (kayak gini di Height Exception Zoo.penguins.get(0).getHeight() ke PenguinService)
+        - 

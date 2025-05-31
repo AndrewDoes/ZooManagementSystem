@@ -1,4 +1,6 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Animals;
+
+import ZooManagementSystem.Enums.Gender;
 
 public abstract class CarnivorousAnimal extends Animal{
     private String name;

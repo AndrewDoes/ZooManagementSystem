@@ -1,4 +1,4 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Exceptions;
 
 public class AgeException extends Exception {
 	public AgeException() {

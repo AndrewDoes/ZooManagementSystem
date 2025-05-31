@@ -1,6 +1,8 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Services;
 
 import java.util.List;
+
+import ZooManagementSystem.Repositories.AnimalRepository;
 
 public abstract class Services<T> {
     private AnimalRepository repo = new AnimalRepository();
@@ -12,6 +14,9 @@ public abstract class Services<T> {
     }
     public void setRepo(AnimalRepository repo) {
         this.repo = repo;
+    }
+    public int getSize(){
+        return getAll().size();
     }
     public abstract List<T> getAll();
     public abstract void addNewAnimal(T animal);
