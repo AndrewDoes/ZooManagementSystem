@@ -1,4 +1,4 @@
-package ZooManagementSystem;
+package ZooManagementSystem.Services;
 
 import java.util.List;
 
@@ -9,24 +9,28 @@ import ZooManagementSystem.Animals.Lynx;
 import ZooManagementSystem.Animals.Penguin;
 import ZooManagementSystem.Animals.Tiger;
 import ZooManagementSystem.Repositories.AnimalRepository;
-import ZooManagementSystem.Services.DogService;
-import ZooManagementSystem.Services.FishService;
-import ZooManagementSystem.Services.LionService;
-import ZooManagementSystem.Services.LynxService;
-import ZooManagementSystem.Services.PenguinService;
-import ZooManagementSystem.Services.TigerService;
 
 public class ZooPrinter {
     private AnimalRepository repo;
-    // Put all services from Zoo class here
-    private LionService lionService = new LionService(repo);
-    private TigerService tigerService = new TigerService(repo);
-    private LynxService lynxService = new LynxService(repo);
-    private DogService dogService = new DogService(repo);
-    private PenguinService penguinService = new PenguinService(repo);
-    private FishService fishService = new FishService(repo);
-    public ZooPrinter(AnimalRepository repo){
-        this.repo = repo;
+	private LionService lionService;
+	private TigerService tigerService;
+	private LynxService lynxService;
+	private DogService dogService;
+	private PenguinService penguinService;
+	private FishService fishService;
+    public AnimalRepository getRepo() {
+		return repo;
+	}
+
+	// Put all services from Zoo class here
+    public ZooPrinter(Zoo zoo){
+        this.repo = zoo.getRepo();
+		lionService = zoo.getLionService();
+		tigerService = zoo.getTigerService();
+		lynxService = zoo.getLynxService();
+		dogService = zoo.getDogService();
+		penguinService = zoo.getPenguinService();
+		fishService = zoo.getFishService();
     }
 
     	public String printZooDetails(String name, String location) {
@@ -46,7 +50,7 @@ public class ZooPrinter {
 			String Fishes_D="";
 			String toPrint = "Number of fishes in the Aquarium: " + numberOfFishes + "\n";
 			String All_colors = "The Colors of the Fishes: ";
-			for (int i = 0; fishes.get(i) != null; i++) {
+			for (int i = 0; i<fishes.size(); i++) {
 				Fishes_D+= (i+1)+")Type Of Fish: "+ fishes.get(i).toString()+" Age: "+ fishes.get(i).getAge() + " Length: " + String.format("%.2f",fishes.get(i).getLength()) + " Pattern: " + fishes.get(i).getPattern()+ " Happiness: "+ fishes.get(i).getHappiness() + ".\n";
 				All_colors += fishes.get(i).getColours() + " ";
 			}

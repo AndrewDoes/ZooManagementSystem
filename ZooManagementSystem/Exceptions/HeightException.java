@@ -21,10 +21,9 @@ public class HeightException extends Exception{
 			throw new HeightException("Height is taller than the leader of the flock! ("+ penguinService.getLeaderHeight()+")");
 		
 		if(!(height >= 1 && height <= penguinService.getLeaderHeight()))
-			throw new HeightException("Height of the new Penguin is illegal (Please choose a number between 1-"+ penguinService.getLeaderHeight()+" (inclusive))");
-		
+			throw new HeightException("Height of the new Penguin is illegal (Please choose a number between 1-"+ penguinService.getLeaderHeight()+" (inclusive))");	
 	}
 	
-
+	
 
 }

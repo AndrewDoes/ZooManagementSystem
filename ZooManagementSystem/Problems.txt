@@ -48,6 +48,10 @@ sebaiknya di move attribute ke superclassnya.
     - method seperti randomizeColour dan randomizePattern bukan responsibility AquariumFish
     - Subclass yang extend dari AquariumFish tidak 
 
+8. Perbaiki Main logic menjadi App.java agar menghindari Static useage (Leaky Encapsulation)
+
+9. duplicate code di SortPenguin() function (Main) yg sekarang jadi App.java
+
 Tahapan Benerin:
     - bikin Abstract Class Animal buat top Abstraction (Design Smell-3)
     - correspond semua class di bawahnya dengan Hierarchy baru

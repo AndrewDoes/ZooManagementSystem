@@ -20,6 +20,7 @@ public class DogService extends Services<Dog> {
 
     public List<Dog> getAll() {
         List<Animal> animals = this.getRepo().getAnimals("Dog");
+		if(animals.size() == 0) return null;
         List<Dog> dogs = new ArrayList<Dog>();
         for (Animal animal : animals) {
             if (animal instanceof Dog) {
@@ -27,5 +28,14 @@ public class DogService extends Services<Dog> {
             }
         }
         return dogs;
+    }
+
+    public double feedAll(){
+        List<Dog> dogs = getAll();
+        double food = 0;
+        for(Dog dog : dogs){
+            food += dog.feed();
+        }
+        return food;
     }
 }

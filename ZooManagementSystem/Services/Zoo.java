@@ -11,32 +11,57 @@ import ZooManagementSystem.Animals.Lion;
 import ZooManagementSystem.Animals.Lynx;
 import ZooManagementSystem.Animals.Penguin;
 import ZooManagementSystem.Animals.Tiger;
-import ZooManagementSystem.Enums.Colour;
 import ZooManagementSystem.Enums.DogType;
 import ZooManagementSystem.Enums.Gender;
 import ZooManagementSystem.Exceptions.AgeException;
 import ZooManagementSystem.Exceptions.HeightException;
 import ZooManagementSystem.Repositories.AnimalRepository;
-import ZooManagementSystem.Views.Main;
 
 
 public class Zoo {
 	private static final int max_happiness = 100;
 	private String name;
 	private String location;
-	private AnimalRepository repo = new AnimalRepository();
-	private FishService fishService = new FishService(repo);
-	private PenguinService penguinService = new PenguinService(repo);
-	private TigerService tigerService = new TigerService(repo);
-	private DogService dogService = new DogService(repo);
-	private LionService	lionService = new LionService(repo);
-	private LynxService lynxService = new LynxService(repo);
+	private AnimalRepository repo;
+	private FishService fishService;
+	private PenguinService penguinService;
+	private TigerService tigerService;
+	private DogService dogService;
+	private LionService	lionService;
+	private LynxService lynxService;
+    ZooPrinter printer;
 	
 	public Zoo()   {
 		this.name = "Zoo";
 		this.location = "Tel Aviv-Yaffo";
+		this.repo = new AnimalRepository();
 	}
 
+	public void initializeService(){
+		if(this.repo == null) this.repo = new AnimalRepository();
+		fishService = new FishService(repo);
+		penguinService = new PenguinService(repo);
+		tigerService = new TigerService(repo);
+		dogService = new DogService(repo);
+		lionService = new LionService(repo);
+		lynxService = new LynxService(repo);
+		printer = new ZooPrinter(this);
+	}
+
+		public void initializeAnimals(){
+		getPenguinService().addNewAnimal(new Penguin("Penny", 10, 200));
+		getPenguinService().addNewAnimal(new Penguin("Lenny", 10, 198));
+		getPenguinService().addNewAnimal(new Penguin("Tim", 10, 195));
+		getLionService().addNewAnimal(new Lion("Bird", 5, 36, Gender.Male));
+		getLionService().addNewAnimal(new Lion("Hungry", 20, 80, Gender.Male));
+		getLionService().addNewAnimal(new Lion("Skinny", 10, 40, Gender.Female));
+		getLionService().addNewAnimal(new Lion("Chunky", 24, 90, Gender.Female));
+		getTigerService().addNewAnimal(new Tiger("Mask", 20, 15, Gender.Male));
+		getTigerService().addNewAnimal(new Tiger("Husk", 5, 20, Gender.Female));
+		getLynxService().addNewAnimal(new Lynx("Timpo", 8, 15, Gender.Male));
+		getDogService().addNewAnimal(new Dog("Leo", 8, 10, DogType.Akita, Gender.Male));
+		getFishService().addRandomFish(10);
+	}
 	
 	public String getName() {
 		return name;
@@ -46,9 +71,17 @@ public class Zoo {
 	public String getLocation() {
 		return location;
 	}
+
+	public void feedAll(){
+		System.out.println("The Lions ate: "+lionService.feedAll()+"kg of meat.");
+                    System.out.println("The Tigers ate: "+tigerService.feedAll()+"kg of meat.");
+					System.out.println("The Lynxes ate: "+lynxService.feedAll()+"kg of meat.");
+                    System.out.println("The Fishes ate: "+ String.format("%.2f",fishService.feedAll()) +" meals.\n");
+                    System.out.println("The Penguins ate : "+penguinService.feedAll()+" Fishes.\n");
+	}
 	
-	public String Add_New_Penguin(String name_p,double height_p,int age_p) throws HeightException, AgeException {
-		if(penguinService.getAll().size()>0){
+	public String Add_New_Penguin(String name_p,int age_p ,double height_p) throws HeightException, AgeException {
+		if(penguinService.getSize()>0){
 			try {
 			AgeException ageException = new AgeException();
 			ageException.AgeValidator(age_p);
@@ -56,11 +89,11 @@ public class Zoo {
 			heightException.HeightIsIllegal(height_p);
 			}
 			catch (HeightException e0){
-				height_p = Main.heightExceptionPenguin();
+				height_p = penguinService.heightExceptionPenguin();
 				
 			}
 			catch(AgeException e1) {
-				age_p = Main.ageExceptionPenguin();
+				age_p = penguinService.ageExceptionPenguin();
 				
 			}
 		}
@@ -77,6 +110,7 @@ public class Zoo {
 			gender = Gender.Female;
 		Lion newLion = new Lion(name_l,age_l,weight_l, gender);
 		lionService.addNewAnimal(newLion);
+		System.out.println("Animals Added");
 	}
 	public void AddNewTiger(String name_t,double weight_t , int age_t , int tiger_g ){
 		Gender gender = null;
@@ -86,6 +120,7 @@ public class Zoo {
 			gender = Gender.Female;
 		Tiger newTiger = new Tiger(name_t,age_t,weight_t, gender);
 		tigerService.addNewAnimal(newTiger);
+		System.out.println("Animals Added");
 	}
 
 	public void AddNewLynx(String name_l,double weight_l , int age_l , int lynx_gender ){
@@ -96,6 +131,7 @@ public class Zoo {
 			gender = Gender.Female;
 		Lynx newLynx = new Lynx(name_l,age_l,weight_l, gender);
 		lynxService.addNewAnimal(newLynx);
+		System.out.println("Animals Added");
 	}
 
 	public void AddNewDog(String name_d , int age_d ,double weight_d , int dogtype , int dog_){
@@ -118,54 +154,16 @@ public class Zoo {
 		}
 		Dog newDog= new Dog(name_d,age_d,weight_d,Type,gender);
 		dogService.addNewAnimal(newDog);
+		System.out.println("Animals Added");
 	}
 	
 	public String ListentoAllAnimalsinZoo(){
 		String out="";
-		out+= "1)Lions Noise: "+ lionService.getAll().get(0).makeNoise() + " 2)Tigers Noise: " + tigerService.getAll().get(0).makeNoise() +
-		 " 3)Penguins Noise: " + penguinService.getAll().get(0).makeNoise() + " 4)Fishes Noise: " + fishService.getAll().get(0).makeNoise() +
-		  "5)Lynxes Noise: " + lynxService.getAll().get(0).makeNoise() + "6)Dogs Noise: " + dogService.getAll().get(0).makeNoise();
+		out+= "1)Lions Noise: "+ lionService.getAll().get(0).makeNoise() + "\n2)Tigers Noise: " + tigerService.getAll().get(0).makeNoise() +
+		 "\n3)Penguins Noise: " + penguinService.getLeader().makeNoise() + "\n4)Fishes Noise: " + fishService.getAll().get(0).makeNoise() +
+		  "\n5)Lynxes Noise: " + lynxService.getAll().get(0).makeNoise() + "\n6)Dogs Noise: " + dogService.getAll().get(0).makeNoise();
 		return out;
 	}
-	
-	public String MostPopularFishColour() {
-    List<Fish> fishes = fishService.getAll();
-    Map<Colour, Integer> colourCounts = new HashMap<>();
-    assignColourMap(fishes, colourCounts);
-    // Find the two most common colours
-    Colour mostCommonColour = null;
-    Colour secondMostCommonColour = null;
-    int maxCount = 0;
-    int secondMaxCount = 0;
-    return find2MostPopularColour(colourCounts, mostCommonColour, secondMostCommonColour, maxCount, secondMaxCount);
-}
-
-	private String find2MostPopularColour(Map<Colour, Integer> colourCounts, Colour mostCommonColour, Colour secondMostCommonColour,
-			int maxCount, int secondMaxCount) {
-		for (Map.Entry<Colour, Integer> entry : colourCounts.entrySet()) {
-		    int count = entry.getValue();
-		    if (count > maxCount) {
-		        secondMaxCount = maxCount;
-		        maxCount = count;
-		        secondMostCommonColour = mostCommonColour;
-		        mostCommonColour = entry.getKey();
-		    } else if (count > secondMaxCount) {
-		        secondMaxCount = count;
-		        secondMostCommonColour = entry.getKey();
-		    }
-		}
-		return "The most common colour in the aquarium are:\n" + mostCommonColour + " & " + secondMostCommonColour;
-	}
-
-	private void assignColourMap(List<Fish> fishes, Map<Colour, Integer> colourCounts) {
-		for (Fish fish : fishes) {
-		    List<Colour> colours = fish.getColours();
-		    for (Colour colour : colours) {
-		        colourCounts.put(colour, colourCounts.getOrDefault(colour, 0) + 1);
-		    }
-		}
-	}
-
 
 	public String ageOneYearAll(){
 		List<Animal> animals = repo.getAllAnimal();
@@ -238,5 +236,65 @@ public class Zoo {
 
 	public void setFishService(FishService fishService) {
 		this.fishService = fishService;
+	}
+
+
+	public PenguinService getPenguinService() {
+		return penguinService;
+	}
+
+
+	public void setPenguinService(PenguinService penguinService) {
+		this.penguinService = penguinService;
+	}
+
+
+	public TigerService getTigerService() {
+		return tigerService;
+	}
+
+
+	public void setTigerService(TigerService tigerService) {
+		this.tigerService = tigerService;
+	}
+
+
+	public DogService getDogService() {
+		return dogService;
+	}
+
+
+	public void setDogService(DogService dogService) {
+		this.dogService = dogService;
+	}
+
+
+	public LionService getLionService() {
+		return lionService;
+	}
+
+
+	public void setLionService(LionService lionService) {
+		this.lionService = lionService;
+	}
+
+
+	public LynxService getLynxService() {
+		return lynxService;
+	}
+
+
+	public void setLynxService(LynxService lynxService) {
+		this.lynxService = lynxService;
+	}
+
+
+	public ZooPrinter getPrinter() {
+		return printer;
+	}
+
+
+	public void setPrinter(ZooPrinter printer) {
+		this.printer = printer;
 	}
 }

@@ -2,10 +2,11 @@ package ZooManagementSystem.Services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-import ZooManagementSystem.FishAttributeRandomizer;
 import ZooManagementSystem.Animals.Animal;
 import ZooManagementSystem.Animals.ClownFish;
 import ZooManagementSystem.Animals.Fish;
@@ -15,15 +16,15 @@ import ZooManagementSystem.Enums.Pattern;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class FishService extends Services<Fish>{
-    private AnimalRepository repo;
-
     public FishService(AnimalRepository repo){
         super(repo);
+        // checkRepo();
     };
 
     public List<Fish> getAll(){
-        List<Animal> animals = repo.getAnimals("Fish");
-        List<Fish> fishes = new ArrayList<Fish>();
+        List<Animal> animals = getRepo().getAnimals("Fish");
+		if(animals.size() == 0) return null;
+        List<Fish> fishes = new ArrayList<>();
 
         for(Animal animal : animals){
             if(animal instanceof Fish){
@@ -89,4 +90,52 @@ public class FishService extends Services<Fish>{
 
 		return result;
 	}
+
+    public String MostPopularFishColour() {
+    List<Fish> fishes = getAll();
+    if(fishes == null) return null;
+    Map<Colour, Integer> colourCounts = new HashMap<>();
+    assignColourMap(fishes, colourCounts);
+    // Find the two most common colours
+    Colour mostCommonColour = null;
+    Colour secondMostCommonColour = null;
+    int maxCount = 0;
+    int secondMaxCount = 0;
+    return find2MostPopularColour(colourCounts, mostCommonColour, secondMostCommonColour, maxCount, secondMaxCount);
+}
+
+	private String find2MostPopularColour(Map<Colour, Integer> colourCounts, Colour mostCommonColour, Colour secondMostCommonColour,
+			int maxCount, int secondMaxCount) {
+		for (Map.Entry<Colour, Integer> entry : colourCounts.entrySet()) {
+		    int count = entry.getValue();
+		    if (count > maxCount) {
+		        secondMaxCount = maxCount;
+		        maxCount = count;
+		        secondMostCommonColour = mostCommonColour;
+		        mostCommonColour = entry.getKey();
+		    } else if (count > secondMaxCount) {
+		        secondMaxCount = count;
+		        secondMostCommonColour = entry.getKey();
+		    }
+		}
+		return "The most common colour in the aquarium are:\n" + mostCommonColour + " & " + secondMostCommonColour;
+	}
+
+	private void assignColourMap(List<Fish> fishes, Map<Colour, Integer> colourCounts) {
+		for (Fish fish : fishes) {
+		    List<Colour> colours = fish.getColours();
+		    for (Colour colour : colours) {
+		        colourCounts.put(colour, colourCounts.getOrDefault(colour, 0) + 1);
+		    }
+		}
+	}
+
+    public double feedAll(){
+        List<Fish> fishes = getAll();
+        double food = 0;
+        for(Fish fish : fishes){
+            food += fish.feed();
+        }
+        return food;
+    }
 }

@@ -1,13 +1,9 @@
 package ZooManagementSystem.Animals;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Penguin extends Animal{
 	private double height;
 	private String name;
-	public static int LastSortWayused;
+	public int LastSortWayused;
 	//Constructor
 	public Penguin(String name, int age, double height) {
 		super(age, 6);

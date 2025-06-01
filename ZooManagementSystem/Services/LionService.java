@@ -17,7 +17,8 @@ public class LionService extends Services<Lion>{
         this.getRepo().addAnimal("Lion", animal);
     }
     public List<Lion> getAll(){
-        List<Animal> animals = this.getRepo().getAnimals("Lion");
+        List<Animal> animals = getRepo().getAnimals("Lion");
+		if(animals.size() == 0) return new ArrayList<Lion>();
         List<Lion> lions = new ArrayList<Lion>();
         for (Animal animal : animals){
             if(animal instanceof Lion){
@@ -25,5 +26,14 @@ public class LionService extends Services<Lion>{
             }
         }
         return lions;
+    }
+
+    public double feedAll(){
+        List<Lion> lions = getAll();
+        double food = 0;
+        for(Lion lion : lions){
+            food += lion.feed();
+        }
+        return food;
     }
 }

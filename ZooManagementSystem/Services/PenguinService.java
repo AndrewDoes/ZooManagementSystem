@@ -2,6 +2,7 @@ package ZooManagementSystem.Services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import ZooManagementSystem.Animals.Animal;
 import ZooManagementSystem.Animals.Fish;
@@ -9,8 +10,11 @@ import ZooManagementSystem.Animals.Penguin;
 import ZooManagementSystem.Exceptions.AgeException;
 import ZooManagementSystem.Exceptions.HeightException;
 import ZooManagementSystem.Repositories.AnimalRepository;
+import ZooManagementSystem.Views.App;
 
 public class PenguinService extends Services<Penguin> {
+	private int lastSortWayused;
+
     public PenguinService(AnimalRepository repo) {
         super(repo);
     }
@@ -23,6 +27,7 @@ public class PenguinService extends Services<Penguin> {
 
     public List<Penguin> getAll() {
         List<Animal> animals = this.getRepo().getAnimals("Penguin");
+		if(animals.size() == 0) return null;
         List<Penguin> penguins = new ArrayList<Penguin>();
         for (Animal animal : animals) {
             if (animal instanceof Penguin) {
@@ -37,7 +42,7 @@ public class PenguinService extends Services<Penguin> {
 	// }
 
     public String createNewPenguin(String name,double height,int age) throws HeightException, AgeException {
-		if(getAll().size()>0){
+		if(getAll().size() != 0){
 			try {
 			AgeException ageException = new AgeException();
 			ageException.AgeValidator(age);
@@ -45,11 +50,11 @@ public class PenguinService extends Services<Penguin> {
 			heightException.HeightIsIllegal(height);
 			}
 			catch (HeightException e0){
-				height = Main.heightExceptionPenguin();
+				height = heightExceptionPenguin();
 				
 			}
 			catch(AgeException e1) {
-				age = Main.ageExceptionPenguin();
+				age = ageExceptionPenguin();
 				
 			}
 		}
@@ -90,7 +95,7 @@ public class PenguinService extends Services<Penguin> {
     }
 
     //Function to Sort the list of the penguies by Hieght
-	public static List<Penguin> SortByHeight(List<Penguin> arr) {
+	public List<Penguin> SortByHeight(List<Penguin> arr) {
 		Penguin temp;
 		for(int i = 0; i<arr.size()-1 && arr.get(i) != null; i++) {
 			for(int j = i+1; j < arr.size() && arr.get(j) != null; j++) {
@@ -104,7 +109,7 @@ public class PenguinService extends Services<Penguin> {
 		return arr;
 	}
 
-	public static List<Penguin> SortByAge(List<Penguin> arr) {
+	public List<Penguin> SortByAge(List<Penguin> arr) {
 		Penguin temp;
 		for(int i = 0; i<arr.size()-1 && arr.get(i) != null; i++) {
 			for(int j = i+1; j < arr.size() && arr.get(j) != null; j++) {
@@ -117,7 +122,7 @@ public class PenguinService extends Services<Penguin> {
 		}
 		return arr;
 	}
-	public static List<Penguin> SortByName(List<Penguin> arr) {
+	public List<Penguin> SortByName(List<Penguin> arr) {
 		Penguin temp;
 		for(int i = 0; i<arr.size()-1 && arr.get(i) != null; i++) {
 			for(int j = i+1; j < arr.size() && arr.get(j) != null; j++) {
@@ -151,4 +156,38 @@ public class PenguinService extends Services<Penguin> {
 	public double getLeaderHeight(){
 		return getLeader().getHeight();
 	}
+
+	public double feedAll(){
+		List<Penguin> penguins = getAll();
+		double food = 0;
+		for(Penguin penguin : penguins){
+			food += penguin.feed();
+		}
+		return food;
+	}
+
+	    public double heightExceptionPenguin() {
+        Penguin leadPenguin = getLeader();
+		if(leadPenguin == null){
+			
+		}
+    	double height_p = -1;
+    	Scanner input_Penguin = new Scanner(System.in);
+    	while(height_p < 1 || height_p > 200) {
+    	System.out.println("Height of the new Penguin is illegal (choose a number between 1-"+ leadPenguin.getHeight()+" (inclusive))\nPlease re-Enter the height of the new penguin: ");
+    	height_p = input_Penguin.nextDouble();
+    	}
+        input_Penguin.close();
+    	return height_p;
+    }
+    
+    public int ageExceptionPenguin() {
+    	int age_p = -1;
+    	Scanner input_Penguin = new Scanner(System.in);
+    	while(age_p < 1 || age_p > 20) {
+    	System.out.println("Age of the penguin is illegal (choose a number 1-20 (inclusive)),\nPlease re-Enter the age of the new penguin: ");
+        age_p = input_Penguin.nextInt();
+    	}
+        return age_p;
+    }
 }

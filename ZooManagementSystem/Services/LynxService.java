@@ -20,6 +20,7 @@ public class LynxService extends Services<Lynx> {
 
     public List<Lynx> getAll() {
         List<Animal> animals = this.getRepo().getAnimals("Lynx");
+		if(animals.size() == 0) return null;
         List<Lynx> lynxes = new ArrayList<Lynx>();
         for (Animal animal : animals) {
             if (animal instanceof Lynx) {
@@ -27,5 +28,14 @@ public class LynxService extends Services<Lynx> {
             }
         }
         return lynxes;
+    }
+
+    public double feedAll(){
+        List<Lynx> lynxes = getAll();
+        double food = 0;
+        for(Lynx lynx : lynxes){
+            food += lynx.feed();
+        }
+        return food;
     }
 }

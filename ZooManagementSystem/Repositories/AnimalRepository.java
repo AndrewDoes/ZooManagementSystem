@@ -13,13 +13,13 @@ import ZooManagementSystem.Animals.Penguin;
 import ZooManagementSystem.Animals.Tiger;
 import ZooManagementSystem.Enums.DogType;
 import ZooManagementSystem.Enums.Gender;
-import ZooManagementSystem.Services.FishService;
 
 public class AnimalRepository {
     private Map<String, List<Animal>> animalMap;
 
     public AnimalRepository() {
         animalMap = new HashMap<>();
+        // initializeAnimals();
     }
 
     public void initializeAnimals(){
@@ -34,8 +34,6 @@ public class AnimalRepository {
         addAnimal("Tiger", new Tiger("Husk", 5, 20, Gender.Female));
         addAnimal("Lynx", new Lynx("Timpo", 8, 15, Gender.Male));
         addAnimal("Dog", new Dog("Leo", 8, 10, DogType.Akita, Gender.Male));
-        FishService fishService = new FishService(this);
-        fishService.addRandomFish(10);
     }
 
     public void addAnimal(String animalType, Animal animal) {
