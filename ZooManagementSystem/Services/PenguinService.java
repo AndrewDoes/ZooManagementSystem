@@ -12,7 +12,7 @@ import ZooManagementSystem.Exceptions.HeightException;
 import ZooManagementSystem.Repositories.AnimalRepository;
 import ZooManagementSystem.Views.App;
 
-public class PenguinService extends Services<Penguin> {
+public class PenguinService extends AnimalServices<Penguin> {
 	private int lastSortWayused;
 
     public PenguinService(AnimalRepository repo) {

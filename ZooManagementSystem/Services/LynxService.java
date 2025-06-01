@@ -7,7 +7,7 @@ import ZooManagementSystem.Animals.Animal;
 import ZooManagementSystem.Animals.Lynx;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
-public class LynxService extends Services<Lynx> {
+public class LynxService extends AnimalServices<Lynx> {
     public LynxService(AnimalRepository repo) {
         super(repo);
     }

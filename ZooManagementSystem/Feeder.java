@@ -14,10 +14,10 @@ import ZooManagementSystem.Services.FishService;
 import ZooManagementSystem.Services.LionService;
 import ZooManagementSystem.Services.LynxService;
 import ZooManagementSystem.Services.PenguinService;
-import ZooManagementSystem.Services.Services;
+import ZooManagementSystem.Services.AnimalServices;
 import ZooManagementSystem.Services.TigerService;
 
-public abstract class Feeder<T extends Services<?>> {
+public abstract class Feeder<T extends AnimalServices<?>> {
     public abstract double feed(T animalService, int max_happiness);
 }
 

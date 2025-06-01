@@ -15,7 +15,7 @@ import ZooManagementSystem.Enums.Colour;
 import ZooManagementSystem.Enums.Pattern;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
-public class FishService extends Services<Fish>{
+public class FishService extends AnimalServices<Fish>{
     public FishService(AnimalRepository repo){
         super(repo);
         // checkRepo();

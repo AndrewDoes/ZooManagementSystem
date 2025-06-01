@@ -4,9 +4,9 @@ import java.util.List;
 
 import ZooManagementSystem.Repositories.AnimalRepository;
 
-public abstract class Services<T> {
+public abstract class AnimalServices<T> {
     private AnimalRepository repo;
-    public Services(AnimalRepository repo) {
+    public AnimalServices(AnimalRepository repo) {
         this.repo = repo;
     }
     public AnimalRepository getRepo() {

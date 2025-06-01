@@ -7,7 +7,7 @@ import ZooManagementSystem.Animals.Animal;
 import ZooManagementSystem.Animals.Dog;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
-public class DogService extends Services<Dog> {
+public class DogService extends AnimalServices<Dog> {
     public DogService(AnimalRepository repo) {
         super(repo);
     }
