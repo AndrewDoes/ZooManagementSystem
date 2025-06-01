@@ -14,7 +14,7 @@ public class ClownFish extends Fish {
 	}
 	
 	public String toString() {
-		return "ClownFish.";
+		return "ClownFish";
 	}
 
 	@Override

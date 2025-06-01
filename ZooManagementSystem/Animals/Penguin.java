@@ -40,7 +40,7 @@ public class Penguin extends Animal{
 	}
 
 	public String toString() { 
-		return "Penguin."; 
+		return "Penguin"; 
 	 }
 
 	 public String makeNoise() {

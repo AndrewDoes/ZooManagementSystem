@@ -13,6 +13,6 @@ public class Tiger extends CarnivorousAnimal{
         }
 
         public String toString(){
-            return "Tiger.";
+            return "Tiger";
         }
 }

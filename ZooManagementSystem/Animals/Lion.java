@@ -30,6 +30,6 @@ public class Lion extends CarnivorousAnimal{
     }
 
     public String toString(){
-        return "Lion.";
+        return "Lion";
     }
 }

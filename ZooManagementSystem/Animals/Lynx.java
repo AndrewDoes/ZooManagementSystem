@@ -25,6 +25,6 @@ public class Lynx extends CarnivorousAnimal{
      }
 
 	 public String toString() { 
-		 return "Lynx."; 
+		 return "Lynx"; 
 	 }
 }

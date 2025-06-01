@@ -20,6 +20,6 @@ public class GoldFish extends Fish{
 	}
 	
 	public String toString() {
-		return "GoldFish.";
+		return "GoldFish";
 	}
 }

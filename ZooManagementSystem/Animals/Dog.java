@@ -22,6 +22,6 @@ public class Dog extends CarnivorousAnimal{
     }
 
     public String toString(){
-        return "Dog.";
+        return "Dog";
     }
 }

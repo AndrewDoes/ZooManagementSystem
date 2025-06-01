@@ -37,7 +37,7 @@ public class FishService extends AnimalServices<Fish>{
     //ini simply cuma add ke repo
     public void addNewAnimal(Fish fish) {
         if(fish == null) return;
-        this.getRepo().addAnimal("Fish", fish);
+        this.getRepo().addAnimal( fish.toString(), fish);
     }
 
     //bukan middle man ya soalnya ini main logicnya
