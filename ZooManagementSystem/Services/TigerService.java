@@ -32,6 +32,7 @@ public class TigerService extends AnimalServices<Tiger> {
 
     public double feedAll(){
         List<Tiger> tigers = getAll();
+        if(tigers == null) return 0;
         double food = 0;
         for(Tiger tiger : tigers){
             food += tiger.feed();

@@ -272,6 +272,7 @@ public class App{
         PenguinService penguinService = new PenguinService(zoo.getRepo());
         List<Penguin> penguins = penguinService.getAll();
         int waytosort= in.nextInt();
+        in.nextLine();
         if(waytosort==1){
             penguinService.SortByName(penguins);
             System.out.println("Penguins now sorted By Name in Ascending Order\n");
@@ -282,10 +283,10 @@ public class App{
             penguinService.SortByAge(penguins);
             System.out.println("Penguins now sorted By Age in Ascending Order\n");
         }
+        penguins = penguinService.getAll();
         for(Penguin penguin : penguins){
             penguin.setLastSortWayused(waytosort);
-        }
-        in.close();
+        };
     }
 
     private void printSortingOptions() {

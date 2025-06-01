@@ -30,6 +30,7 @@ public class LionService extends AnimalServices<Lion>{
 
     public double feedAll(){
         List<Lion> lions = getAll();
+        if(lions == null) return 0;
         double food = 0;
         for(Lion lion : lions){
             food += lion.feed();

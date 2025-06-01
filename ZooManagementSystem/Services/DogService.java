@@ -32,6 +32,7 @@ public class DogService extends AnimalServices<Dog> {
 
     public double feedAll(){
         List<Dog> dogs = getAll();
+        if(dogs == null) return 0;
         double food = 0;
         for(Dog dog : dogs){
             food += dog.feed();

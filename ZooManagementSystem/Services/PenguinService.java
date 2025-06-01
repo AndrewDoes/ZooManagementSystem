@@ -65,6 +65,7 @@ public class PenguinService extends AnimalServices<Penguin> {
 
     public void sortPenguinsOnWill(int choice){
         List<Penguin> penguins = getAll();
+		if(penguins.size() == 0) return;
         this.getRepo().clearAnimals("Penguins");
         if (choice == 1) {
             penguins = SortByName(penguins);
@@ -80,6 +81,7 @@ public class PenguinService extends AnimalServices<Penguin> {
 
     public void autoSortPenguins(){
         List<Penguin> penguins = getAll();
+		if(penguins.size() == 0) return;
         int lastSort = penguins.get(0).getLastSortWayused();
         this.getRepo().clearAnimals("Penguins");
         if (lastSort == 1) {
@@ -95,56 +97,60 @@ public class PenguinService extends AnimalServices<Penguin> {
     }
 
     //Function to Sort the list of the penguies by Hieght
-	public List<Penguin> SortByHeight(List<Penguin> arr) {
+	public List<Penguin> SortByHeight(List<Penguin> penguins) {
+		if(penguins.size() == 0) return null;
 		Penguin temp;
-		for(int i = 0; i<arr.size()-1 && arr.get(i) != null; i++) {
-			for(int j = i+1; j < arr.size() && arr.get(j) != null; j++) {
-				if (arr.get(i).getHeight() <= arr.get(j).getHeight()) {
-					temp= arr.get(i);
-					arr.set(i,arr.get(j));
-					arr.set(j,temp);
+		for(int i = 0; i<penguins.size()-1 && penguins.get(i) != null; i++) {
+			for(int j = i+1; j < penguins.size() && penguins.get(j) != null; j++) {
+				if (penguins.get(i).getHeight() <= penguins.get(j).getHeight()) {
+					temp= penguins.get(i);
+					penguins.set(i,penguins.get(j));
+					penguins.set(j,temp);
 				}
 			}
 		}
-		return arr;
+		return penguins;
 	}
 
-	public List<Penguin> SortByAge(List<Penguin> arr) {
+	public List<Penguin> SortByAge(List<Penguin> penguins) {
+		if(penguins.size() == 0) return null;
 		Penguin temp;
-		for(int i = 0; i<arr.size()-1 && arr.get(i) != null; i++) {
-			for(int j = i+1; j < arr.size() && arr.get(j) != null; j++) {
-				if (arr.get(i).getAge() > arr.get(j).getAge()) {
-					temp= arr.get(i);
-					arr.set(i,arr.get(j));
-					arr.set(j,temp);
+		for(int i = 0; i<penguins.size()-1 && penguins.get(i) != null; i++) {
+			for(int j = i+1; j < penguins.size() && penguins.get(j) != null; j++) {
+				if (penguins.get(i).getAge() > penguins.get(j).getAge()) {
+					temp= penguins.get(i);
+					penguins.set(i,penguins.get(j));
+					penguins.set(j,temp);
 				}
 			}
 		}
-		return arr;
+		return penguins;
 	}
-	public List<Penguin> SortByName(List<Penguin> arr) {
+	public List<Penguin> SortByName(List<Penguin> penguins) {
+		if(penguins.size() == 0) return null;
 		Penguin temp;
-		for(int i = 0; i<arr.size()-1 && arr.get(i) != null; i++) {
-			for(int j = i+1; j < arr.size() && arr.get(j) != null; j++) {
-				if (arr.get(j).getName().compareTo(arr.get(i).getName()) > 0 ) {
-					temp= arr.get(i);
-					arr.set(i,arr.get(j));
-					arr.set(j,temp);
+		for(int i = 0; i<penguins.size()-1 && penguins.get(i) != null; i++) {
+			for(int j = i+1; j < penguins.size() && penguins.get(j) != null; j++) {
+				if (penguins.get(j).getName().compareTo(penguins.get(i).getName()) > 0 ) {
+					temp= penguins.get(i);
+					penguins.set(i,penguins.get(j));
+					penguins.set(j,temp);
 				}
 			}
 		}
-		return arr;
+		return penguins;
 	}
 
     	// Deleting a fish after it was eaten by a penguin
 	public List<Fish> Feed_Penguins(List<Fish> fishes){
 		int lastFish= fishes.size()-1;
+		if(lastFish < 0) return null;
 		// Removing from the aquarium the last fish that was eaten
 		Fish Fish_to_eat = fishes.get(lastFish);
 		if(Fish_to_eat!=null)
 			System.out.println("Successfully deleted " + Fish_to_eat);
+			FishService fishService = new FishService(getRepo());
 		fishes.remove(lastFish);
-
         return fishes;
         //ini code smell feature envy, ganti nanti
 	}
@@ -159,6 +165,7 @@ public class PenguinService extends AnimalServices<Penguin> {
 
 	public double feedAll(){
 		List<Penguin> penguins = getAll();
+		if(penguins == null) return 0;
 		double food = 0;
 		for(Penguin penguin : penguins){
 			food += penguin.feed();

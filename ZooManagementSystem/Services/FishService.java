@@ -122,6 +122,7 @@ public class FishService extends AnimalServices<Fish>{
 	}
 
 	private void assignColourMap(List<Fish> fishes, Map<Colour, Integer> colourCounts) {
+        if(fishes == null) return;
 		for (Fish fish : fishes) {
 		    List<Colour> colours = fish.getColours();
 		    for (Colour colour : colours) {
@@ -132,6 +133,7 @@ public class FishService extends AnimalServices<Fish>{
 
     public double feedAll(){
         List<Fish> fishes = getAll();
+        if(fishes == null) return 0;
         double food = 0;
         for(Fish fish : fishes){
             food += fish.feed();

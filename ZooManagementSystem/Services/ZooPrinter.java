@@ -48,6 +48,7 @@ public class ZooPrinter {
 	
 	public String printFishes() {
 		List<Fish> fishes = fishService.getAll();
+		if(fishes == null) return "There are no Fishes in the Aquarium";
 		int numberOfFishes = repo.getAnimals("Fish").size();
 		if(numberOfFishes>0) {
 			String Fishes_D="";
@@ -73,6 +74,7 @@ public class ZooPrinter {
 
 	public String printPenguins() {
 		List<Penguin> penguins = penguinService.getAll();
+		if(penguins == null) return "There are no Penguins in the Zoo";
 		String forPrint = "The penguins in the Zoo are as follows:\n";
 		for (Penguin p : penguins){
 			forPrint += "Name: " + p.getName() +  " Age: " + p.getAge() +  " Height: "
@@ -83,6 +85,7 @@ public class ZooPrinter {
 
 	public String printLions() {
 		List<Lion> lions = lionService.getAll();
+		if(lions == null) return "There are no Lions in the Zoo";
 		String forPrint = "The lions in the Zoo are as follows:\n";
 		for (Lion lion : lions) {
 			forPrint += "Name: " + lion.getName() + " Age: " + lion.getAge() + " Weight: "
@@ -93,6 +96,7 @@ public class ZooPrinter {
 
 	public String printTigers(){
 		List<Tiger> tigers = tigerService.getAll();
+		if(tigers == null) return "There are no Tigers in the Zoo";
 		String T_forPrint= "The Tigers in the zoo are:\n";
 		for(Tiger tiger : tigers){
 			T_forPrint+="Name: " + tiger.getName() + " Age: " + tiger.getAge() + " Weight: "
@@ -103,6 +107,7 @@ public class ZooPrinter {
 
 	public String printLynxes() {
 		List<Lynx> lynxes = lynxService.getAll();
+		if(lynxes == null) return "There are no Lynxes in the Zoo";
 		String forPrint = "The lynxes in the Zoo are as follows:\n";
 		for (Lynx lynx : lynxes) {
 			forPrint += "Name: " + lynx.getName() + " Age: " + lynx.getAge() + " Weight: "
@@ -113,6 +118,7 @@ public class ZooPrinter {
 
 	public String printDogs(){
 		List<Dog> dogs = dogService.getAll();
+		if(dogs == null) return "There are no Dogs in the Zoo";
 		String forPrint = "The dogs in the zoo are as follows:\n";
 		for(Dog dog : dogs){
 			forPrint += "Name: " + dog.getName() + " Age: " + dog.getAge() + " Weight: "

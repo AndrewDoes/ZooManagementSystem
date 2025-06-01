@@ -32,6 +32,7 @@ public class LynxService extends AnimalServices<Lynx> {
 
     public double feedAll(){
         List<Lynx> lynxes = getAll();
+        if(lynxes == null) return 0;
         double food = 0;
         for(Lynx lynx : lynxes){
             food += lynx.feed();
