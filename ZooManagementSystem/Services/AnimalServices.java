@@ -16,6 +16,7 @@ public abstract class AnimalServices<T> {
         this.repo = repo;
     }
     public int getSize(){
+        if(getAll() == null) return 0;
         return getAll().size();
     }
     public abstract List<T> getAll();

@@ -54,7 +54,7 @@ public class App{
                     zoo.feedAll();
                     break;
                 case 9:
-                    System.out.println(zoo.ListentoAllAnimalsinZoo());
+                    System.out.println(zooPrinter.ListentoAllAnimalsinZoo(zoo));
                     break;
                 case 10:
                     System.out.println(zoo.ageOneYearAll());

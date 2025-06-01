@@ -2,12 +2,15 @@ package ZooManagementSystem.Services;
 
 import java.util.List;
 
+import ZooManagementSystem.Animals.Animal;
+import ZooManagementSystem.Animals.CarnivorousAnimal;
 import ZooManagementSystem.Animals.Dog;
 import ZooManagementSystem.Animals.Fish;
 import ZooManagementSystem.Animals.Lion;
 import ZooManagementSystem.Animals.Lynx;
 import ZooManagementSystem.Animals.Penguin;
 import ZooManagementSystem.Animals.Tiger;
+import ZooManagementSystem.Enums.Colour;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class ZooPrinter {
@@ -35,9 +38,9 @@ public class ZooPrinter {
 
     	public String printZooDetails(String name, String location) {
 		String forPrint = "Name of the Zoo: " + name + " \nAddress: " + location + "\nin the Zoo there are: \n"
-				+ lionService.getAll().size() + " Lions,\n" + tigerService.getAll().size()+" Tigers,\n" 
-				+ lynxService.getAll().size()+" Lynxes,\n" + dogService.getAll().size() +" Dogs,\n" 
-				+penguinService.getAll().size() + " Penguins,\n" + fishService.getAll().size() + " Fishes.";
+				+ lionService.getSize() + " Lions,\n" + tigerService.getSize()+" Tigers,\n" 
+				+ lynxService.getSize()+" Lynxes,\n" + dogService.getSize() +" Dogs,\n" 
+				+penguinService.getSize() + " Penguins,\n" + fishService.getSize() + " Fishes.";
 
 		return forPrint;
 
@@ -52,7 +55,12 @@ public class ZooPrinter {
 			String All_colors = "The Colors of the Fishes: ";
 			for (int i = 0; i<fishes.size(); i++) {
 				Fishes_D+= (i+1)+")Type Of Fish: "+ fishes.get(i).toString()+" Age: "+ fishes.get(i).getAge() + " Length: " + String.format("%.2f",fishes.get(i).getLength()) + " Pattern: " + fishes.get(i).getPattern()+ " Happiness: "+ fishes.get(i).getHappiness() + ".\n";
-				All_colors += fishes.get(i).getColours() + " ";
+				List<Colour> colours = fishes.get(i).getColours();
+				All_colors += "[";
+				for(Colour colour : colours){
+					All_colors += colour + " ";
+				}
+				All_colors += "]";
 			}
 			All_colors = fishService.removeDuplicateWords(All_colors);
 			return Fishes_D+ toPrint + All_colors;
@@ -112,4 +120,35 @@ public class ZooPrinter {
 		}
 		return forPrint;
 	}
+
+    String reportDeathBySadness(String PrintAllDead, Animal animal) {
+    	if(animal instanceof CarnivorousAnimal){
+    		PrintAllDead+=((CarnivorousAnimal) animal).getName() +" is Dead because of his Sadness:(\n";
+    	}else if(animal instanceof Penguin){
+    		PrintAllDead+=((Penguin) animal).getName() +" is Dead because of his Sadness:(\n";
+    	}
+    	else if(animal instanceof Fish){
+    		PrintAllDead+=((Fish) animal).toString() +" is Dead because of his Sadness:(\n";
+    	}
+    	return PrintAllDead;
+    }
+
+    String reportDeathByAge(String PrintAllDead, Animal animal) {
+    	if(animal instanceof CarnivorousAnimal){
+    		PrintAllDead+=((CarnivorousAnimal) animal).getName()+" is Dead because of his age\n";
+    	}else if(animal instanceof Penguin){
+    		PrintAllDead+=((Penguin) animal).getName()+" is Dead because of his age\n";
+    	}else if(animal instanceof Fish){
+    		PrintAllDead+=((Fish) animal).toString()+" is Dead because of his age\n";
+    	}
+    	return PrintAllDead;
+    }
+
+    public String ListentoAllAnimalsinZoo(Zoo zoo){
+    	String out="";
+    	out+= "1)Lions Noise: "+ zoo.lionService.getAll().get(0).makeNoise() + "\n2)Tigers Noise: " + zoo.tigerService.getAll().get(0).makeNoise() +
+    	 "\n3)Penguins Noise: " + zoo.penguinService.getLeader().makeNoise() + "\n4)Fishes Noise: " + zoo.fishService.getAll().get(0).makeNoise() +
+    	  "\n5)Lynxes Noise: " + zoo.lynxService.getAll().get(0).makeNoise() + "\n6)Dogs Noise: " + zoo.dogService.getAll().get(0).makeNoise();
+    	return out;
+    }
 }

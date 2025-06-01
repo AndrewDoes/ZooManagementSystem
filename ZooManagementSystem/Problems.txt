@@ -52,6 +52,8 @@ sebaiknya di move attribute ke superclassnya.
 
 9. duplicate code di SortPenguin() function (Main) yg sekarang jadi App.java
 
+10. reportDeathByAge, reportDeathBySadness, and hearAllAnimalSound sebaiknya ditaruh di ZooPrinter 
+
 Tahapan Benerin:
     - bikin Abstract Class Animal buat top Abstraction (Design Smell-3)
     - correspond semua class di bawahnya dengan Hierarchy baru

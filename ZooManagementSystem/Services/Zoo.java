@@ -1,12 +1,11 @@
 package ZooManagementSystem.Services;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import ZooManagementSystem.Animals.Animal;
-import ZooManagementSystem.Animals.CarnivorousAnimal;
 import ZooManagementSystem.Animals.Dog;
-import ZooManagementSystem.Animals.Fish;
 import ZooManagementSystem.Animals.Lion;
 import ZooManagementSystem.Animals.Lynx;
 import ZooManagementSystem.Animals.Penguin;
@@ -23,12 +22,12 @@ public class Zoo {
 	private String name;
 	private String location;
 	private AnimalRepository repo;
-	private FishService fishService;
-	private PenguinService penguinService;
-	private TigerService tigerService;
-	private DogService dogService;
-	private LionService	lionService;
-	private LynxService lynxService;
+	FishService fishService;
+	PenguinService penguinService;
+	TigerService tigerService;
+	DogService dogService;
+	LionService	lionService;
+	LynxService lynxService;
     ZooPrinter printer;
 	
 	public Zoo()   {
@@ -157,14 +156,6 @@ public class Zoo {
 		System.out.println("Animals Added");
 	}
 	
-	public String ListentoAllAnimalsinZoo(){
-		String out="";
-		out+= "1)Lions Noise: "+ lionService.getAll().get(0).makeNoise() + "\n2)Tigers Noise: " + tigerService.getAll().get(0).makeNoise() +
-		 "\n3)Penguins Noise: " + penguinService.getLeader().makeNoise() + "\n4)Fishes Noise: " + fishService.getAll().get(0).makeNoise() +
-		  "\n5)Lynxes Noise: " + lynxService.getAll().get(0).makeNoise() + "\n6)Dogs Noise: " + dogService.getAll().get(0).makeNoise();
-		return out;
-	}
-
 	public String ageOneYearAll(){
 		List<Animal> animals = repo.getAllAnimal();
 		String PrintAllDead="";
@@ -174,42 +165,24 @@ public class Zoo {
 	}
 
 	private String ageAll(List<Animal> animals, String PrintAllDead, int index) {
+		List<Animal> animalsToRemove = new ArrayList<>();
 		for(Animal animal : animals){
 			if(!animal.ageOneYear()){
-				PrintAllDead = reportDeathByAge(PrintAllDead, animal);
-				animals.remove(index);
+				PrintAllDead = printer.reportDeathByAge(PrintAllDead, animal);
+				animalsToRemove.add(animal);
 			}
 			else{
 				animal.setHappiness(animal.getHappiness()-(int)(Math.random() * 20 + 1));
 				if(animal.getHappiness()<=0){
-					PrintAllDead = reportDeathBySadness(PrintAllDead, animal);
-					animals.remove(index);
+					PrintAllDead = printer.reportDeathBySadness(PrintAllDead, animal);
+					animalsToRemove.add(animal);
 				}
 			}
 			index++;
 		}
-		return PrintAllDead;
-	}
 
-	private String reportDeathBySadness(String PrintAllDead, Animal animal) {
-		if(animal instanceof CarnivorousAnimal){
-			PrintAllDead+=((CarnivorousAnimal) animal).getName() +" is Dead because of his Sadness:(\n";
-		}else if(animal instanceof Penguin){
-			PrintAllDead+=((Penguin) animal).getName() +" is Dead because of his Sadness:(\n";
-		}
-		else if(animal instanceof Fish){
-			PrintAllDead+=((Fish) animal).toString() +" is Dead because of his Sadness:(\n";
-		}
-		return PrintAllDead;
-	}
-
-	private String reportDeathByAge(String PrintAllDead, Animal animal) {
-		if(animal instanceof CarnivorousAnimal){
-			PrintAllDead+=((CarnivorousAnimal) animal).getName()+" is Dead because of his age\n";
-		}else if(animal instanceof Penguin){
-			PrintAllDead+=((Penguin) animal).getName()+" is Dead because of his age\n";
-		}else if(animal instanceof Fish){
-			PrintAllDead+=((Fish) animal).toString()+" is Dead because of his age\n";
+		for(Animal animal : animalsToRemove){
+			repo.removeAnimal(animal.toString() , animal);
 		}
 		return PrintAllDead;
 	}
