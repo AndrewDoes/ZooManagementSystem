@@ -1,50 +1,18 @@
 package ZooManagementSystem;
 
-public class CarnivorousAnimal {
-    private String name;
-    private int age;
+public abstract class CarnivorousAnimal extends Animal {
     private double weight;
     private Gender gender;
-
-    private int happiness;
-    private static int LifeSpan = 15;
-
-    public CarnivorousAnimal(){
-        name = "";
-        age = 0;
-        weight = 0;
+    
+    public CarnivorousAnimal() {
+        super("", 0);
+        this.weight = 0;
     }
-
+    
     public CarnivorousAnimal(String name, int age, double weight, Gender gender){
-        this.name = name;
-        this.age = age;
+    	super(name, age);
         this.weight = weight;
         this.gender = gender;
-        this.happiness=100;
-    }
-
-    public int getHappiness() {
-        return happiness;
-    }
-
-    public void setHappiness(int happiness) {
-        this.happiness = happiness;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public double getWeight() {
@@ -58,12 +26,18 @@ public class CarnivorousAnimal {
     public Gender getGender() {
         return gender;
     }
+    
     public void setGender(Gender gender) {
         this.gender = gender;
     }
-
+    
     public boolean ageOneYear(){
-        this.age+=1;
-        return this.age <= LifeSpan;
+        return super.handleAging();
     }
+    
+    @Override
+    public String toString() {
+        return String.format("%s, Weight: %.2fkg, Gender: %s",
+                super.toString(), weight, gender);
+    } 
 }

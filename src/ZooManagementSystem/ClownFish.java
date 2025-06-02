@@ -1,11 +1,10 @@
 package ZooManagementSystem;
 
 public class ClownFish extends AquariumFish {
-
 	private Pattern pattern = Pattern.STRIPES;
 	private Colour[] colour = {Colour.ORANGE, Colour.BLACK, Colour.WHITE};
-
-	private static int LifeSpan= 8;
+	private static final int CLOWNFISH_LIFESPAN = 8;
+	
 	public ClownFish(int age, double length) {
 		super(age, length);
 		Zoo.numOfFishColours[0]++;
@@ -20,22 +19,26 @@ public class ClownFish extends AquariumFish {
 		return "ClownFish.";
 	}
 	
+	@Override
+	public Pattern getPattern() {
+		return pattern;
+	}
+	
 	public String getColours() {
 		String x = "";
 		for(int i = 0; i < colour.length; i++) {
-			x+=colour[i]+  " ";
+			x += colour[i]+  " ";
 		}
 		return x;
 	}
 
 	@Override
-	public Pattern getPattern() {
-		return pattern;
+	public boolean ageOneYear(){
+		return super.handleAging();
 	}
 
 	@Override
-	public boolean ageOneYear(){
-		this.setAge(this.getAge()+1);
-		return this.getAge() <= LifeSpan;
+	public int getLifeSpan() {
+		return CLOWNFISH_LIFESPAN;
 	}
 }

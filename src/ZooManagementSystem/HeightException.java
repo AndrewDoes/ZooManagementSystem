@@ -1,5 +1,6 @@
 package ZooManagementSystem;
 
+@SuppressWarnings("serial")
 public class HeightException extends Exception{
 
 	

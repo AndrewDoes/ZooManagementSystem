@@ -7,9 +7,7 @@ import static ZooManagementSystem.Gender.*;
 
 
 public class Zoo {
-
 	private static final int max_size=1000;
-	private static final int max_happiness=100;
 	private static String name;
 	private static String location;
 	static List<Penguin> penguins = new ArrayList<Penguin>(max_size);
@@ -28,13 +26,10 @@ public class Zoo {
 	static int numberOfTigers;
 
 	static int numberOfDogs;
-
-	
-	
 	
 	public Zoo()   {
-		this.name = "Zoo";
-		this.location = "Tel Aviv-Yaffo";
+		Zoo.name = "Zoo";
+		Zoo.location = "Tel Aviv-Yaffo";
         Arrays.fill(numOfFishColours, 0);
 		// numberOfFishes = 10;
 		numberOfPenguins = 3;
@@ -168,17 +163,18 @@ public class Zoo {
 		return (height_p >= penguins.get(0).getHeight());
 
 	}
+	
 	public static List<Penguin> addPenguin(Penguin newPenguin) {
 		if (numberOfPenguins == penguins.size()) {
 			List<Penguin> tempPenguinsArray = new ArrayList<Penguin>(penguins.size() * 2);
 			tempPenguinsArray=penguins;
 			tempPenguinsArray.add(numberOfPenguins,newPenguin);
 			int sortby = Penguin.getLastSortWayused();
-			if(sortby==1) {
+			if(sortby == 1) {
 				Penguin.SortByName(tempPenguinsArray);
-			} else if (sortby==2) {
+			} else if (sortby == 2) {
 				Penguin.SortByHeight(tempPenguinsArray);
-			} else if (sortby==3) {
+			} else if (sortby == 3) {
 				Penguin.SortByAge(tempPenguinsArray);
 			}
 			numberOfPenguins++;
@@ -186,11 +182,11 @@ public class Zoo {
 		}
 		penguins.add(numberOfPenguins,newPenguin);
 		int sortby = Penguin.getLastSortWayused();
-		if(sortby==1) {
+		if(sortby == 1) {
 			Penguin.SortByName(penguins);
-		} else if (sortby==2) {
+		} else if (sortby == 2) {
 			Penguin.SortByHeight(penguins);
-		} else if (sortby==3) {
+		} else if (sortby == 3) {
 			Penguin.SortByAge(penguins);
 		}
 		numberOfPenguins++;
@@ -199,7 +195,7 @@ public class Zoo {
 	}
 	
 	public static void AddNewFish(int type_f, int age_f, double length_f, Colour[] singularFishColours,Pattern Pattern_F){
-		AquariumFish new_fish=null;
+			AquariumFish new_fish=null;
 			if(type_f == 3) {
 				new_fish = new ClownFish(age_f, length_f);
 			} else if(type_f == 2) {
@@ -223,7 +219,7 @@ public class Zoo {
 	//Type of Fish 2 = GoldFish
 	//Type of Fish 3 = ClownFish
 	public static AquariumFish[] addFish(int num) {
-		if(num+numberOfFishes > fishes.length) {
+		if(num + numberOfFishes > fishes.length) {
 			AquariumFish[] concatArray = new AquariumFish[num+fishes.length*2];
 			System.arraycopy(fishes, 0, concatArray, 0, fishes.length);
 			for (int i = numberOfFishes; i < numberOfFishes+num; i++) {
@@ -245,7 +241,7 @@ public class Zoo {
 			numberOfFishes+=num;
 			return fishes = concatArray;
 		}
-		for (int i = numberOfFishes; i < numberOfFishes+num; i++) {
+		for (int i = numberOfFishes; i < numberOfFishes + num; i++) {
 			int ageTemp ;
 			double lengthTemp = Math.random() * 10 + 1;
 			int typeOfFish = (int)(Math.random() * 3 + 1);
@@ -337,7 +333,7 @@ public class Zoo {
 			if(lion==null)
 				break;
 			food_lions += lion.howMuchMeatDoesLionEat();
-			lion.setHappiness(max_happiness);
+			lion.setHappiness(Animal.MAX_HAPPINESS);
 		}
 		return food_lions;
 	}
@@ -348,7 +344,7 @@ public class Zoo {
 			if(tiger==null)
 				break;
 			food_tigers+=tiger.howMuchMeatDoesTigerEat();
-			tiger.setHappiness(max_happiness);
+			tiger.setHappiness(Animal.MAX_HAPPINESS);
 		}
 		return food_tigers;
 	}
@@ -359,7 +355,7 @@ public class Zoo {
 			if(lynx == null)
 				break;
 			food_lynxes += lynx.howMuchMeatDoesLynxEat();
-			lynx.setHappiness(max_happiness);
+			lynx.setHappiness(Animal.MAX_HAPPINESS);
 		}
 		return food_lynxes;
 	}
@@ -370,18 +366,18 @@ public class Zoo {
 			if(dog == null)
 				break;
 			food_dogs += dog.HowMuchDogEat();
-			dog.setHappiness(max_happiness);
+			dog.setHappiness(Animal.MAX_HAPPINESS);
 		}
 		return food_dogs;
 	}
 	
 	public double Feed_Fishes(){
-		double food_fishes=0;
+		double food_fishes = 0;
 		for (AquariumFish fish : fishes) {
-			if(fish==null)
+			if(fish == null)
 				break;
 			food_fishes += fish.HowMuchMealFish();
-			fish.setHappiness(max_happiness);
+			fish.setHappiness(Animal.MAX_HAPPINESS);
 		}
 		return food_fishes;
 	}
@@ -396,7 +392,7 @@ public class Zoo {
 			if(numberOfFishes>0) {
 				numberOfFishes--;
 				count_food_p+=1;
-				penguin.setHappiness(max_happiness); // Just the penguin that ate will return to level 100 of Happiness
+				penguin.setHappiness(Animal.MAX_HAPPINESS); // Just the penguin that ate will return to level 100 of Happiness
 			}
 			else {
 				break;
@@ -467,22 +463,22 @@ public class Zoo {
 	public void AddNewDog(String name_d , int age_d ,double weight_d , int dogtype , int gender){
 		Gender DogGender;
 		DogType Type;
-		if(gender==1){
-			DogGender=Gender.Male;
+		if(gender == 1){
+			DogGender = Gender.Male;
 		}
 		else {
-			DogGender=Gender.Female;
+			DogGender = Gender.Female;
 		}
-		if(dogtype==1){
-			Type=DogType.Akita;
-		} else if (dogtype==2) {
-			Type=DogType.Bulldog;
-		} else if (dogtype==3) {
-			Type=DogType.Poodle;
+		if(dogtype == 1){
+			Type = DogType.Akita;
+		} else if (dogtype == 2) {
+			Type = DogType.Bulldog;
+		} else if (dogtype == 3) {
+			Type = DogType.Poodle;
 		} else {
-			Type=DogType.Terriers;
+			Type = DogType.Terriers;
 		}
-		Dog newDog= new Dog(name_d,age_d,weight_d,Type,DogGender);
+		Dog newDog = new Dog(name_d,age_d,weight_d,Type,DogGender);
 		addDog(newDog);
 	}
 	
@@ -497,6 +493,7 @@ public class Zoo {
 		int secondIndex = -1;
 		int max = 0;
 		int secondMax = 0;
+		
 		for(int i = 0; i < numOfFishColours.length; i++) {
 			if(numOfFishColours[i] >= max) {
 				secondMax = max;
@@ -512,112 +509,64 @@ public class Zoo {
 
 	public String ageOneYearAll(){
 		String PrintAllDead="";
-		for(int i=0;i<numberOfLynxes;i++){
+		
+		for(int i = 0;i < numberOfLynxes; i++){
 			if(!lynxes[i].ageOneYear()){
-				PrintAllDead+=lynxes[i].getName()+" is Dead because of his age\n";
 				lynxes[i]=null;
 				lynxes[i]=lynxes[numberOfLynxes-1];
+				lynxes[numberOfLynxes-1]=null;
 				numberOfLynxes--;
 				i--;
-			} else{
-				lynxes[i].setHappiness(lynxes[i].getHappiness()-(int)(Math.random() * 20 + 1));
-				if(lynxes[i].getHappiness()<=0){
-					PrintAllDead+=lynxes[i].getName() +" is Dead because of his Sadness:(\n";
-					lynxes[i]=lynxes[numberOfLynxes-1];
-					lynxes[numberOfLynxes-1]=null;
-					numberOfLynxes--;
-					i--;
-				}
 			}
 		}
-		for(int i=0;i<numberOfDogs;i++){
+		
+		for(int i = 0; i < numberOfDogs; i++){
 			if(!dogs[i].ageOneYear()){
-				PrintAllDead+=dogs[i].getName()+" is Dead because of his age\n";
 				dogs[i]=null;
 				dogs[i]=dogs[numberOfDogs-1];
+				dogs[numberOfDogs-1]=null;
 				numberOfDogs--;
 				i--;
-			} else{
-				dogs[i].setHappiness(dogs[i].getHappiness()-(int)(Math.random() * 20 + 1));
-				if(dogs[i].getHappiness()<=0){
-					PrintAllDead+=dogs[i].getName() +" is Dead because of his Sadness:(\n";
-					dogs[i]=dogs[numberOfDogs-1];
-					dogs[numberOfDogs-1]=null;
-					numberOfDogs--;
-					i--;
-				}
-			}
+			} 
 		}
+		
 		for(int i=0;i<numberOfTigers;i++){
 			if(!tigers[i].ageOneYear()){
-				PrintAllDead+=tigers[i].getName()+" is Dead because of his age\n";
 				tigers[i]=null;
 				tigers[i]=tigers[numberOfTigers-1];
+				tigers[numberOfTigers-1]=null;
 				numberOfTigers--;
 				i--;
-			} else{
-				tigers[i].setHappiness(tigers[i].getHappiness()-(int)(Math.random() * 20 + 1));
-				if(tigers[i].getHappiness()<=0){
-					PrintAllDead+=tigers[i].getName() +" is Dead because of his Sadness:(\n";
-					tigers[i]=tigers[numberOfTigers-1];
-					tigers[numberOfTigers-1]=null;
-					numberOfTigers--;
-					i--;
-				}
 			}
 		}
-		for(int i=0;i<numberOfLions;i++){
+		
+		for(int i = 0; i < numberOfLions; i++){
 			if(!lions[i].ageOneYear()){
-				PrintAllDead+=lions[i].getName()+" is Dead because of his age\n";
 				lions[i]=null;
 				lions[i]=lions[numberOfLions-1];
+				lions[numberOfLions-1]=null;
 				numberOfLions--;
 				i--;
-			} else{
-				lions[i].setHappiness(lions[i].getHappiness()-(int)(Math.random() * 20 + 1));
-				if(lions[i].getHappiness()<=0){
-					PrintAllDead+=lions[i].getName() +" is Dead because of his Sadness:(\n";
-					lions[i]=lions[numberOfLions-1];
-					lions[numberOfLions-1]=null;
-					numberOfLions--;
-					i--;
-				}
 			}
 		}
-		for (int i=0;i<numberOfFishes;i++){
+		
+		for (int i = 0; i < numberOfFishes; i++){
 			if(!fishes[i].ageOneYear()){
-				PrintAllDead+=fishes[i].toString()+" is Dead because of his age\n";
-				fishes[i]=fishes[numberOfFishes-1];
-				fishes[numberOfFishes-1]=null;
+				fishes[i] = null;
+				fishes[i] = fishes[numberOfFishes-1];
+				fishes[numberOfFishes-1] = null;
 				numberOfFishes--;
 				i--;
-			} else {
-				fishes[i].setHappiness(fishes[i].getHappiness()-(int)(Math.random() * 20 + 1));
-				if(fishes[i].getHappiness()<=0){
-					PrintAllDead+= fishes[i].toString() +" is Dead because of his Sadness:(\n";
-					fishes[i]=fishes[numberOfFishes-1];
-					fishes[numberOfFishes-1]=null;
-					numberOfFishes--;
-					i--;
-				}
 			}
 		}
 		for(int i=0;i<numberOfPenguins;i++){
 			if(!penguins.get(i).ageOneYear()){
-				PrintAllDead+=penguins.get(i).getName()+" is Dead because of his age\n";
 				penguins.remove(i);
 				numberOfPenguins--;
 				i--;
-			} else {
-				penguins.get(i).setHappiness(penguins.get(i).getHappiness()-(int)(Math.random()*20+1));
-				if(penguins.get(i).getHappiness()<=0){
-					PrintAllDead+=penguins.get(i).getName()+" is Dead because of his Sadness\n";
-					penguins.remove(i);
-					numberOfPenguins--;
-					i--;
-				}
 			}
 		}
+		
 		return PrintAllDead;
 	}
 }

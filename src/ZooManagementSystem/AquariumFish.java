@@ -4,39 +4,31 @@ package ZooManagementSystem;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class AquariumFish {
-
-	private int age;
+public class AquariumFish extends Animal{
 	private double length;
 	private Colour[] colours;
 	private Pattern pattern;
-
-	private int happiness;
-
-	private static int LifeSpan= 25;
-
+	private static int FISH_LIFESPAN= 25;
 	private final String Fish_Noise = "blob";
-
-	
 	
 	//Default Constructor
 	public AquariumFish() {
-		age = 0;
+		super(0);
 		length = 0;
-		
 	}
+	
 	//Constructor
 	public AquariumFish(int age, double length) {
-		this.age = age;
+		super(age);
 		this.length = length;
-		this.happiness=100;
 	}
+	
 	public static void ZooDetails() {
 		
 	}
 
 	public double HowMuchMealFish(){
-		if (this.age<3)
+		if (super.getAge() < 3)
 			return 3;
 		else
 			return length + 3;
@@ -94,15 +86,11 @@ public class AquariumFish {
 	public void setLength(double length) {
 		this.length = length;
 	}
-	public int getAge() {
-		return age;
-	}
+	
 	public Pattern getPattern() {
 		return pattern;
 	}
-	public void setAge(int age) {
-		this.age = age;
-	}
+	
 	public void setPattern(Pattern pattern) {
 		this.pattern = pattern;
 	}
@@ -140,16 +128,13 @@ public class AquariumFish {
 		return "Fish.";
 	}
 
-	public int getHappiness() {
-		return happiness;
-	}
-
-	public void setHappiness(int happiness) {
-		this.happiness = happiness;
-	}
-
+	@Override
 	public boolean ageOneYear(){
-		this.age+=1;
-		return this.age <= LifeSpan;
+		return super.handleAging();
+	}
+
+	@Override
+	public int getLifeSpan() {
+		return FISH_LIFESPAN;
 	}
 }

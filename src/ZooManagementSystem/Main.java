@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) throws HeightException, AgeException {
         Zoo zoo = new Zoo();
         Scanner input= new Scanner(System.in);
+        
         System.out.println("\n1)Show The Zoo Details & Number of pets in it\n"
                 + "2)Show all Penguins in the zoo\n"
                 + "3)Add Penguin\n"
@@ -28,9 +29,12 @@ public class Main {
                 + "13)Add a new Dog\n"
                 + "14)Exit\n"
         );
+        
         System.out.println("Enter your option:");
+        
         choice = input.nextInt();
-        while(choice!=14) {
+        
+        while(choice != 14) {
             switch(choice) {
                 case 1:
                     System.out.println(zooDetails());
@@ -86,6 +90,7 @@ public class Main {
                 default:
                     throw new IllegalStateException("Unexpected value: " + input);
             }
+            
             System.out.println("\n1)Show The Zoo Details & Number of pets in it\n"
                     + "2)Show all Penguins in the zoo\n"
                     + "3)Add Penguin\n"
@@ -101,107 +106,145 @@ public class Main {
                     + "13)Add a new Dog\n"
                     + "14)Exit\n"
             );
+            
             System.out.println("Enter your option:");
-            choice=input.nextInt();
+            choice = input.nextInt();
         }
+        
+        input.close();
       //  return 0;
     }
 
     private static void AddNewDog(Zoo zoo) {
         Scanner input_dog = new Scanner(System.in);
+        
         System.out.println("Enter the Name of the new Dog: ");
-        String name= input_dog.nextLine();
+        String name = input_dog.nextLine();
+        
         System.out.println("Enter the Weight of the new Dog: ");
-        double weight= input_dog.nextDouble();
-        while (weight<=0){
+        double weight = input_dog.nextDouble();
+        
+        while (weight <= 0){
             System.out.println("The Weight of the Dog Can't be Negative\n" +
                     "Please Re enter a new weight: ");
             weight=input_dog.nextDouble();
         }
+        
         System.out.println("Enter the age of the new Dog: ");
-        int age_d= input_dog.nextInt();
-        while (age_d<=0 || age_d>=60){
+        int age_d = input_dog.nextInt();
+        
+        while (age_d <= 0 || age_d >= 60){
             System.out.println("The Age of a dog is between 1-60\n" +
                     "Please re Enter a new responsible age: ");
             age_d=input_dog.nextInt();
         }
+        
         System.out.println("Enter the Gender of the new Dog:"+"\n1)Male.\n2)Female. (Type 1 or 2)");
         int animal_gender = input_dog.nextInt();
+        
         System.out.println("Enter the Type of the new Dog:"+"\n1)Akita.\n2)Bulldog.\n3)Poodle.\n4)Terriers.");
         int dogtype = input_dog.nextInt();
+        
         zoo.AddNewDog(name,age_d,weight,dogtype,animal_gender);
+        
+        input_dog.close();
     }
 
     public static void add_penguin(Zoo zoo) throws HeightException, AgeException{
-        System.out.println("Enter the Name of the new penguin: ");
-        Scanner input_Penguin = new Scanner(System.in);
+    	Scanner input_Penguin = new Scanner(System.in);
+    	
+    	System.out.println("Enter the Name of the new penguin: ");
         String name_p = input_Penguin.nextLine();
+        
         System.out.println("Enter the height of the new penguin: ");
         double height_p = input_Penguin.nextDouble();
+        
         System.out.println("Enter the age of the new penguin: ");
         int age_p = input_Penguin.nextInt();
+        
         System.out.println(zoo.Add_New_Penguin(name_p,height_p,age_p));
+        
+        input_Penguin.close();
     }
 
     public static void AddCarnivorousAnimal(Zoo zoo){
+    	int animal_choice = -1;
+        Scanner input_carnivorous = new Scanner(System.in);
+    	
         System.out.println("Which carnivorous animal you want to add?\n");
         System.out.println("lion/tiger/lynx(Type the requested aninmal!)");
-        int animal_choice = -1;
-        Scanner input_carnivorous = new Scanner(System.in);
         String requested_animal= input_carnivorous.nextLine();
-        if(requested_animal.equals("lion"))
-            animal_choice=1;
-        else if (requested_animal.equals("tiger"))
+        
+        if(requested_animal.equals("lion")) {
+        	animal_choice=1;
+        } else if (requested_animal.equals("tiger")) {
         	animal_choice=2;
-        else if(requested_animal.equals("lynx"))
+        } else if(requested_animal.equals("lynx"))
         	animal_choice=3;
+        
         System.out.println("Enter the Name of the new "+requested_animal+": ");
         String name_animal= input_carnivorous.nextLine();
+        
         System.out.println("Enter the Weight of the new "+requested_animal+": ");
         double weight_animal= input_carnivorous.nextDouble();
+        
         while (weight_animal<=0){
             System.out.println("The Weight of "+requested_animal+"Can't be Negative\n" +
                     "Please Re enter a new weight: ");
             weight_animal=input_carnivorous.nextDouble();
         }
+        
         System.out.println("Enter the age of the new "+requested_animal+": ");
         int age_animal= input_carnivorous.nextInt();
+        
         while (age_animal<=0 || age_animal>=60){
             System.out.println("The Age of a carnivorous animal is between 1-60\n" +
                     "Please re Enter a new responsible age: ");
             age_animal=input_carnivorous.nextInt();
         }
+        
         System.out.println("Enter the Gender of the new "+requested_animal+":"+"\n1)Male.\n2)Female. (Type 1 or 2)");
         int animal_gender = input_carnivorous.nextInt();
-        if(animal_choice == 1)
-            zoo.AddNewLion(name_animal,weight_animal,age_animal,animal_gender);
-        else if(animal_choice == 2)
+        
+        if(animal_choice == 1) {
+        	zoo.AddNewLion(name_animal,weight_animal,age_animal,animal_gender);
+        } else if(animal_choice == 2) {
             zoo.AddNewTiger(name_animal,weight_animal,age_animal,animal_gender);
-        else
+    	} else {
         	zoo.AddNewLynx(name_animal, weight_animal, age_animal, animal_gender);
+    	}
+        
+        input_carnivorous.close();
     }
 
-    public static void add_new_fishes(){
+    @SuppressWarnings("resource")
+	public static void add_new_fishes(){
+    	Pattern Pattern_fish=null;
+    	Scanner input_choice = new Scanner(System.in);
+    	
         System.out.println("Choose an option:\n1)Add Fish With Details\n2)Add a number of random Fishes\n");
-        Pattern Pattern_fish=null;
-        Scanner input_choice = new Scanner(System.in);
         int choice_of_adding = input_choice.nextInt();
-        if(choice_of_adding==1){
+        
+        if(choice_of_adding == 1){
             System.out.println("What type of Fish would you like to add?\n1.Fish\n2.GoldFish\n3.ClownFish");
             int type_f = input_choice.nextInt();
+            
         	System.out.println("Enter the Age of the Fish:");
             int age_f=input_choice.nextInt();
-            while(age_f<=0 || age_f>15){
+            
+            while(age_f <= 0 || age_f > 15){
                 System.out.println("Fish as they know on average lives between 10-15 years\n" +
                         "Please Re enter a new responsible age: ");
                 age_f=input_choice.nextInt();
             }
+            
             System.out.println("Enter the Length of the Fish:");
             double length_f=input_choice.nextDouble();
-            while (length_f<=0){
+            
+            while (length_f <= 0){
                 System.out.println("The length of a fish can't be Negative\n" +
                         "Please Re enter a new fish length: ");
-                length_f=input_choice.nextDouble();
+                length_f = input_choice.nextDouble();
             }
             if(type_f == 2) {
                 AddNewFish(type_f, age_f, length_f, null, null);
@@ -217,24 +260,30 @@ public class Main {
             input_choice.skip("[\r\n]+"); // To skip the input of the next line char
             String pattern = input_choice.nextLine();
             if (pattern.equals("DOTS")) {
-                Pattern_fish= DOTS;
+                Pattern_fish = DOTS;
             }
             else if (pattern.equals("SPOTS")) {
-                Pattern_fish=SPOTS;
+                Pattern_fish = SPOTS;
             } else if (pattern.equals("STRIPES")) {
-                Pattern_fish=STRIPES;
+                Pattern_fish = STRIPES;
             } else if (pattern.equals("CLEAR")) {
-                Pattern_fish=CLEAR;
+                Pattern_fish = CLEAR;
             }
+            
             Colour[] allColours = Colour.values();
+            
             System.out.println("How many Colors is the Fish?\n");
             int number_of_colors= input_choice.nextInt();
+            
             Colour[] singularFishColours = new Colour[number_of_colors];
-            for(int i = 0; i<number_of_colors; i++) {
+            
+            for(int i = 0; i < number_of_colors; i++) {
                 boolean was_added=false;
+                
                 System.out.println("Choose the Colors :\n1)BLACK, 2)WHITE, 3)GREEN, 4)ORANGE, 5)BLUE, 6)YELLOW, 7)BROWN, 8)GOLD, 9)RED, 10)CYAN");
                 int color_num = input_choice.nextInt();
-                for(int j=0;singularFishColours[j]!=null;j++) {
+                
+                for(int j = 0; singularFishColours[j] != null; j++) {
                     if(singularFishColours[j].equals(allColours[color_num])) {
                         System.out.println("This colour was already added!");
                         was_added=true;
@@ -242,59 +291,76 @@ public class Main {
                         break;
                     }
                 }
+                
                 if(!was_added)
                     singularFishColours[i] = allColours[color_num];
                 was_added=false;
+                
             }
+            
             AddNewFish(type_f,age_f,length_f,singularFishColours,Pattern_fish);
             System.out.println("The Fish was successfully added");
-        } else if (choice_of_adding==2) {
+            
+        } else if (choice_of_adding == 2) {
             System.out.println("How much Fishes you want to add?\n");
-            int num_fishes= input_choice.nextInt();
+            int num_fishes = input_choice.nextInt();
+            
             addFish(num_fishes);
             System.out.println(num_fishes+" new Fishes were Added Successfully\n");
         }
+        
+        input_choice.close();
     }
 
     public static void SortPenguins(){
+    	Scanner in = new Scanner(System.in);
+    	
         System.out.println("Which way would you like to sort the penguins\n" +
                 "1)By Name in Ascending Order\n" +
                 "2)By Height in Descending Order\n" +
                 "3)By Age in Ascending Order\n");
-        Scanner in = new Scanner(System.in);
         int waytosort= in.nextInt();
-        if(waytosort==1){
+        
+        if(waytosort == 1){
             Penguin.SortByName(penguins);
             Penguin.setLastSortWayused(1);
             System.out.println("Penguins now sorted By Name in Ascending Order\n");
-        } else if (waytosort==2) {
+        } else if (waytosort == 2) {
             Penguin.SortByHeight(penguins);
             Penguin.setLastSortWayused(2);
             System.out.println("Penguins now sorted By Height in Descending Order\n\n");
-        } else if (waytosort==3) {
+        } else if (waytosort == 3) {
             Penguin.SortByAge(penguins);
             Penguin.setLastSortWayused(3);
             System.out.println("Penguins now sorted By Age in Ascending Order\n");
         }
+        
+        in.close();
     }
     
     public static double heightExceptionPenguin() {
     	double height_p = -1;
     	Scanner input_Penguin = new Scanner(System.in);
+    	
     	while(height_p < 1 || height_p > 200) {
-    	System.out.println("Height of the new Penguin is illegal (choose a number between 1-"+ Zoo.penguins.get(0).getHeight()+" (inclusive))\nPlease re-Enter the height of the new penguin: ");
-    	height_p = input_Penguin.nextDouble();
+    		System.out.println("Height of the new Penguin is illegal (choose a number between 1-"+ Zoo.penguins.get(0).getHeight()+" (inclusive))\nPlease re-Enter the height of the new penguin: ");
+    		height_p = input_Penguin.nextDouble();
     	}
+    	input_Penguin.close();
+    	
     	return height_p;
     }
     
     public static int ageExceptionPenguin() {
     	int age_p = -1;
     	Scanner input_Penguin = new Scanner(System.in);
+    	
     	while(age_p < 1 || age_p > 20) {
-    	System.out.println("Age of the penguin is illegal (choose a number 1-20 (inclusive)),\nPlease re-Enter the age of the new penguin: ");
-        age_p = input_Penguin.nextInt();
+    		System.out.println("Age of the penguin is illegal (choose a number 1-20 (inclusive)),\nPlease re-Enter the age of the new penguin: ");
+        	age_p = input_Penguin.nextInt();
     	}
+    	input_Penguin.close();
+    	
         return age_p;
     }
 }
