@@ -39,9 +39,11 @@ public class AquariumFishService extends AnimalServices<AquariumFish>{
 			if(type == 3) {
 				new_fish = new ClownFish(age, length);
 			} else if(type == 2) {
-				new_fish = new GoldFish(age, length);
+                List<Colour> colours = Arrays.asList(Colour.BLACK, Colour.GOLD, Colour.ORANGE, Colour.YELLOW);
+                Colour colour = FishAttributeRandomizer.randomSingleColour(colours);
+				new_fish = new GoldFish(age, length, colour);
 			} else if (type == 1) {
-				new_fish = new AquariumFish(age,length);
+				new_fish = new AquariumFish(age,length, singularFishColours, Pattern);
 			}
             addNewAnimal(new_fish);
             return new_fish;
@@ -56,10 +58,12 @@ public class AquariumFishService extends AnimalServices<AquariumFish>{
             int typeOfFish = (int)(Math.random() * 3 + 1);
             AquariumFish fish = null;
             if(typeOfFish == 1){
-                fish = new AquariumFish(ageTemp, lengthTemp);
+                fish = new AquariumFish(ageTemp, lengthTemp, FishAttributeRandomizer.randomColour(), FishAttributeRandomizer.randomPattern());
             }
             if(typeOfFish == 2) {
-                fish = new GoldFish(ageTemp, lengthTemp);
+                List<Colour> colours = Arrays.asList(Colour.BLACK, Colour.GOLD, Colour.ORANGE, Colour.YELLOW);
+                Colour colour = FishAttributeRandomizer.randomSingleColour(colours);
+                fish = new GoldFish(ageTemp, lengthTemp, colour);
             }
             if(typeOfFish == 3) {
 
@@ -112,7 +116,7 @@ public class AquariumFishService extends AnimalServices<AquariumFish>{
 	private void assignColourMap(List<AquariumFish> fishes, Map<Colour, Integer> colourCounts) {
         if(fishes == null) return;
 		for (AquariumFish fish : fishes) {
-		    List<Colour> colours = Arrays.asList(fish.getColours());
+		    List<Colour> colours = fish.getColours();
 		    for (Colour colour : colours) {
 		        colourCounts.put(colour, colourCounts.getOrDefault(colour, 0) + 1);
 		    }

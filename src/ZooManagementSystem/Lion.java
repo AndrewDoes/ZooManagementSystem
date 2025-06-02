@@ -1,48 +1,33 @@
 package ZooManagementSystem;
 
 public class Lion extends CarnivorousAnimal{
-	private final String Lion_Noise = "ROAR"; //
-    private final double MeatCalcMale = 0.02; //
-    private final double MeatCalcFemale = 0.03; //
-    private final int MaxMeatinKg = 25; //
-    private static final int LION_LIFE_SPAN = 15;
-
-    public Lion() {
-        super();
-    }
+    private final int MaxMeatinKg=25;
     
     public Lion(String name, int age, double weight, Gender gender) {
-        super(name, age, weight, gender);
+        super(name,age, 15, weight, gender, 0.02, 0.03);
     }
 
-    public int howMuchMeatDoesLionEat() {
-        double meat = (int)getWeight() * getAge();
+    public String makeNoise(){
+        return "ROAR";
+    }
+
+    public double feed(){
+        double meat = getWeight()*getAge();
         if(getGender() == Gender.Male) {
-            meat = MeatCalcMale;
-            if(meat > MaxMeatinKg)
-                return MaxMeatinKg;
-            else return (int)meat;
-        }
-        else {
-            meat *= MeatCalcFemale;
+            meat*= this.getMeatCalcMale();
             if(meat>MaxMeatinKg)
                 return MaxMeatinKg;
-            else return (int)meat;
+            else return meat;
+        }
+        else {
+            meat*=this.getMeatCalcFemale();
+            if(meat>MaxMeatinKg)
+                return MaxMeatinKg;
+            else return meat;
         }
     }
 
-    @Override
-    public double feed() {
-        return howMuchMeatDoesLionEat();
+    public String toString(){
+        return "Lion";
     }
-
-    @Override
-    public String makeNoise(){
-        return Lion_Noise;
-    }
-	
-	@Override
-	public int getLifeSpan() {
-		return LION_LIFE_SPAN;
-	}
 }

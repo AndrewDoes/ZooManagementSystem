@@ -1,6 +1,5 @@
 package ZooManagementSystem;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ZooPrinter {
@@ -64,7 +63,7 @@ public class ZooPrinter {
 			String All_colors = "The Colors of the Fishes: ";
 			for (int i = 0; i<fishes.size(); i++) {
 				Fishes_D+= (i+1)+")Type Of Fish: "+ fishes.get(i).toString()+" Age: "+ fishes.get(i).getAge() + " Length: " + String.format("%.2f",fishes.get(i).getLength()) + " Pattern: " + fishes.get(i).getPattern()+ " Happiness: "+ fishes.get(i).getHappiness() + ".\n";
-				List<Colour> colours = Arrays.asList(fishes.get(i).getColours());
+				List<Colour> colours = fishes.get(i).getColours();
 				All_colors += "[";
 				for(Colour colour : colours){
 					All_colors += colour + " ";

@@ -1,18 +1,27 @@
 package ZooManagementSystem;
 
-public abstract class CarnivorousAnimal extends Animal {
+public abstract class CarnivorousAnimal extends Animal{
+    private String name;
     private double weight;
     private Gender gender;
-    
-    public CarnivorousAnimal() {
-        super("", 0);
-        this.weight = 0;
-    }
-    
-    public CarnivorousAnimal(String name, int age, double weight, Gender gender){
-    	super(name, age);
+    private final double MeatCalcFemale;
+    private final double MeatCalcMale;
+
+    public CarnivorousAnimal(String name, int age, int lifeSpan, double weight, Gender gender, double MeatCalcMale, double MeatCalcFemale) {
+        super(age, lifeSpan);
+        this.name = name;
         this.weight = weight;
         this.gender = gender;
+        this.MeatCalcMale = MeatCalcMale;
+        this.MeatCalcFemale = MeatCalcFemale;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getWeight() {
@@ -23,21 +32,31 @@ public abstract class CarnivorousAnimal extends Animal {
         this.weight = weight;
     }
 
-    public Gender getGender() {
+        public Gender getGender() {
         return gender;
     }
-    
+
     public void setGender(Gender gender) {
         this.gender = gender;
     }
-    
-    public boolean ageOneYear(){
-        return super.handleAging();
+
+    public double getMeatCalcFemale() {
+        return MeatCalcFemale;
     }
-    
-    @Override
-    public String toString() {
-        return String.format("%s, Weight: %.2fkg, Gender: %s",
-                super.toString(), weight, gender);
-    } 
+
+    public double getMeatCalcMale() {
+        return MeatCalcMale;
+    }
+
+    public double feed(){
+        double meat = (this.weight*this.getAge());
+        if(getGender() == Gender.Male) {
+            meat*=MeatCalcMale;
+            return meat;
+        }
+        else {
+            meat*=MeatCalcFemale;
+            return meat;
+        }
+    }
 }

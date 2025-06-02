@@ -1,29 +1,11 @@
 package ZooManagementSystem;
 
 public class Dog extends CarnivorousAnimal{
-    private final double MeatCalcMale=0.05;
-    private final double MeatCalcFemale=0.03;
     private DogType Type;
-    private static final int DOG_LIFE_SPAN = 15;
-    private final String DogNoise="BARK";
-    
-    public Dog(String name, int age ,double weight, DogType Type ,Gender gender){
-    	super(name, age, weight, gender);
-        this.Type = Type;
+    public Dog(String name, int age, double weight, DogType Type ,Gender gender){
+        super(name, age, 14, weight, gender, 0.05, 0.03);
+        this.Type=Type;
     }
-
-    public int HowMuchDogEat(){
-        double meat = (int)(getWeight()*getAge());
-        if(getGender() == Gender.Male) {
-            meat *= MeatCalcMale;
-            return (int)meat;
-        }
-        else {
-            meat *= MeatCalcFemale;
-            return (int)meat;
-        }
-    }
-    
     public DogType getType() {
         return Type;
     }
@@ -32,18 +14,11 @@ public class Dog extends CarnivorousAnimal{
         Type = type;
     }
 
-    @Override
     public String makeNoise(){
-        return DogNoise;
+        return "BARK";
     }
-    
-	@Override
-	public int getLifeSpan() {
-		return DOG_LIFE_SPAN;
-	}
 
-	@Override
-	public double feed() {
-		return HowMuchDogEat();
-	}
+    public String toString(){
+        return "Dog";
+    }
 }
