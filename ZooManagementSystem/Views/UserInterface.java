@@ -53,7 +53,7 @@ public class UserInterface {
         System.out.println("Enter the age of the new penguin: ");
         int age_p = input.nextInt();
         PenguinService penguinService = zoo.getPenguinService();
-        System.out.println(penguinService.addNewPenguin(name_p,age_p,height_p));
+        System.out.println(penguinService.addNewPenguin(name_p,age_p,height_p, input));
     }
 
     public void AddCarnivorousAnimal(Zoo zoo, Scanner input){
@@ -190,7 +190,7 @@ public class UserInterface {
     public void SortPenguins(Zoo zoo, Scanner input){
         ZooPrinter zooPrinter = zoo.getPrinter();
         zooPrinter.printSortingOptions();
-        PenguinService penguinService = new PenguinService(zoo.getRepo());
+        PenguinService penguinService = zoo.getPenguinService();
         List<Penguin> penguins = penguinService.getAll();
         int waytosort= input.nextInt();
         input.nextLine();

@@ -19,6 +19,7 @@ public class App{
             zooPrinter.printMenu();
             System.out.println("Enter your option:");
             choice = input.nextInt();
+            input.nextLine();
             switch(choice) {
                 case 1:
                     System.out.println( zooPrinter.printZooDetails(zoo.getName(), zoo.getLocation()));

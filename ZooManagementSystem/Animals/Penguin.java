@@ -3,7 +3,7 @@ package ZooManagementSystem.Animals;
 public class Penguin extends Animal{
 	private double height;
 	private String name;
-	public int LastSortWayused;
+	private int LastSortWayused;
 	//Constructor
 	public Penguin(String name, int age, double height) {
 		super(age, 6);
