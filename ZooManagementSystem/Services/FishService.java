@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import ZooManagementSystem.Animals.Animal;
 import ZooManagementSystem.Animals.AquariumFish;
 import ZooManagementSystem.Animals.ClownFish;
-import ZooManagementSystem.Animals.AquariumFish;
 import ZooManagementSystem.Animals.GoldFish;
 import ZooManagementSystem.Enums.Colour;
 import ZooManagementSystem.Enums.Pattern;

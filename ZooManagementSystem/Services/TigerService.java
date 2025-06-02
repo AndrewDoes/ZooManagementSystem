@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ZooManagementSystem.Animals.Animal;
-import ZooManagementSystem.Animals.Lynx;
 import ZooManagementSystem.Animals.Tiger;
 import ZooManagementSystem.Enums.Gender;
 import ZooManagementSystem.Repositories.AnimalRepository;

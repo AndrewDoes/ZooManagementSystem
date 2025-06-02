@@ -10,7 +10,7 @@ import ZooManagementSystem.Repositories.AnimalRepository;
 
 
 public class Zoo {
-	private static final int max_happiness = 100;
+	// private static final int max_happiness = 100;
 	private String name;
 	private String location;
 	AnimalRepository repo;

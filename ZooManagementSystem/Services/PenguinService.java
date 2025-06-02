@@ -193,6 +193,7 @@ public class PenguinService extends AnimalServices<Penguin> {
     	System.out.println("Age of the penguin is illegal (choose a number 1-20 (inclusive)),\nPlease re-Enter the age of the new penguin: ");
         age_p = input_Penguin.nextInt();
     	}
+		input_Penguin.close();
         return age_p;
     }
 	@Override
