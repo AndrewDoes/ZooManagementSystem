@@ -1,11 +1,11 @@
 package ZooManagementSystem;
 
-@SuppressWarnings("serial")
 public class HeightException extends Exception{
-
+	PenguinService penguinService;
 	
-	public HeightException() {
+	public HeightException(PenguinService penguinService) {
 		super();
+		this.penguinService = penguinService;
 	}
 	
 	public HeightException(String message) {
@@ -15,14 +15,13 @@ public class HeightException extends Exception{
 	
 	
 	public void HeightIsIllegal(double height) throws HeightException {
-		if(height > Zoo.penguins.get(0).getHeight())
-			throw new HeightException("Height is taller than the leader of the flock! ("+ Zoo.penguins.get(0).getHeight()+")");
+		if(height > penguinService.getLeaderHeight())
+			throw new HeightException("Height is taller than the leader of the flock! ("+ penguinService.getLeaderHeight()+")");
 		
-		if(!(height >= 1 && height <= Zoo.penguins.get(0).getHeight()))
-			throw new HeightException("Height of the new Penguin is illegal (Please choose a number between 1-"+ Zoo.penguins.get(0).getHeight()+" (inclusive))");
-		
+		if(!(height >= 1 && height <= penguinService.getLeaderHeight()))
+			throw new HeightException("Height of the new Penguin is illegal (Please choose a number between 1-"+ penguinService.getLeaderHeight()+" (inclusive))");	
 	}
 	
-
+	
 
 }

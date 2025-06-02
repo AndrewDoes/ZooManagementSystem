@@ -95,9 +95,12 @@ public class AquariumFish extends Animal{
 		this.pattern = pattern;
 	}
 
+	public Colour[] getColours() {
+		return colours;
+	}
 
 	//Returns a String of the Fish's colours.
-	public String getColours() {
+	public String getColoursString() {
 		String x = "";
 		for(int i = 0; i < colours.length; i++) {
 			x+=colours[i]+  " ";
