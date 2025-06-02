@@ -76,7 +76,7 @@ public class FishService extends AnimalServices<AquariumFish>{
             }
             if(typeOfFish == 3) {
 
-                fish = new AquariumFish(ageTemp, lengthTemp);
+                fish = new ClownFish(ageTemp, lengthTemp);
             }
             addNewAnimal(fish);
         }
