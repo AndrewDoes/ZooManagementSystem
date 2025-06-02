@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import ZooManagementSystem.Animals.Animal;
 import ZooManagementSystem.Animals.AquariumFish;
+import ZooManagementSystem.Animals.ClownFish;
 import ZooManagementSystem.Animals.AquariumFish;
 import ZooManagementSystem.Animals.GoldFish;
 import ZooManagementSystem.Enums.Colour;
@@ -45,7 +46,7 @@ public class FishService extends AnimalServices<AquariumFish>{
 		AquariumFish new_fish=null;
         // int age, int lifeSpan, double length, List<Colour> colours, Pattern pattern
 			if(type == 3) {
-				new_fish = new AquariumFish(age, length);
+				new_fish = new ClownFish(age, length);
 			} else if(type == 2) {
                 List<Colour> colours = Arrays.asList(Colour.BLACK, Colour.GOLD, Colour.ORANGE, Colour.YELLOW);
                 Colour colour = FishAttributeRandomizer.randomSingleColour(colours);
