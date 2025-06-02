@@ -36,7 +36,25 @@ public class ZooPrinter {
 		fishService = zoo.getFishService();
     }
 
-    	public String printZooDetails(String name, String location) {
+	public void printMenu() {
+        System.out.println("\n1)Show The Zoo Details & Number of pets in it\n"
+            + "2)Show all Penguins in the zoo\n"
+            + "3)Add Penguin\n"
+            + "4)Show all the carnivorous animals\n"
+            + "5)Add a new carnivorous animal\n"
+            + "6)Show all Fishies\n"
+            + "7)Add Fishies to the Aquarium\n"
+            + "8)Feed all pets in the zoo\n"
+            + "9)Listen to all Animals in the Zoo\n"
+            + "10)Make All Animals in the Zoo age One Year\n"
+            + "11)Choose a way to sort the Penguins\n"
+            + "12)Show all Dogs in the Zoo\n"
+            + "13)Add a new Dog\n"
+            + "14)Exit\n"
+        );
+    }
+
+    public String printZooDetails(String name, String location) {
 		String forPrint = "Name of the Zoo: " + name + " \nAddress: " + location + "\nin the Zoo there are: \n"
 				+ lionService.getSize() + " Lions,\n" + tigerService.getSize()+" Tigers,\n" 
 				+ lynxService.getSize()+" Lynxes,\n" + dogService.getSize() +" Dogs,\n" 
@@ -157,4 +175,30 @@ public class ZooPrinter {
     	  "\n5)Lynxes Noise: " + zoo.lynxService.getAll().get(0).makeNoise() + "\n6)Dogs Noise: " + zoo.dogService.getAll().get(0).makeNoise();
     	return out;
     }
+
+	public void printAllWildCarnivorous() {
+	    System.out.println("All carnivorous animals: \n");
+	    System.out.println(printLions());
+	    System.out.println(printTigers());
+	    System.out.println(printLynxes());
+	}
+
+	 public void printSortingOptions() {
+        System.out.println("Which way would you like to sort the penguins\n" +
+                "1)By Name in Ascending Order\n" +
+                "2)By Height in Descending Order\n" +
+                "3)By Age in Ascending Order\n");
+    }
+
+	public void printAddSuccess(){
+		System.out.println("Animal added successfully");
+	}
+
+	public void feedAll(Zoo zoo){
+		System.out.println("The Lions ate: "+zoo.lionService.feedAll()+"kg of meat.");
+	                System.out.println("The Tigers ate: "+zoo.tigerService.feedAll()+"kg of meat.");
+					System.out.println("The Lynxes ate: "+zoo.lynxService.feedAll()+"kg of meat.");
+	                System.out.println("The Fishes ate: "+ String.format("%.2f",zoo.fishService.feedAll()) +" meals.\n");
+	                System.out.println("The Penguins ate : "+zoo.penguinService.feedAll()+" Fishes.\n");
+	}
 }

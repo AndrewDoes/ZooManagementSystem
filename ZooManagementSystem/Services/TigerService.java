@@ -4,12 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ZooManagementSystem.Animals.Animal;
+import ZooManagementSystem.Animals.Lynx;
 import ZooManagementSystem.Animals.Tiger;
+import ZooManagementSystem.Enums.Gender;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class TigerService extends AnimalServices<Tiger> {
     public TigerService(AnimalRepository repo) {
         super(repo);
+    }
+
+    public void addNewTiger(String name, double weight, int age, int gender) {
+        Gender genderEnum;
+        if(gender == 1){
+            genderEnum = Gender.Male;
+        }
+        else genderEnum = Gender.Female;
+        Tiger tiger = new Tiger(name, age, weight, genderEnum);
+        addNewAnimal(tiger);
     }
 
     @Override
@@ -38,5 +50,10 @@ public class TigerService extends AnimalServices<Tiger> {
             food += tiger.feed();
         }
         return food;
+    }
+
+    @Override
+    public void remove(Tiger animal) {
+        this.getRepo().removeAnimal("Tiger", animal);
     }
 }

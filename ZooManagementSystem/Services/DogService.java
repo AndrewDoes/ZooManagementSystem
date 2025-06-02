@@ -5,11 +5,23 @@ import java.util.List;
 
 import ZooManagementSystem.Animals.Animal;
 import ZooManagementSystem.Animals.Dog;
+import ZooManagementSystem.Enums.DogType;
+import ZooManagementSystem.Enums.Gender;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class DogService extends AnimalServices<Dog> {
     public DogService(AnimalRepository repo) {
         super(repo);
+    }
+
+    public void addNewDog(String name, int age, double weight, DogType dogType, int gender) {
+        Gender genderEnum;
+        if(gender == 1){
+            genderEnum = Gender.Male;
+        }
+        else genderEnum = Gender.Female;
+        Dog dog = new Dog(name, age, weight, dogType, genderEnum);
+        addNewAnimal(dog);
     }
 
     @Override
@@ -38,5 +50,33 @@ public class DogService extends AnimalServices<Dog> {
             food += dog.feed();
         }
         return food;
+    }
+
+    public void AddNewDog(String name_d, int age_d, double weight_d, int dogtype, int dog_){
+    	Gender gender;
+    	DogType Type;
+    	if(dog_==1){
+    		gender=Gender.Male;
+    	}
+    	else {
+    		gender=Gender.Female;
+    	}
+    	if(dogtype==1){
+    		Type=DogType.Akita;
+    	} else if (dogtype==2) {
+    		Type=DogType.Bulldog;
+    	} else if (dogtype==3) {
+    		Type=DogType.Poodle;
+    	} else {
+    		Type=DogType.Terriers;
+    	}
+    	Dog newDog= new Dog(name_d,age_d,weight_d,Type,gender);
+    	addNewAnimal(newDog);
+    	System.out.println("Animals Added");
+    }
+
+    @Override
+    public void remove(Dog animal) {
+        this.getRepo().removeAnimal("Dog", animal);
     }
 }

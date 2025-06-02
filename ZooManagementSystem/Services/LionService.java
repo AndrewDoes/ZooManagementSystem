@@ -5,11 +5,23 @@ import java.util.List;
 
 import ZooManagementSystem.Animals.Animal;
 import ZooManagementSystem.Animals.Lion;
+import ZooManagementSystem.Enums.Gender;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class LionService extends AnimalServices<Lion>{
     public LionService(AnimalRepository repo){
         super(repo);
+    }
+
+    public void addNewLion(String name, double weight, int age, int gender) {
+        Gender genderEnum;
+        if(gender == 1){
+            genderEnum = Gender.Male;
+        }
+        else genderEnum = Gender.Female;
+        Lion lion = new Lion(name, age, weight, genderEnum);
+
+        addNewAnimal(lion);
     }
     @Override
     public void addNewAnimal(Lion animal) {
@@ -36,5 +48,10 @@ public class LionService extends AnimalServices<Lion>{
             food += lion.feed();
         }
         return food;
+    }
+
+    @Override
+    public void remove(Lion animal) {
+        this.getRepo().removeAnimal("Lion", animal);
     }
 }

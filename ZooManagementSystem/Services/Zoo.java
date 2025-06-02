@@ -1,10 +1,4 @@
 package ZooManagementSystem.Services;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import ZooManagementSystem.Animals.Animal;
 import ZooManagementSystem.Animals.Dog;
 import ZooManagementSystem.Animals.Lion;
 import ZooManagementSystem.Animals.Lynx;
@@ -12,8 +6,6 @@ import ZooManagementSystem.Animals.Penguin;
 import ZooManagementSystem.Animals.Tiger;
 import ZooManagementSystem.Enums.DogType;
 import ZooManagementSystem.Enums.Gender;
-import ZooManagementSystem.Exceptions.AgeException;
-import ZooManagementSystem.Exceptions.HeightException;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
 
@@ -21,7 +13,7 @@ public class Zoo {
 	private static final int max_happiness = 100;
 	private String name;
 	private String location;
-	private AnimalRepository repo;
+	AnimalRepository repo;
 	FishService fishService;
 	PenguinService penguinService;
 	TigerService tigerService;
@@ -29,6 +21,7 @@ public class Zoo {
 	LionService	lionService;
 	LynxService lynxService;
     ZooPrinter printer;
+	public ZooTimeService timeService;
 	
 	public Zoo()   {
 		this.name = "Zoo";
@@ -45,6 +38,7 @@ public class Zoo {
 		lionService = new LionService(repo);
 		lynxService = new LynxService(repo);
 		printer = new ZooPrinter(this);
+		timeService = new ZooTimeService();
 	}
 
 		public void initializeAnimals(){
@@ -69,122 +63,6 @@ public class Zoo {
 
 	public String getLocation() {
 		return location;
-	}
-
-	public void feedAll(){
-		System.out.println("The Lions ate: "+lionService.feedAll()+"kg of meat.");
-                    System.out.println("The Tigers ate: "+tigerService.feedAll()+"kg of meat.");
-					System.out.println("The Lynxes ate: "+lynxService.feedAll()+"kg of meat.");
-                    System.out.println("The Fishes ate: "+ String.format("%.2f",fishService.feedAll()) +" meals.\n");
-                    System.out.println("The Penguins ate : "+penguinService.feedAll()+" Fishes.\n");
-	}
-	
-	public String Add_New_Penguin(String name_p,int age_p ,double height_p) throws HeightException, AgeException {
-		if(penguinService.getSize()>0){
-			try {
-			AgeException ageException = new AgeException();
-			ageException.AgeValidator(age_p);
-			HeightException heightException = new HeightException(penguinService);
-			heightException.HeightIsIllegal(height_p);
-			}
-			catch (HeightException e0){
-				height_p = penguinService.heightExceptionPenguin();
-				
-			}
-			catch(AgeException e1) {
-				age_p = penguinService.ageExceptionPenguin();
-				
-			}
-		}
-		Penguin newPenguin = new Penguin(name_p,age_p,height_p);
-		penguinService.addNewAnimal(newPenguin);
-		return newPenguin.getName() + " Was added to the flock! :)";
-	}
-
-	public void AddNewLion(String name_l,double weight_l , int age_l , int lion_g ){
-		Gender gender = null;
-		if(lion_g==1)
-			gender = Gender.Male;
-		else
-			gender = Gender.Female;
-		Lion newLion = new Lion(name_l,age_l,weight_l, gender);
-		lionService.addNewAnimal(newLion);
-		System.out.println("Animals Added");
-	}
-	public void AddNewTiger(String name_t,double weight_t , int age_t , int tiger_g ){
-		Gender gender = null;
-		if(tiger_g==1)
-			gender = Gender.Male;
-		else
-			gender = Gender.Female;
-		Tiger newTiger = new Tiger(name_t,age_t,weight_t, gender);
-		tigerService.addNewAnimal(newTiger);
-		System.out.println("Animals Added");
-	}
-
-	public void AddNewLynx(String name_l,double weight_l , int age_l , int lynx_gender ){
-		Gender gender = null;
-		if(lynx_gender==1)
-			gender = Gender.Male;
-		else
-			gender = Gender.Female;
-		Lynx newLynx = new Lynx(name_l,age_l,weight_l, gender);
-		lynxService.addNewAnimal(newLynx);
-		System.out.println("Animals Added");
-	}
-
-	public void AddNewDog(String name_d , int age_d ,double weight_d , int dogtype , int dog_){
-		Gender gender;
-		DogType Type;
-		if(dog_==1){
-			gender=Gender.Male;
-		}
-		else {
-			gender=Gender.Female;
-		}
-		if(dogtype==1){
-			Type=DogType.Akita;
-		} else if (dogtype==2) {
-			Type=DogType.Bulldog;
-		} else if (dogtype==3) {
-			Type=DogType.Poodle;
-		} else {
-			Type=DogType.Terriers;
-		}
-		Dog newDog= new Dog(name_d,age_d,weight_d,Type,gender);
-		dogService.addNewAnimal(newDog);
-		System.out.println("Animals Added");
-	}
-	
-	public String ageOneYearAll(){
-		List<Animal> animals = repo.getAllAnimal();
-		String PrintAllDead="";
-		int index = 0;
-		PrintAllDead = ageAll(animals, PrintAllDead, index);
-		return PrintAllDead;
-	}
-
-	private String ageAll(List<Animal> animals, String PrintAllDead, int index) {
-		List<Animal> animalsToRemove = new ArrayList<>();
-		for(Animal animal : animals){
-			if(!animal.ageOneYear()){
-				PrintAllDead = printer.reportDeathByAge(PrintAllDead, animal);
-				animalsToRemove.add(animal);
-			}
-			else{
-				animal.setHappiness(animal.getHappiness()-(int)(Math.random() * 20 + 1));
-				if(animal.getHappiness()<=0){
-					PrintAllDead = printer.reportDeathBySadness(PrintAllDead, animal);
-					animalsToRemove.add(animal);
-				}
-			}
-			index++;
-		}
-
-		for(Animal animal : animalsToRemove){
-			repo.removeAnimal(animal.toString() , animal);
-		}
-		return PrintAllDead;
 	}
 
 	public void setName(String name) {
@@ -270,4 +148,13 @@ public class Zoo {
 	public void setPrinter(ZooPrinter printer) {
 		this.printer = printer;
 	}
+
+	public ZooTimeService getTimeService() {
+		return timeService;
+	}
+
+	public void setTimeService(ZooTimeService timeService) {
+		this.timeService = timeService;
+	}
+	
 }

@@ -10,11 +10,8 @@ import ZooManagementSystem.Animals.Penguin;
 import ZooManagementSystem.Exceptions.AgeException;
 import ZooManagementSystem.Exceptions.HeightException;
 import ZooManagementSystem.Repositories.AnimalRepository;
-import ZooManagementSystem.Views.App;
 
 public class PenguinService extends AnimalServices<Penguin> {
-	private int lastSortWayused;
-
     public PenguinService(AnimalRepository repo) {
         super(repo);
     }
@@ -41,7 +38,7 @@ public class PenguinService extends AnimalServices<Penguin> {
 
 	// }
 
-    public String createNewPenguin(String name,double height,int age) throws HeightException, AgeException {
+    public String addNewPenguin(String name,int age, double height) throws HeightException, AgeException {
 		if(getAll().size() != 0){
 			try {
 			AgeException ageException = new AgeException();
@@ -147,10 +144,11 @@ public class PenguinService extends AnimalServices<Penguin> {
 		if(lastFish < 0) return null;
 		// Removing from the aquarium the last fish that was eaten
 		Fish Fish_to_eat = fishes.get(lastFish);
-		if(Fish_to_eat!=null)
-			System.out.println("Successfully deleted " + Fish_to_eat);
+		if(Fish_to_eat!=null){
+			System.out.println("Successfully deleted " + Fish_to_eat.toString());
 			FishService fishService = new FishService(getRepo());
-		fishes.remove(lastFish);
+			fishService.remove(Fish_to_eat);
+		}
         return fishes;
         //ini code smell feature envy, ganti nanti
 	}
@@ -197,4 +195,8 @@ public class PenguinService extends AnimalServices<Penguin> {
     	}
         return age_p;
     }
+	@Override
+	public void remove(Penguin animal) {
+		this.getRepo().removeAnimal("Penguin", animal);
+	}
 }

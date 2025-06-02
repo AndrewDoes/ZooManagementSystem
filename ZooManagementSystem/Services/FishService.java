@@ -37,7 +37,7 @@ public class FishService extends AnimalServices<Fish>{
     //ini simply cuma add ke repo
     public void addNewAnimal(Fish fish) {
         if(fish == null) return;
-        this.getRepo().addAnimal( fish.toString(), fish);
+        this.getRepo().addAnimal( "Fish", fish);
     }
 
     //bukan middle man ya soalnya ini main logicnya
@@ -92,17 +92,17 @@ public class FishService extends AnimalServices<Fish>{
 	}
 
     public String MostPopularFishColour() {
-    List<Fish> fishes = getAll();
-    if(fishes == null) return null;
-    Map<Colour, Integer> colourCounts = new HashMap<>();
-    assignColourMap(fishes, colourCounts);
-    // Find the two most common colours
-    Colour mostCommonColour = null;
-    Colour secondMostCommonColour = null;
-    int maxCount = 0;
-    int secondMaxCount = 0;
-    return find2MostPopularColour(colourCounts, mostCommonColour, secondMostCommonColour, maxCount, secondMaxCount);
-}
+        List<Fish> fishes = getAll();
+        if(fishes == null) return null;
+        Map<Colour, Integer> colourCounts = new HashMap<>();
+        assignColourMap(fishes, colourCounts);
+        // Find the two most common colours
+        Colour mostCommonColour = null;
+        Colour secondMostCommonColour = null;
+        int maxCount = 0;
+        int secondMaxCount = 0;
+        return find2MostPopularColour(colourCounts, mostCommonColour, secondMostCommonColour, maxCount, secondMaxCount);
+    }
 
 	private String find2MostPopularColour(Map<Colour, Integer> colourCounts, Colour mostCommonColour, Colour secondMostCommonColour,
 			int maxCount, int secondMaxCount) {
@@ -139,5 +139,10 @@ public class FishService extends AnimalServices<Fish>{
             food += fish.feed();
         }
         return food;
+    }
+
+    @Override
+    public void remove(Fish animal) {
+        this.getRepo().removeAnimal("Fish", animal);
     }
 }

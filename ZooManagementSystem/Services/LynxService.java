@@ -5,11 +5,22 @@ import java.util.List;
 
 import ZooManagementSystem.Animals.Animal;
 import ZooManagementSystem.Animals.Lynx;
+import ZooManagementSystem.Enums.Gender;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class LynxService extends AnimalServices<Lynx> {
     public LynxService(AnimalRepository repo) {
         super(repo);
+    }
+
+    public void addNewLynx(String name, double weight, int age, int gender) {
+        Gender genderEnum;
+        if(gender == 1){
+            genderEnum = Gender.Male;
+        }
+        else genderEnum = Gender.Female;
+        Lynx lynx = new Lynx(name, age, weight, genderEnum);
+        addNewAnimal(lynx);
     }
 
     @Override
@@ -38,5 +49,10 @@ public class LynxService extends AnimalServices<Lynx> {
             food += lynx.feed();
         }
         return food;
+    }
+
+    @Override
+    public void remove(Lynx animal) {
+        this.getRepo().removeAnimal("Lynx", animal);
     }
 }

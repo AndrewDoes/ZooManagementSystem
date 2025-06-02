@@ -22,4 +22,5 @@ public abstract class AnimalServices<T> {
     public abstract List<T> getAll();
     public abstract void addNewAnimal(T animal);
     public abstract double feedAll();
+    public abstract void remove (T animal);
 }
