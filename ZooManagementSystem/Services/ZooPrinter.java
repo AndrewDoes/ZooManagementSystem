@@ -5,7 +5,7 @@ import java.util.List;
 import ZooManagementSystem.Animals.Animal;
 import ZooManagementSystem.Animals.CarnivorousAnimal;
 import ZooManagementSystem.Animals.Dog;
-import ZooManagementSystem.Animals.Fish;
+import ZooManagementSystem.Animals.AquariumFish;
 import ZooManagementSystem.Animals.Lion;
 import ZooManagementSystem.Animals.Lynx;
 import ZooManagementSystem.Animals.Penguin;
@@ -65,7 +65,7 @@ public class ZooPrinter {
 	}
 	
 	public String printFishes() {
-		List<Fish> fishes = fishService.getAll();
+		List<AquariumFish> fishes = fishService.getAll();
 		if(fishes == null) return "There are no Fishes in the Aquarium";
 		int numberOfFishes = repo.getAnimals("Fish").size();
 		if(numberOfFishes>0) {
@@ -151,8 +151,8 @@ public class ZooPrinter {
     	}else if(animal instanceof Penguin){
     		PrintAllDead+=((Penguin) animal).getName() +" is Dead because of his Sadness:(\n";
     	}
-    	else if(animal instanceof Fish){
-    		PrintAllDead+=((Fish) animal).toString() +" is Dead because of his Sadness:(\n";
+    	else if(animal instanceof AquariumFish){
+    		PrintAllDead+=((AquariumFish) animal).toString() +" is Dead because of his Sadness:(\n";
     	}
     	return PrintAllDead;
     }
@@ -162,8 +162,8 @@ public class ZooPrinter {
     		PrintAllDead+=((CarnivorousAnimal) animal).getName()+" is Dead because of his age\n";
     	}else if(animal instanceof Penguin){
     		PrintAllDead+=((Penguin) animal).getName()+" is Dead because of his age\n";
-    	}else if(animal instanceof Fish){
-    		PrintAllDead+=((Fish) animal).toString()+" is Dead because of his age\n";
+    	}else if(animal instanceof AquariumFish){
+    		PrintAllDead+=((AquariumFish) animal).toString()+" is Dead because of his age\n";
     	}
     	return PrintAllDead;
     }

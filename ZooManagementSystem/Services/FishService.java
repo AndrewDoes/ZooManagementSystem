@@ -8,50 +8,50 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import ZooManagementSystem.Animals.Animal;
-import ZooManagementSystem.Animals.ClownFish;
-import ZooManagementSystem.Animals.Fish;
+import ZooManagementSystem.Animals.AquariumFish;
+import ZooManagementSystem.Animals.AquariumFish;
 import ZooManagementSystem.Animals.GoldFish;
 import ZooManagementSystem.Enums.Colour;
 import ZooManagementSystem.Enums.Pattern;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
-public class FishService extends AnimalServices<Fish>{
+public class FishService extends AnimalServices<AquariumFish>{
     public FishService(AnimalRepository repo){
         super(repo);
         // checkRepo();
     };
 
-    public List<Fish> getAll(){
+    public List<AquariumFish> getAll(){
         List<Animal> animals = getRepo().getAnimals("Fish");
 		if(animals.size() == 0) return null;
-        List<Fish> fishes = new ArrayList<>();
+        List<AquariumFish> fishes = new ArrayList<>();
 
         for(Animal animal : animals){
-            if(animal instanceof Fish){
-                fishes.add((Fish) animal);
+            if(animal instanceof AquariumFish){
+                fishes.add((AquariumFish) animal);
             }
         }
         return fishes;
     }
 
     //ini simply cuma add ke repo
-    public void addNewAnimal(Fish fish) {
+    public void addNewAnimal(AquariumFish fish) {
         if(fish == null) return;
         this.getRepo().addAnimal( "Fish", fish);
     }
 
     //bukan middle man ya soalnya ini main logicnya
-    public Fish createNewFishByType(int type, int age, double length, List<Colour> singularFishColours,Pattern Pattern){
-		Fish new_fish=null;
+    public AquariumFish createNewFishByType(int type, int age, double length, List<Colour> singularFishColours,Pattern Pattern){
+		AquariumFish new_fish=null;
         // int age, int lifeSpan, double length, List<Colour> colours, Pattern pattern
 			if(type == 3) {
-				new_fish = new ClownFish(age, length);
+				new_fish = new AquariumFish(age, length);
 			} else if(type == 2) {
                 List<Colour> colours = Arrays.asList(Colour.BLACK, Colour.GOLD, Colour.ORANGE, Colour.YELLOW);
                 Colour colour = FishAttributeRandomizer.randomSingleColour(colours);
 				new_fish = new GoldFish(age, length, colour);
 			} else if (type == 1) {
-				new_fish = new Fish(age,length, singularFishColours, Pattern);
+				new_fish = new AquariumFish(age,length, singularFishColours, Pattern);
 			}
             addNewAnimal(new_fish);
             return new_fish;
@@ -59,14 +59,14 @@ public class FishService extends AnimalServices<Fish>{
 	//Type of Fish 1 = Reg Fish
 	//Type of Fish 2 = GoldFish
 	//Type of Fish 3 = ClownFish
-	public List<Fish> addRandomFish(int num) {
+	public List<AquariumFish> addRandomFish(int num) {
 		for (int i = 0; i < num; i++) {
             int ageTemp = (int)(Math.random() * 10 + 1);
             double lengthTemp = Math.random() * 10 + 1;
             int typeOfFish = (int)(Math.random() * 3 + 1);
-            Fish fish = null;
+            AquariumFish fish = null;
             if(typeOfFish == 1){
-                fish = new Fish(ageTemp, lengthTemp, FishAttributeRandomizer.randomColour(), FishAttributeRandomizer.randomPattern());
+                fish = new AquariumFish(ageTemp, lengthTemp, FishAttributeRandomizer.randomColour(), FishAttributeRandomizer.randomPattern());
             }
             if(typeOfFish == 2) {
                 List<Colour> colours = Arrays.asList(Colour.BLACK, Colour.GOLD, Colour.ORANGE, Colour.YELLOW);
@@ -75,7 +75,7 @@ public class FishService extends AnimalServices<Fish>{
             }
             if(typeOfFish == 3) {
 
-                fish = new ClownFish(ageTemp, lengthTemp);
+                fish = new AquariumFish(ageTemp, lengthTemp);
             }
             addNewAnimal(fish);
         }
@@ -92,7 +92,7 @@ public class FishService extends AnimalServices<Fish>{
 	}
 
     public String MostPopularFishColour() {
-        List<Fish> fishes = getAll();
+        List<AquariumFish> fishes = getAll();
         if(fishes == null) return null;
         Map<Colour, Integer> colourCounts = new HashMap<>();
         assignColourMap(fishes, colourCounts);
@@ -121,9 +121,9 @@ public class FishService extends AnimalServices<Fish>{
 		return "The most common colour in the aquarium are:\n" + mostCommonColour + " & " + secondMostCommonColour;
 	}
 
-	private void assignColourMap(List<Fish> fishes, Map<Colour, Integer> colourCounts) {
+	private void assignColourMap(List<AquariumFish> fishes, Map<Colour, Integer> colourCounts) {
         if(fishes == null) return;
-		for (Fish fish : fishes) {
+		for (AquariumFish fish : fishes) {
 		    List<Colour> colours = fish.getColours();
 		    for (Colour colour : colours) {
 		        colourCounts.put(colour, colourCounts.getOrDefault(colour, 0) + 1);
@@ -132,17 +132,17 @@ public class FishService extends AnimalServices<Fish>{
 	}
 
     public double feedAll(){
-        List<Fish> fishes = getAll();
+        List<AquariumFish> fishes = getAll();
         if(fishes == null) return 0;
         double food = 0;
-        for(Fish fish : fishes){
+        for(AquariumFish fish : fishes){
             food += fish.feed();
         }
         return food;
     }
 
     @Override
-    public void remove(Fish animal) {
+    public void remove(AquariumFish animal) {
         this.getRepo().removeAnimal("Fish", animal);
     }
 }

@@ -5,18 +5,18 @@ import java.util.List;
 import ZooManagementSystem.Enums.Colour;
 import ZooManagementSystem.Enums.Pattern;
 
-public class Fish extends Animal{
+public class AquariumFish extends Animal{
     protected double length;
 	protected List<Colour> colours;
 	protected Pattern pattern;
-    public Fish(int age, int lifeSpan, double length, List<Colour> colours, Pattern pattern) {
+    public AquariumFish(int age, int lifeSpan, double length, List<Colour> colours, Pattern pattern) {
         super(age, lifeSpan);
         this.length = length;
         this.colours = colours;
         this.pattern = pattern;
     }
 
-    public Fish(int age, double Length, List<Colour> colours, Pattern pattern) {
+    public AquariumFish(int age, double Length, List<Colour> colours, Pattern pattern) {
         this(age, 25, Length, colours, pattern);
     }
 

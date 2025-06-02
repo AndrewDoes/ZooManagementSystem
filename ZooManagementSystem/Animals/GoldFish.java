@@ -5,7 +5,7 @@ import java.util.List;
 import ZooManagementSystem.Enums.Colour;
 import ZooManagementSystem.Enums.Pattern;
 
-public class GoldFish extends Fish{	
+public class GoldFish extends AquariumFish{	
 	//Constructor,  a random colour will be chosen.
 	public GoldFish(int age, double length, Colour colour) {
 		super(age, 12, length , List.of(Colour.BLACK, Colour.GOLD, Colour.ORANGE, Colour.YELLOW), Pattern.CLEAR);

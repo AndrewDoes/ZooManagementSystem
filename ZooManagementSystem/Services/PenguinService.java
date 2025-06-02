@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import ZooManagementSystem.Animals.Animal;
-import ZooManagementSystem.Animals.Fish;
+import ZooManagementSystem.Animals.AquariumFish;
 import ZooManagementSystem.Animals.Penguin;
 import ZooManagementSystem.Exceptions.AgeException;
 import ZooManagementSystem.Exceptions.HeightException;
@@ -139,11 +139,11 @@ public class PenguinService extends AnimalServices<Penguin> {
 	}
 
     	// Deleting a fish after it was eaten by a penguin
-	public List<Fish> Feed_Penguins(List<Fish> fishes){
+	public List<AquariumFish> Feed_Penguins(List<AquariumFish> fishes){
 		int lastFish= fishes.size()-1;
 		if(lastFish < 0) return null;
 		// Removing from the aquarium the last fish that was eaten
-		Fish Fish_to_eat = fishes.get(lastFish);
+		AquariumFish Fish_to_eat = fishes.get(lastFish);
 		if(Fish_to_eat!=null){
 			System.out.println("Successfully deleted " + Fish_to_eat.toString());
 			FishService fishService = new FishService(getRepo());
