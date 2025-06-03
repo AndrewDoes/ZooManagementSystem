@@ -6,193 +6,250 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
-    public void AddNewDog(Zoo zoo, Scanner input) {
-        System.out.println("Enter the Name of the new Dog: ");
-        String name= input.nextLine();
-        System.out.println("Enter the Weight of the new Dog: ");
-        double weight= input.nextDouble();
-        while (weight<=0){
-            System.out.println("The Weight of the Dog Can't be Negative\n" +
-                    "Please Re enter a new weight: ");
-            weight=input.nextDouble();
-        }
-        System.out.println("Enter the age of the new Dog: ");
-        int age_d= input.nextInt();
-        while (age_d<=0 || age_d>=60){
-            System.out.println("The Age of a dog is between 1-60\n" +
-                    "Please re Enter a new responsible age: ");
-            age_d=input.nextInt();
-        }
-        System.out.println("Enter the Gender of the new Dog:"+"\n1)Male.\n2)Female. (Type 1 or 2)");
-        int animal_gender = input.nextInt();
-        System.out.println("Enter the Type of the new Dog:"+"\n1)Akita.\n2)Bulldog.\n3)Poodle.\n4)Terriers.");
-        int dogtype = input.nextInt();
-        DogService dogService = zoo.getDogService();
-        dogService.AddNewDog(name,age_d,weight,dogtype,animal_gender);
+
+    private String promptString(Scanner input, String message) {
+        System.out.println(message);
+        return input.nextLine();
     }
 
-    public void add_penguin(Zoo zoo, Scanner input) throws HeightException, AgeException{
-        System.out.println("Enter the Name of the new penguin: ");
-        String name_p = input.nextLine();
-        System.out.println("Enter the height of the new penguin: ");
-        double height_p = input.nextDouble();
-        System.out.println("Enter the age of the new penguin: ");
-        int age_p = input.nextInt();
-        PenguinService penguinService = zoo.getPenguinService();
-        System.out.println(penguinService.addNewPenguin(name_p,age_p,height_p, input));
-    }
-
-    public void AddCarnivorousAnimal(Zoo zoo, Scanner input){
-        System.out.println("Which carnivorous animal you want to add?\n");
-        System.out.println("lion/tiger/lynx(Type the requested aninmal!)");
-        int animal_choice = -1;
-        String requested_animal= input.nextLine();
-        if(requested_animal.equals("lion"))
-            animal_choice=1;
-        else if (requested_animal.equals("tiger"))
-        	animal_choice=2;
-        else if(requested_animal.equals("lynx"))
-        	animal_choice=3;
-        System.out.println("Enter the Name of the new "+requested_animal+": ");
-        String name_animal= input.nextLine();
-        System.out.println("Enter the Weight of the new "+requested_animal+": ");
-        double weight_animal= input.nextDouble();
-        while (weight_animal<=0){
-            System.out.println("The Weight of "+requested_animal+"Can't be Negative\n" +
-                    "Please Re enter a new weight: ");
-            weight_animal=input.nextDouble();
-        }
-        System.out.println("Enter the age of the new "+requested_animal+": ");
-        int age_animal= input.nextInt();
-        while (age_animal<=0 || age_animal>=60){
-            System.out.println("The Age of a carnivorous animal is between 1-60\n" +
-                    "Please re Enter a new responsible age: ");
-            age_animal=input.nextInt();
-        }
-        System.out.println("Enter the Gender of the new "+requested_animal+":"+"\n1)Male.\n2)Female. (Type 1 or 2)");
-        int animal_gender = input.nextInt();
-        if(animal_choice == 1){
-            LionService lionService = zoo.getLionService();
-            lionService.addNewLion(name_animal,weight_animal,age_animal,animal_gender);
-        }
-        else if(animal_choice == 2){
-            TigerService tigerService = zoo.getTigerService();
-            tigerService.addNewTiger(name_animal,weight_animal,age_animal,animal_gender);
-        }
-        else{
-            LynxService lynxService = zoo.getLynxService();
-        	lynxService.addNewLynx(name_animal, weight_animal, age_animal, animal_gender);
-        }
-    }
-
-    public void add_new_fishes(Zoo zoo, Scanner input) {
-        AquariumFishService fishService = zoo.getFishService();
-        System.out.println("Choose an option:\n1)Add Fish With Details\n2)Add a number of random Fishes\n");
-        Pattern Pattern_fish = null;
-        int choice_of_adding = input.nextInt();
-        if(choice_of_adding == 1) {
-            System.out.println("What type of Fish would you like to add?\n1.Fish\n2.GoldFish\n3.ClownFish");
-            int type_f = input.nextInt();
-            System.out.println("Enter the Age of the Fish:");
-            int age_f = input.nextInt();
-            while(age_f <= 0 || age_f > 15) {
-                System.out.println("Fish as they know on average lives between 10-15 years\n" +
-                        "Please Re enter a new responsible age: ");
-                age_f = input.nextInt();
-            }
-            System.out.println("Enter the Length of the Fish:");
-            double length_f = input.nextDouble();
-            while (length_f <= 0) {
-                System.out.println("The length of a fish can't be Negative\n" +
-                        "Please Re enter a new fish length: ");
-                length_f = input.nextDouble();
-            }
-            if(type_f == 2) {
-                fishService.createNewFishByType(type_f, age_f, length_f, null, null);
-                System.out.println("The GoldFish was successfully added");
-                return;
-            }
-            if(type_f == 3) {
-                fishService.createNewFishByType(type_f, age_f, length_f, null, null);
-                System.out.println("The ClownFish was successfully added");
-                return;
-            }
-            System.out.println("Enter the Pattern of the Fish: (Type one of these Patterns: SPOTS,STRIPES,CLEAR,DOTS )");
-            input.skip("[\r\n]+"); // To skip the input of the next line char
-            String pattern = input.nextLine();
-            if (pattern.equals("DOTS")) {
-                Pattern_fish = Pattern.DOTS;
-            }
-            else if (pattern.equals("SPOTS")) {
-                Pattern_fish = Pattern.SPOTS;
-            } else if (pattern.equals("STRIPES")) {
-                Pattern_fish = Pattern.STRIPES;
-            } else if (pattern.equals("CLEAR")) {
-                Pattern_fish = Pattern.CLEAR;
-            }
-            List<Colour> allColours = Arrays.asList(Colour.values());
-            System.out.println("How many Colors is the Fish?\n");
-            int number_of_colors = input.nextInt();
-            List<Colour> singularFishColours = new ArrayList<>(); // Initialize as empty list
-            
-            for(int i = 0; i < number_of_colors; i++) {
-                System.out.println("Choose the Colors :\n1)BLACK, 2)WHITE, 3)GREEN, 4)ORANGE, 5)BLUE, 6)YELLOW, 7)BROWN, 8)GOLD, 9)RED, 10)CYAN");
-                int color_num = input.nextInt();
-                
-                // Adjust index to be 0-based (subtract 1 from user input)
-                if (color_num >= 1 && color_num <= 10) {
-                    color_num--; // Convert from 1-based to 0-based indexing
-                    
-                    // Check if color already exists in the list
-                    boolean colorExists = false;
-                    for (Colour existingColor : singularFishColours) {
-                        if (existingColor.equals(allColours.get(color_num))) {
-                            System.out.println("This colour was already added!");
-                            colorExists = true;
-                            i--; // Decrement i to retry this iteration
-                            break;
-                        }
-                    }
-                    
-                    if (!colorExists) {
-                        singularFishColours.add(allColours.get(color_num));
-                    }
-                } else {
-                    System.out.println("Invalid color selection. Please choose a number between 1 and 10.");
-                    i--; // Decrement i to retry this iteration
+    private double promptPositiveDouble(Scanner input, String message, String errorMessage) {
+        double value;
+        while (true) {
+            System.out.println(message);
+            String line = input.nextLine();
+            try {
+                value = Double.parseDouble(line);
+                if (value > 0) {
+                    return value;
                 }
+                System.out.println(errorMessage);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
             }
-            
-            fishService.createNewFishByType(type_f, age_f, length_f, singularFishColours, Pattern_fish);
-            System.out.println("The Fish was successfully added");
-        } else if (choice_of_adding == 2) {
-            System.out.println("How much Fishes you want to add?\n");
-            int num_fishes = input.nextInt();
-            fishService.addRandomFish(num_fishes);
-            System.out.println(num_fishes + " new Fishes were Added Successfully\n");
         }
     }
 
-    public void SortPenguins(Zoo zoo, Scanner input){
+    private int promptIntInRange(Scanner input, String message, String errorMessage, int min, int max) {
+        int value;
+        while (true) {
+            System.out.println(message);
+            String line = input.nextLine();
+            try {
+                value = Integer.parseInt(line);
+                if (value >= min && value <= max) {
+                    return value;
+                }
+                System.out.println(errorMessage + " (Expected range: " + min + "-" + max + ")");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter an integer.");
+            }
+        }
+    }
+
+    public void addNewDog(Zoo zoo, Scanner input) {
+        System.out.println("--- Adding a New Dog ---");
+        String name = promptString(input, "Enter the Name of the new Dog:");
+        double weight = promptPositiveDouble(input, "Enter the Weight of the new Dog:",
+                "The Weight of the Dog Can't be Negative or zero. Please re-enter a new weight:");
+        int age = promptIntInRange(input, "Enter the age of the new Dog:",
+                "The Age of a dog must be between 1-59.", 1, 59);
+        int genderChoice = promptIntInRange(input, "Enter the Gender of the new Dog:\n1) Male\n2) Female (Type 1 or 2)",
+                "Invalid choice. Please type 1 or 2.", 1, 2);
+        int dogTypeChoice = promptIntInRange(input, "Enter the Type of the new Dog:\n1) Akita\n2) Bulldog\n3) Poodle\n4) Terriers",
+                "Invalid choice. Please select a valid dog type.", 1, 4);
+
+        DogService dogService = zoo.getDogService();
+        dogService.AddNewDog(name, age, weight, dogTypeChoice, genderChoice);
+        System.out.println(name + " the Dog has been added successfully!");
+    }
+
+    public void addPenguin(Zoo zoo, Scanner input) {
+        System.out.println("--- Adding a New Penguin ---");
+        String name = promptString(input, "Enter the Name of the new penguin:");
+        double height = promptPositiveDouble(input, "Enter the height of the new penguin (e.g., in cm):",
+                "Height must be a positive value.");
+        int age = promptIntInRange(input, "Enter the age of the new penguin:",
+                "Please enter a valid age for a penguin (e.g., 1-30).", 1, 30); 
+
+        PenguinService penguinService = zoo.getPenguinService();
+        try {
+            String resultMessage = penguinService.addNewPenguin(name, age, height); 
+            System.out.println(resultMessage);
+        } catch (Exception e) { 
+            System.err.println("Error adding penguin: " + e.getMessage());
+        }
+    }
+
+    private String selectCarnivorousAnimalType(Scanner input) {
+        List<String> animalTypes = Arrays.asList("lion", "tiger", "lynx");
+        String promptMessage = "Which carnivorous animal do you want to add?\nAvailable types: " +
+                               String.join(", ", animalTypes) + "\nType the requested animal name (lion/tiger/lynx):";
+        while (true) {
+            String requestedAnimal = promptString(input, promptMessage).toLowerCase();
+            if (animalTypes.contains(requestedAnimal)) {
+                return requestedAnimal;
+            }
+            System.out.println("Invalid animal type. Please choose from: " + String.join(", ", animalTypes));
+        }
+    }
+
+    public void addCarnivorousAnimal(Zoo zoo, Scanner input) {
+        System.out.println("--- Adding a New Carnivorous Animal ---");
+        String animalType = selectCarnivorousAnimalType(input);
+
+        String name = promptString(input, "Enter the Name of the new " + animalType + ":");
+        double weight = promptPositiveDouble(input, "Enter the Weight of the new " + animalType + ":",
+                "The Weight of " + animalType + " Can't be Negative or zero. Please re-enter a new weight:");
+        int age = promptIntInRange(input, "Enter the age of the new " + animalType + ":",
+                "The Age of a carnivorous animal is between 1-59.", 1, 59);
+        int genderChoice = promptIntInRange(input, "Enter the Gender of the new " + animalType + ":\n1) Male\n2) Female (Type 1 or 2)",
+                "Invalid choice. Please type 1 or 2.", 1, 2);
+
+        switch (animalType) {
+            case "lion":
+                LionService lionService = zoo.getLionService();
+                lionService.addNewLion(name, weight, age, genderChoice);
+                System.out.println(name + " the Lion has been added successfully!");
+                break;
+            case "tiger":
+                TigerService tigerService = zoo.getTigerService();
+                tigerService.addNewTiger(name, weight, age, genderChoice);
+                System.out.println(name + " the Tiger has been added successfully!");
+                break;
+            case "lynx":
+                LynxService lynxService = zoo.getLynxService();
+                lynxService.addNewLynx(name, weight, age, genderChoice);
+                System.out.println(name + " the Lynx has been added successfully!");
+                break;
+            default:
+                System.out.println("Error: Unknown carnivorous animal type selected.");
+                break;
+        }
+    }
+
+    private Pattern getFishPattern(Scanner input) {
+        while (true) {
+            String patternStr = promptString(input, "Enter the Pattern of the Fish: (Type one of these: SPOTS, STRIPES, CLEAR, DOTS)").toUpperCase();
+            try {
+                return Pattern.valueOf(patternStr);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid pattern. Please choose from SPOTS, STRIPES, CLEAR, DOTS.");
+            }
+        }
+    }
+
+    private List<Colour> getFishColors(Scanner input) {
+        List<Colour> allColours = Arrays.asList(Colour.values());
+        List<Colour> singularFishColours = new ArrayList<>();
+
+        System.out.println("Available Colors:");
+        for (int i = 0; i < allColours.size(); i++) {
+            System.out.println((i + 1) + ") " + allColours.get(i));
+        }
+
+        int numberOfColors = promptIntInRange(input, "How many Colors is the Fish?",
+                "Number of colors must be positive and not exceed available colors.", 1, allColours.size());
+
+        for (int i = 0; i < numberOfColors; ) {
+            int colorNumChoice = promptIntInRange(input, "Select color number " + (i + 1) + " for the fish:",
+                    "Invalid color selection.", 1, allColours.size());
+            Colour selectedColour = allColours.get(colorNumChoice - 1); 
+
+            if (!singularFishColours.contains(selectedColour)) {
+                singularFishColours.add(selectedColour);
+                i++; 
+            } else {
+                System.out.println(selectedColour + " was already added! Please choose a different color.");
+            }
+        }
+        return singularFishColours;
+    }
+
+    private void handleAddFishWithDetails(AquariumFishService fishService, Scanner input) {
+        System.out.println("--- Adding Fish With Details ---");
+        int fishTypeChoice = promptIntInRange(input, "What type of Fish would you like to add?\n1) Generic Fish\n2) GoldFish\n3) ClownFish",
+                "Invalid choice.", 1, 3);
+        int age = promptIntInRange(input, "Enter the Age of the Fish:",
+                "Fish age is typically between 1-15 years.", 1, 15);
+        double length = promptPositiveDouble(input, "Enter the Length of the Fish (e.g., in cm):",
+                "The length of a fish can't be negative or zero.");
+
+        if (fishTypeChoice == 2) { 
+            fishService.createNewFishByType(fishTypeChoice, age, length, null, null);
+            System.out.println("The GoldFish was successfully added.");
+            return;
+        }
+        if (fishTypeChoice == 3) { 
+            fishService.createNewFishByType(fishTypeChoice, age, length, null, null);
+            System.out.println("The ClownFish was successfully added.");
+            return;
+        }
+
+        Pattern pattern = getFishPattern(input);
+        List<Colour> colours = getFishColors(input);
+
+        fishService.createNewFishByType(fishTypeChoice, age, length, colours, pattern);
+        System.out.println("The Fish was successfully added.");
+    }
+
+    private void handleAddRandomFishes(AquariumFishService fishService, Scanner input) {
+        System.out.println("--- Adding Random Fishes ---");
+        int numFishes = promptIntInRange(input, "How many random fishes do you want to add?",
+                "Please enter a positive number.", 1, Integer.MAX_VALUE);
+        fishService.addRandomFish(numFishes);
+        System.out.println(numFishes + " new Fishes were Added Successfully.");
+    }
+
+    public void addNewFishes(Zoo zoo, Scanner input) {
+        AquariumFishService fishService = zoo.getFishService();
+        System.out.println("--- Fish Management ---");
+        int choice = promptIntInRange(input, "Choose an option:\n1) Add Fish With Details\n2) Add a number of random Fishes",
+                "Invalid choice. Please type 1 or 2.", 1, 2);
+
+        if (choice == 1) {
+            handleAddFishWithDetails(fishService, input);
+        } else {
+            handleAddRandomFishes(fishService, input);
+        }
+    }
+
+    public void sortPenguins(Zoo zoo, Scanner input) {
         ZooPrinter zooPrinter = zoo.getPrinter();
-        zooPrinter.printSortingOptions();
         PenguinService penguinService = zoo.getPenguinService();
         List<Penguin> penguins = penguinService.getAll();
-        int waytosort= input.nextInt();
-        input.nextLine();
-        if(waytosort==1){
-            penguinService.SortByName(penguins);
-            System.out.println("Penguins now sorted By Name in Ascending Order\n");
-        } else if (waytosort==2) {
-            penguinService.SortByHeight(penguins);
-            System.out.println("Penguins now sorted By Height in Descending Order\n\n");
-        } else if (waytosort==3) {
-            penguinService.SortByAge(penguins);
-            System.out.println("Penguins now sorted By Age in Ascending Order\n");
+
+        if (penguins == null || penguins.isEmpty()) {
+            System.out.println("There are no penguins to sort.");
+            return;
         }
-        penguins = penguinService.getAll();
-        for(Penguin penguin : penguins){
-            penguin.setLastSortWayused(waytosort);
-        };
+
+        System.out.println("--- Sorting Penguins ---");
+        zooPrinter.printSortingOptions();
+
+        int sortChoice = promptIntInRange(input, "Enter your sorting choice:",
+                "Invalid choice. Please select a valid option.", 1, 3);
+
+        switch (sortChoice) {
+            case 1:
+                penguinService.SortByName(penguins);
+                System.out.println("Penguins now sorted By Name in Ascending Order.");
+                break;
+            case 2:
+                penguinService.SortByHeight(penguins);
+                System.out.println("Penguins now sorted By Height in Descending Order.");
+                break;
+            case 3:
+                penguinService.SortByAge(penguins);
+                System.out.println("Penguins now sorted By Age in Ascending Order.");
+                break;
+            default:
+                System.out.println("Invalid sorting option selected.");
+                return;
+        }
+
+        for (Penguin penguin : penguins) {
+            penguin.setLastSortWayused(sortChoice);
+        }
+        System.out.println("Penguins have been sorted and their last sort way updated.");
     }
 }
