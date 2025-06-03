@@ -1,27 +1,17 @@
 package ZooManagementSystem;
 
 public abstract class CarnivorousAnimal extends Animal{
-    private String name;
     private double weight;
     private Gender gender;
     private final double MeatCalcFemale;
     private final double MeatCalcMale;
 
     public CarnivorousAnimal(String name, int age, int lifeSpan, double weight, Gender gender, double MeatCalcMale, double MeatCalcFemale) {
-        super(age, lifeSpan);
-        this.name = name;
+        super(name, age, lifeSpan);
         this.weight = weight;
         this.gender = gender;
         this.MeatCalcMale = MeatCalcMale;
         this.MeatCalcFemale = MeatCalcFemale;
-    }
-    
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getWeight() {
