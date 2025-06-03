@@ -55,7 +55,8 @@ public class UserInterface {
                 "The Age of a dog must be between 1-59.", 1, 59);
         int genderChoice = promptIntInRange(input, "Enter the Gender of the new Dog:\n1) Male\n2) Female (Type 1 or 2)",
                 "Invalid choice. Please type 1 or 2.", 1, 2);
-        int dogTypeChoice = promptIntInRange(input, "Enter the Type of the new Dog:\n1) Akita\n2) Bulldog\n3) Poodle\n4) Terriers",
+        int dogTypeChoice = promptIntInRange(input,
+                "Enter the Type of the new Dog:\n1) Akita\n2) Bulldog\n3) Poodle\n4) Terriers",
                 "Invalid choice. Please select a valid dog type.", 1, 4);
 
         DogService dogService = zoo.getDogService();
@@ -69,13 +70,13 @@ public class UserInterface {
         double height = promptPositiveDouble(input, "Enter the height of the new penguin (e.g., in cm):",
                 "Height must be a positive value.");
         int age = promptIntInRange(input, "Enter the age of the new penguin:",
-                "Please enter a valid age for a penguin (e.g., 1-30).", 1, 30); 
+                "Please enter a valid age for a penguin (e.g., 1-30).", 1, 30);
 
         PenguinService penguinService = zoo.getPenguinService();
         try {
-            String resultMessage = penguinService.addNewPenguin(name, age, height); 
+            String resultMessage = penguinService.addNewPenguin(name, age, height, input);
             System.out.println(resultMessage);
-        } catch (Exception e) { 
+        } catch (Exception e) {
             System.err.println("Error adding penguin: " + e.getMessage());
         }
     }
@@ -83,7 +84,7 @@ public class UserInterface {
     private String selectCarnivorousAnimalType(Scanner input) {
         List<String> animalTypes = Arrays.asList("lion", "tiger", "lynx");
         String promptMessage = "Which carnivorous animal do you want to add?\nAvailable types: " +
-                               String.join(", ", animalTypes) + "\nType the requested animal name (lion/tiger/lynx):";
+                String.join(", ", animalTypes) + "\nType the requested animal name (lion/tiger/lynx):";
         while (true) {
             String requestedAnimal = promptString(input, promptMessage).toLowerCase();
             if (animalTypes.contains(requestedAnimal)) {
@@ -102,7 +103,8 @@ public class UserInterface {
                 "The Weight of " + animalType + " Can't be Negative or zero. Please re-enter a new weight:");
         int age = promptIntInRange(input, "Enter the age of the new " + animalType + ":",
                 "The Age of a carnivorous animal is between 1-59.", 1, 59);
-        int genderChoice = promptIntInRange(input, "Enter the Gender of the new " + animalType + ":\n1) Male\n2) Female (Type 1 or 2)",
+        int genderChoice = promptIntInRange(input,
+                "Enter the Gender of the new " + animalType + ":\n1) Male\n2) Female (Type 1 or 2)",
                 "Invalid choice. Please type 1 or 2.", 1, 2);
 
         switch (animalType) {
@@ -129,7 +131,8 @@ public class UserInterface {
 
     private Pattern getFishPattern(Scanner input) {
         while (true) {
-            String patternStr = promptString(input, "Enter the Pattern of the Fish: (Type one of these: SPOTS, STRIPES, CLEAR, DOTS)").toUpperCase();
+            String patternStr = promptString(input,
+                    "Enter the Pattern of the Fish: (Type one of these: SPOTS, STRIPES, CLEAR, DOTS)").toUpperCase();
             try {
                 return Pattern.valueOf(patternStr);
             } catch (IllegalArgumentException e) {
@@ -150,14 +153,14 @@ public class UserInterface {
         int numberOfColors = promptIntInRange(input, "How many Colors is the Fish?",
                 "Number of colors must be positive and not exceed available colors.", 1, allColours.size());
 
-        for (int i = 0; i < numberOfColors; ) {
+        for (int i = 0; i < numberOfColors;) {
             int colorNumChoice = promptIntInRange(input, "Select color number " + (i + 1) + " for the fish:",
                     "Invalid color selection.", 1, allColours.size());
-            Colour selectedColour = allColours.get(colorNumChoice - 1); 
+            Colour selectedColour = allColours.get(colorNumChoice - 1);
 
             if (!singularFishColours.contains(selectedColour)) {
                 singularFishColours.add(selectedColour);
-                i++; 
+                i++;
             } else {
                 System.out.println(selectedColour + " was already added! Please choose a different color.");
             }
@@ -167,19 +170,20 @@ public class UserInterface {
 
     private void handleAddFishWithDetails(AquariumFishService fishService, Scanner input) {
         System.out.println("--- Adding Fish With Details ---");
-        int fishTypeChoice = promptIntInRange(input, "What type of Fish would you like to add?\n1) Generic Fish\n2) GoldFish\n3) ClownFish",
+        int fishTypeChoice = promptIntInRange(input,
+                "What type of Fish would you like to add?\n1) Generic Fish\n2) GoldFish\n3) ClownFish",
                 "Invalid choice.", 1, 3);
         int age = promptIntInRange(input, "Enter the Age of the Fish:",
                 "Fish age is typically between 1-15 years.", 1, 15);
         double length = promptPositiveDouble(input, "Enter the Length of the Fish (e.g., in cm):",
                 "The length of a fish can't be negative or zero.");
 
-        if (fishTypeChoice == 2) { 
+        if (fishTypeChoice == 2) {
             fishService.createNewFishByType(fishTypeChoice, age, length, null, null);
             System.out.println("The GoldFish was successfully added.");
             return;
         }
-        if (fishTypeChoice == 3) { 
+        if (fishTypeChoice == 3) {
             fishService.createNewFishByType(fishTypeChoice, age, length, null, null);
             System.out.println("The ClownFish was successfully added.");
             return;
@@ -203,7 +207,8 @@ public class UserInterface {
     public void addNewFishes(Zoo zoo, Scanner input) {
         AquariumFishService fishService = zoo.getFishService();
         System.out.println("--- Fish Management ---");
-        int choice = promptIntInRange(input, "Choose an option:\n1) Add Fish With Details\n2) Add a number of random Fishes",
+        int choice = promptIntInRange(input,
+                "Choose an option:\n1) Add Fish With Details\n2) Add a number of random Fishes",
                 "Invalid choice. Please type 1 or 2.", 1, 2);
 
         if (choice == 1) {
