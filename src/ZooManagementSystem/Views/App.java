@@ -11,10 +11,16 @@ import ZooManagementSystem.Services.ZooPrinter;
 public class App {
     public void startApp() throws HeightException, AgeException {
         Zoo zoo = new Zoo();
-        UserInterface UI = new UserInterface();
         zoo.initializeService();
         zoo.initializeAnimals();
+
         Scanner input = new Scanner(System.in);
+
+        DogUI dogUI = new DogUI(zoo.getDogService());
+        PenguinUI penguinUI = new PenguinUI(zoo.getPenguinService(), zoo.getPrinter());
+        CarnivoreUI carnivoreUI = new CarnivoreUI(zoo);
+        FishUI fishUI = new FishUI(zoo.getFishService());
+
         int choice = 0;
         while (choice != 14) {
             ZooPrinter zooPrinter = new ZooPrinter(zoo);
@@ -30,13 +36,13 @@ public class App {
                     System.out.println(zooPrinter.printPenguins());
                     break;
                 case 3:
-                    UI.addPenguin(zoo, input);
+                    penguinUI.handleAddPenguin(input);
                     break;
                 case 4:
                     zooPrinter.printAllWildCarnivorous();
                     break;
                 case 5:
-                    UI.addCarnivorousAnimal(zoo, input);
+                    carnivoreUI.handleAddCarnivorousAnimal(input);
                     break;
                 case 6:
                     AquariumFishService fishService = zoo.getFishService();
@@ -44,7 +50,7 @@ public class App {
                     System.out.println(fishService.MostPopularFishColour());
                     break;
                 case 7:
-                    UI.addNewFishes(zoo, input);
+                    fishUI.handleAddNewFishes(input);
                     break;
                 case 8:
                     zoo.getPrinter().feedAll(zoo);
@@ -57,13 +63,13 @@ public class App {
                     System.out.println("All Other animals have been Aged one year\n");
                     break;
                 case 11:
-                    UI.sortPenguins(zoo, input);
+                    penguinUI.handleSortPenguins(input);
                     break;
                 case 12:
                     System.out.println(zooPrinter.printDogs());
                     break;
                 case 13:
-                    UI.addNewDog(zoo, input);
+                    dogUI.handleAddNewDog(input);
                     break;
                 case 14:
                     System.out.println("Thank You!\nHave a nice day:)");
