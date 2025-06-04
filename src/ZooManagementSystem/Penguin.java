@@ -46,5 +46,10 @@ public class Penguin extends Animal{
 	 public String makeNoise() {
 		 return "squack";
 	 }
+
+	@Override
+	public String getDeathReport(String cause) {
+		return getName() + " is Dead because of " + cause;
+	}
 }
 

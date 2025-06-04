@@ -13,4 +13,9 @@ public class Tiger extends CarnivorousAnimal{
         public String toString(){
             return "Tiger";
         }
+
+    @Override
+    public String getDeathReport(String cause) {
+        return getName() + " is Dead because of " + cause;
+    }
 }

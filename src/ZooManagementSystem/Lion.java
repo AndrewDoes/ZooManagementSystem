@@ -30,4 +30,9 @@ public class Lion extends CarnivorousAnimal{
     public String toString(){
         return "Lion";
     }
+
+    @Override
+    public String getDeathReport(String cause) {
+        return getName() + " is Dead because of " + cause;
+    }
 }

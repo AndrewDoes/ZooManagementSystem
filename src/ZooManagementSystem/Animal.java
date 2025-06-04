@@ -26,6 +26,8 @@ public abstract class Animal {
         this(null, age, lifeSpan);
     }
 
+    
+
     public int getAge() {
         return age;
     }
@@ -66,5 +68,6 @@ public abstract class Animal {
     public abstract String makeNoise();
     public abstract double feed();
     public abstract String toString();
+    public abstract String getDeathReport(String cause);
 
 }

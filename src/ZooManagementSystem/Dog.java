@@ -21,4 +21,9 @@ public class Dog extends CarnivorousAnimal{
     public String toString(){
         return "Dog";
     }
+
+    @Override
+    public String getDeathReport(String cause) {
+        return getName() + " is Dead because of " + cause;
+    }
 }

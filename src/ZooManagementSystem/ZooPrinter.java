@@ -135,26 +135,13 @@ public class ZooPrinter {
 	}
 
     String reportDeathBySadness(String PrintAllDead, Animal animal) {
-    	if(animal instanceof CarnivorousAnimal){
-    		PrintAllDead+=((CarnivorousAnimal) animal).getName() +" is Dead because of his Sadness:(\n";
-    	}else if(animal instanceof Penguin){
-    		PrintAllDead+=((Penguin) animal).getName() +" is Dead because of his Sadness:(\n";
-    	}
-    	else if(animal instanceof AquariumFish){
-    		PrintAllDead+=((AquariumFish) animal).toString() +" is Dead because of his Sadness:(\n";
-    	}
-    	return PrintAllDead;
+		PrintAllDead += animal.getDeathReport("his Sadness:(") + "\n";
+		return PrintAllDead;
     }
 
     String reportDeathByAge(String PrintAllDead, Animal animal) {
-    	if(animal instanceof CarnivorousAnimal){
-    		PrintAllDead+=((CarnivorousAnimal) animal).getName()+" is Dead because of his age\n";
-    	}else if(animal instanceof Penguin){
-    		PrintAllDead+=((Penguin) animal).getName()+" is Dead because of his age\n";
-    	}else if(animal instanceof AquariumFish){
-    		PrintAllDead+=((AquariumFish) animal).toString()+" is Dead because of his age\n";
-    	}
-    	return PrintAllDead;
+		PrintAllDead += animal.getDeathReport("his age") + "\n";
+		return PrintAllDead;
     }
 
     public String ListentoAllAnimalsinZoo(Zoo zoo){

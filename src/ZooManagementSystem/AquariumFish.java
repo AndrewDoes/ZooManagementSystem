@@ -56,4 +56,9 @@ public class AquariumFish extends Animal{
     public String toString(){
         return "Fish";
     }
+
+    @Override
+    public String getDeathReport(String cause) {
+        return this.toString() + " is Dead because of " + cause;
+    }
 }

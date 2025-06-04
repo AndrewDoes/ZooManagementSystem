@@ -25,4 +25,9 @@ public class Lynx extends CarnivorousAnimal{
 	 public String toString() { 
 		 return "Lynx"; 
 	 }
+
+    @Override
+    public String getDeathReport(String cause) {
+        return getName() + " is Dead because of " + cause;
+    }
 }
