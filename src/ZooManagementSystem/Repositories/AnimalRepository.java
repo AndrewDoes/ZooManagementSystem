@@ -5,24 +5,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ZooManagementSystem.Animals.Animal;
-import ZooManagementSystem.Animals.Dog;
-import ZooManagementSystem.Animals.Lion;
-import ZooManagementSystem.Animals.Lynx;
-import ZooManagementSystem.Animals.Penguin;
-import ZooManagementSystem.Animals.Tiger;
-import ZooManagementSystem.Enums.DogType;
-import ZooManagementSystem.Enums.Gender;
+import ZooManagementSystem.DomainModels.Animal;
+import ZooManagementSystem.DomainModels.Dog;
+import ZooManagementSystem.DomainModels.DogType;
+import ZooManagementSystem.DomainModels.Gender;
+import ZooManagementSystem.DomainModels.Lion;
+import ZooManagementSystem.DomainModels.Lynx;
+import ZooManagementSystem.DomainModels.Penguin;
+import ZooManagementSystem.DomainModels.Tiger;
 
 public class AnimalRepository {
     private Map<String, List<Animal>> animalMap;
 
     public AnimalRepository() {
         animalMap = new HashMap<>();
-        // initializeAnimals();
     }
 
-    public void initializeAnimals(){
+    public void initializeAnimals() {
         addAnimal("Penguin", new Penguin("Penny", 10, 200));
         addAnimal("Penguin", new Penguin("Lenny", 10, 198));
         addAnimal("Penguin", new Penguin("Tim", 10, 195));
@@ -47,7 +46,7 @@ public class AnimalRepository {
         return animalMap.get(animalType);
     }
 
-    public List<Animal> getAllAnimal(){
+    public List<Animal> getAllAnimal() {
         List<Animal> allAnimals = new ArrayList<>();
         for (List<Animal> animals : animalMap.values()) {
             allAnimals.addAll(animals);
