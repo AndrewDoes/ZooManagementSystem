@@ -11,7 +11,7 @@ import ZooManagementSystem.Enums.Colour;
 import ZooManagementSystem.Enums.Pattern;
 
 public class FishAttributeRandomizer{
-public static List<Integer> generateUniqueRandomList(int length) {
+private static List<Integer> generateUniqueRandomList(int length) {
     Set<Integer> uniqueNumbers = new HashSet<>();
     Random random = new Random();
 
