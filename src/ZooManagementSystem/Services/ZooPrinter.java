@@ -11,6 +11,7 @@ import ZooManagementSystem.Animals.Penguin;
 import ZooManagementSystem.Animals.Tiger;
 import ZooManagementSystem.Enums.Colour;
 import ZooManagementSystem.Repositories.AnimalRepository;
+import ZooManagementSystem.Utils.StringManipulatorUtil;
 
 public class ZooPrinter {
     private AnimalRepository repo;
@@ -80,7 +81,7 @@ public class ZooPrinter {
 				}
 				All_colors += "]";
 			}
-			All_colors = fishService.removeDuplicateWords(All_colors);
+			All_colors = StringManipulatorUtil.removeDuplicateWords(All_colors);
 			return Fishes_D+ toPrint + All_colors;
 		}
 		else {

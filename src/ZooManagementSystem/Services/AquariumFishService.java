@@ -83,15 +83,6 @@ public class AquariumFishService extends AnimalServices<AquariumFish>{
         return getAll();
     }
 
-	public String removeDuplicateWords(String inputString) {
-		String[] words = inputString.split("\\s+");
-		String result = Arrays.stream(words)
-				.distinct()
-				.collect(Collectors.joining(" "));
-
-		return result;
-	}
-
     public String MostPopularFishColour() {
         List<AquariumFish> fishes = getAll();
         if(fishes == null) return null;
