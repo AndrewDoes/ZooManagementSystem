@@ -13,14 +13,14 @@ public class Zoo {
 	// private static final int max_happiness = 100;
 	private String name;
 	private String location;
-	AnimalRepository repo;
-	AquariumFishService fishService;
-	PenguinService penguinService;
-	TigerService tigerService;
-	DogService dogService;
-	LionService	lionService;
-	LynxService lynxService;
-    ZooPrinter printer;
+	public AnimalRepository repo;
+	public AquariumFishService fishService;
+	public PenguinService penguinService;
+	public TigerService tigerService;
+	public DogService dogService;
+	public LionService	lionService;
+	public LynxService lynxService;
+    public ZooPrinter printer;
 	public ZooTimeService timeService;
 	
 	public Zoo()   {
