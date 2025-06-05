@@ -1,0 +1,17 @@
+@startuml ExceptionDiagram
+class AgeException extends Exception {
+  + AgeException()
+  + AgeException(message: String)
+
+  + AgeValidator(age: int): void
+}
+
+class HeightException extends Exception {
+  - penguinService: PenguinService
+
+  + HeightException(penguinService: PenguinService)
+  + HeightException(message: String)
+
+  + HeightIsIllegal(height: double): void
+}
+@enduml

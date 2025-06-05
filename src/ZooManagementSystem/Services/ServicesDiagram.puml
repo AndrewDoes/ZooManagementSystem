@@ -1,0 +1,94 @@
+@startuml ServicesDiagram
+
+abstract class AnimalServices {
+  - repo: AnimalRepository
+
+  + AnimalServices(repo: AnimalRepository)
+  + getRepo(): AnimalRepository
+  + setRepo(repo: AnimalRepository): void
+  + getSize(): int
+
+  + abstract getAll(): List<Animal>
+  + abstract addNewAnimal(animal: Animal): void
+  + abstract feedAll(): double
+  + abstract remove(animal: Animal): void
+}
+
+class AquariumFishService extends AnimalServices {
+  + AquariumFishService(repo: AnimalRepository)
+
+  + getAll(): List<AquariumFish>
+  + addNewAnimal(fish: AquariumFish): void
+  + createNewFishByType(type: int, age: int, length: double, singularFishColours: List<Colour>, pattern: Pattern): AquariumFish
+  + addRandomFish(num: int): List<AquariumFish>
+  + removeDuplicateWords(inputString: String): String
+  + MostPopularFishColour(): String
+  + feedAll(): double
+  + remove(animal: AquariumFish): void
+
+  ~ assignColourMap(fishes: List<AquariumFish>, colourCounts: Map<Colour, Integer>): void
+  ~ find2MostPopularColour(colourCounts: Map<Colour, Integer>, mostCommonColour: Colour, secondMostCommonColour: Colour, maxCount: int, secondMaxCount: int): String
+}
+
+class DogService extends AnimalServices {
+  + DogService(repo: AnimalRepository)
+
+  + getAll(): List<Dog>
+  + addNewAnimal(dog: Dog): void
+  + feedAll(): double
+  + remove(dog: Dog): void
+
+  + AddNewDog(name_d: String, age_d: int, weight_d: double, dogtype: int, dog_: int): void
+}
+
+class TigerService extends AnimalServices {
+  + TigerService(repo: AnimalRepository)
+
+  + addNewTiger(name: String, weight: double, age: int, gender: int): void
+  + addNewAnimal(tiger: Tiger): void
+  + getAll(): List<Tiger>
+  + feedAll(): double
+  + remove(tiger: Tiger): void
+}
+
+class PenguinService extends AnimalServices {
+  + PenguinService(repo: AnimalRepository)
+
+  + addNewAnimal(penguin: Penguin): void
+  + getAll(): List<Penguin>
+  + addNewPenguin(name: String, age: int, height: double, input: Scanner): String
+  + sortPenguinsOnWill(choice: int): void
+  + autoSortPenguins(penguins: List<Penguin>): void
+  + SortByHeight(penguins: List<Penguin>): List<Penguin>
+  + SortByAge(penguins: List<Penguin>): List<Penguin>
+  + SortByName(penguins: List<Penguin>): List<Penguin>
+  + Feed_Penguins(fishes: List<AquariumFish>): List<AquariumFish>
+  + getLeader(): Penguin
+  + getLeaderHeight(): double
+  + feedAll(): double
+  + heightExceptionPenguin(input: Scanner): double
+  + ageExceptionPenguin(input: Scanner): int
+  + remove(penguin: Penguin): void
+}
+
+class LionService extends AnimalServices {
+  + LionService(repo: AnimalRepository)
+
+  + addNewLion(name: String, weight: double, age: int, gender: int): void
+  + addNewAnimal(lion: Lion): void
+  + getAll(): List<Lion>
+  + feedAll(): double
+  + remove(lion: Lion): void
+}
+
+class LynxService extends AnimalServices {
+  + LynxService(repo: AnimalRepository)
+
+  + addNewLynx(name: String, weight: double, age: int, gender: int): void
+  + addNewAnimal(lynx: Lynx): void
+  + getAll(): List<Lynx>
+  + feedAll(): double
+  + remove(lynx: Lynx): void
+}
+
+@enduml

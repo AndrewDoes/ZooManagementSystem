@@ -1,0 +1,15 @@
+@startuml
+class AnimalRepository {
+  - animalMap: Map<String, List<Animal>>
+
+  + AnimalRepository()
+  + initializeAnimals(): void
+
+  + addAnimal(animalType: String, animal: Animal): void
+  + getAnimals(animalType: String): List<Animal>
+  + getAllAnimal(): List<Animal>
+  + removeAnimal(animalType: String, animal: Animal): void
+  + clearAnimals(animalType: String): void
+  + clearAllAnimals(): void
+}
+@enduml

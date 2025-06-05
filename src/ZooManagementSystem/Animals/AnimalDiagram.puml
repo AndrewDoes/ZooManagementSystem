@@ -1,0 +1,143 @@
+@startuml AnimalDiagram
+abstract class Animal {
+  - name: String
+  - age: int
+  - happiness: int = 100
+  - lifeSpan: int
+
+  + Animal(name: String, age: int, lifeSpan: int)
+  + Animal(age: int, lifeSpan: int)
+
+  + getAge(): int
+  + setAge(age: int): void
+  + getHappiness(): int
+  + setHappiness(happiness: int): void
+  + getLifeSpan(): int
+  + setLifeSpan(lifeSpan: int): void
+  + ageOneYear(): boolean
+  + getName(): String
+  + setName(name: String): void
+
+  + makeNoise(): String {abstract}
+  + feed(): double {abstract}
+  + toString(): String {abstract}
+  + getDeathReport(cause: String): String {abstract}
+}
+
+class AquariumFish extends Animal {
+  - length: double
+  - colours: List<Colour>
+  - pattern: Pattern
+
+  + AquariumFish(age: int, lifeSpan: int, length: double, colours: List<Colour>, pattern: Pattern)
+  + AquariumFish(age: int, length: double, colours: List<Colour>, pattern: Pattern)
+
+  + getLength(): double
+  + setLength(length: double): void
+  + getColoursString(): String
+  + getColours(): List<Colour>
+  + setColours(colours: List<Colour>): void
+  + getPattern(): Pattern
+  + setPattern(pattern: Pattern): void
+
+  + feed(): double
+  + makeNoise(): String
+  + toString(): String
+  + getDeathReport(cause: String): String
+}
+
+abstract class CarnivorousAnimal extends Animal {
+  - weight: double
+  - gender: Gender
+  - MeatCalcFemale: double
+  - MeatCalcMale: double
+
+  + CarnivorousAnimal(name: String, age: int, lifeSpan: int, weight: double, gender: Gender, MeatCalcMale: double, MeatCalcFemale: double)
+
+  + getWeight(): double
+  + setWeight(weight: double): void
+  + getGender(): Gender
+  + setGender(gender: Gender): void
+  + getMeatCalcFemale(): double
+  + getMeatCalcMale(): double
+
+  + feed(): double
+}
+
+class ClownFish extends AquariumFish {
+  + ClownFish(age: int, length: double)
+
+  + feed(): double
+  + toString(): String
+  + getPattern(): Pattern
+}
+
+class GoldFish extends AquariumFish {
+  + GoldFish(age: int, length: double, colour: Colour)
+
+  + feed(): double
+  + getPattern(): Pattern
+  + toString(): String
+}
+
+class Dog extends CarnivorousAnimal {
+  - Type: DogType
+
+  + Dog(name: String, age: int, weight: double, Type: DogType, gender: Gender)
+
+  + getType(): DogType
+  + setType(Type: DogType): void
+
+  + makeNoise(): String
+  + toString(): String
+  + getDeathReport(cause: String): String
+}
+
+class Lion extends CarnivorousAnimal {
+  - MaxMeatinKg: int = 25
+
+  + Lion(name: String, age: int, weight: double, gender: Gender)
+
+  + makeNoise(): String
+  + feed(): double
+  + toString(): String
+  + getDeathReport(cause: String): String
+}
+
+class Lynx extends CarnivorousAnimal {
+  + Lynx(name: String, age: int, weight: double, gender: Gender)
+
+  + feed(): double
+  + makeNoise(): String
+  + toString(): String
+  + getDeathReport(cause: String): String
+}
+
+class Tiger extends CarnivorousAnimal {
+  + Tiger(name: String, age: int, weight: double, gender: Gender)
+
+  + makeNoise(): String
+  + toString(): String
+  + getDeathReport(cause: String): String
+}
+
+class Penguin extends Animal {
+  - height: double
+  - name: String
+  - LastSortWayused: int
+
+  + Penguin(name: String, age: int, height: double)
+
+  + getHeight(): double
+  + setHeight(height: double): void
+  + getName(): String
+  + setName(name: String): void
+  + getLastSortWayused(): int
+  + setLastSortWayused(lastSortWayused: int): void
+
+  + feed(): double
+  + makeNoise(): String
+  + toString(): String
+  + getDeathReport(cause: String): String
+}
+@enduml

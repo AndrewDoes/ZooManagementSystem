@@ -1,0 +1,33 @@
+@startuml EnumDiagram
+enum Colour {
+  BLACK
+  GOLD
+  ORANGE
+  YELLOW
+  WHITE
+  GREEN
+  BLUE
+  BROWN
+  RED
+  CYAN
+}
+
+enum DogType {
+  Akita
+  Bulldog
+  Poodle
+  Terriers
+}
+
+enum Gender{
+    Male
+    Female
+}
+
+enum Pattern{
+    DOTS
+    STRIPES
+    SPOTS
+    CLEAR
+}
+@enduml

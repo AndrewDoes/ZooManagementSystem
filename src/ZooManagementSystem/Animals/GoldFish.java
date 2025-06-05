@@ -11,6 +11,7 @@ public class GoldFish extends AquariumFish{
 		super(age, 12, length , List.of(Colour.BLACK, Colour.GOLD, Colour.ORANGE, Colour.YELLOW), Pattern.CLEAR);
 	}
 	
+
 	public double feed() {
 		return 1.0;
 	}
