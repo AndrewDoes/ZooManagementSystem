@@ -1,16 +1,23 @@
-package ZooManagementSystem.Services;
+package ZooManagementSystem.Printer;
 
 import java.util.List;
 
-import ZooManagementSystem.Animals.Animal;
-import ZooManagementSystem.Animals.AquariumFish;
-import ZooManagementSystem.Animals.Dog;
-import ZooManagementSystem.Animals.Lion;
-import ZooManagementSystem.Animals.Lynx;
-import ZooManagementSystem.Animals.Penguin;
-import ZooManagementSystem.Animals.Tiger;
+import ZooManagementSystem.DomainModels.Animal;
+import ZooManagementSystem.DomainModels.AquariumFish;
 import ZooManagementSystem.DomainModels.Colour;
+import ZooManagementSystem.DomainModels.Dog;
+import ZooManagementSystem.DomainModels.Lion;
+import ZooManagementSystem.DomainModels.Lynx;
+import ZooManagementSystem.DomainModels.Penguin;
+import ZooManagementSystem.DomainModels.Tiger;
 import ZooManagementSystem.Repositories.AnimalRepository;
+import ZooManagementSystem.Services.AquariumFishService;
+import ZooManagementSystem.Services.DogService;
+import ZooManagementSystem.Services.LionService;
+import ZooManagementSystem.Services.LynxService;
+import ZooManagementSystem.Services.PenguinService;
+import ZooManagementSystem.Services.TigerService;
+import ZooManagementSystem.Services.Zoo;
 
 public class ZooPrinter {
 	private AnimalRepository repo;
@@ -151,12 +158,12 @@ public class ZooPrinter {
 		return forPrint;
 	}
 
-	String reportDeathBySadness(String PrintAllDead, Animal animal) {
+	public String reportDeathBySadness(String PrintAllDead, Animal animal) {
 		PrintAllDead += animal.getDeathReport("his Sadness:(") + "\n";
 		return PrintAllDead;
 	}
 
-	String reportDeathByAge(String PrintAllDead, Animal animal) {
+	public String reportDeathByAge(String PrintAllDead, Animal animal) {
 		PrintAllDead += animal.getDeathReport("his age") + "\n";
 		return PrintAllDead;
 	}

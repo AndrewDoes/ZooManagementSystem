@@ -2,11 +2,11 @@ package ZooManagementSystem.Views;
 
 import java.util.Scanner;
 
-import ZooManagementSystem.Exceptions.AgeException;
-import ZooManagementSystem.Exceptions.HeightException;
+import ZooManagementSystem.Printer.ZooPrinter;
 import ZooManagementSystem.Services.AquariumFishService;
 import ZooManagementSystem.Services.Zoo;
-import ZooManagementSystem.Services.ZooPrinter;
+import ZooManagementSystem.Utils.AgeException;
+import ZooManagementSystem.Utils.HeightException;
 
 public class App {
     public void startApp() throws HeightException, AgeException {

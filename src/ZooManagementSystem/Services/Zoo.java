@@ -1,12 +1,12 @@
 package ZooManagementSystem.Services;
 
-import ZooManagementSystem.Animals.Dog;
-import ZooManagementSystem.Animals.Lion;
-import ZooManagementSystem.Animals.Lynx;
-import ZooManagementSystem.Animals.Penguin;
-import ZooManagementSystem.Animals.Tiger;
+import ZooManagementSystem.DomainModels.Dog;
 import ZooManagementSystem.DomainModels.DogType;
 import ZooManagementSystem.DomainModels.Gender;
+import ZooManagementSystem.DomainModels.Lion;
+import ZooManagementSystem.DomainModels.Lynx;
+import ZooManagementSystem.DomainModels.Penguin;
+import ZooManagementSystem.DomainModels.Tiger;
 import ZooManagementSystem.Printer.ZooPrinter;
 import ZooManagementSystem.Repositories.AnimalRepository;
 

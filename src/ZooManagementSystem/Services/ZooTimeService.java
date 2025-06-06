@@ -3,7 +3,7 @@ package ZooManagementSystem.Services;
 import java.util.ArrayList;
 import java.util.List;
 
-import ZooManagementSystem.Animals.Animal;
+import ZooManagementSystem.DomainModels.Animal;
 
 public class ZooTimeService {
 

@@ -3,10 +3,10 @@ package ZooManagementSystem.Services;
 import java.util.ArrayList;
 import java.util.List;
 
-import ZooManagementSystem.Animals.Animal;
-import ZooManagementSystem.Animals.Dog;
-import ZooManagementSystem.Enums.DogType;
-import ZooManagementSystem.Enums.Gender;
+import ZooManagementSystem.DomainModels.Animal;
+import ZooManagementSystem.DomainModels.Dog;
+import ZooManagementSystem.DomainModels.DogType;
+import ZooManagementSystem.DomainModels.Gender;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class DogService extends AnimalServices<Dog> {

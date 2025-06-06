@@ -2,9 +2,9 @@ package ZooManagementSystem.Services;
 import java.util.ArrayList;
 import java.util.List;
 
-import ZooManagementSystem.Animals.Animal;
-import ZooManagementSystem.Animals.Tiger;
-import ZooManagementSystem.Enums.Gender;
+import ZooManagementSystem.DomainModels.Animal;
+import ZooManagementSystem.DomainModels.Gender;
+import ZooManagementSystem.DomainModels.Tiger;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class TigerService extends AnimalServices<Tiger> {
