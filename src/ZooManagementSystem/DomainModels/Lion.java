@@ -1,6 +1,4 @@
-package ZooManagementSystem.Animals;
-
-import ZooManagementSystem.Enums.Gender;
+package ZooManagementSystem.DomainModels;
 
 public class Lion extends CarnivorousAnimal{
     private final int MaxMeatinKg=25;

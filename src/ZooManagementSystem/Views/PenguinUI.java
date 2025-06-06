@@ -3,9 +3,9 @@ package ZooManagementSystem.Views;
 import java.util.List;
 import java.util.Scanner;
 
-import ZooManagementSystem.Animals.Penguin;
+import ZooManagementSystem.DomainModels.Penguin;
+import ZooManagementSystem.Printer.ZooPrinter;
 import ZooManagementSystem.Services.PenguinService;
-import ZooManagementSystem.Services.ZooPrinter;
 import ZooManagementSystem.Utils.InputUtil;
 
 public class PenguinUI {

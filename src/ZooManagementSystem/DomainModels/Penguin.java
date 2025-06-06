@@ -1,10 +1,10 @@
-package ZooManagementSystem.Animals;
+package ZooManagementSystem.DomainModels;
 
-public class Penguin extends Animal{
+public class Penguin extends Animal {
 	private double height;
 	private String name;
 	private int LastSortWayused;
-	//Constructor
+
 	public Penguin(String name, int age, double height) {
 		super(age, 6);
 		this.name = name;
@@ -18,7 +18,7 @@ public class Penguin extends Animal{
 	public void setLastSortWayused(int lastSortWayused) {
 		LastSortWayused = lastSortWayused;
 	}
-	
+
 	public double feed() {
 		return 1.0;
 	}
@@ -39,17 +39,16 @@ public class Penguin extends Animal{
 		this.name = name;
 	}
 
-	public String toString() { 
-		return "Penguin"; 
-	 }
+	public String toString() {
+		return "Penguin";
+	}
 
-	 public String makeNoise() {
-		 return "squack";
-	 }
+	public String makeNoise() {
+		return "squack";
+	}
 
 	@Override
 	public String getDeathReport(String cause) {
 		return getName() + " is Dead because of " + cause;
 	}
 }
-

@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import ZooManagementSystem.Enums.Colour;
-import ZooManagementSystem.Enums.Pattern;
+import ZooManagementSystem.DomainModels.Colour;
+import ZooManagementSystem.DomainModels.Pattern;
 import ZooManagementSystem.Services.AquariumFishService;
 import ZooManagementSystem.Utils.InputUtil;
 
@@ -30,7 +30,7 @@ public class FishUI {
     }
 
     private List<Colour> getFishColors(Scanner input) {
-        List<Colour> allColours = Arrays.asList(Colour.values()); // Pastikan enum Colour ada
+        List<Colour> allColours = Arrays.asList(Colour.values());
         List<Colour> singularFishColours = new ArrayList<>();
 
         System.out.println("Available Colors:");
@@ -100,7 +100,7 @@ public class FishUI {
 
         if (choice == 1) {
             handleAddFishWithDetails(input);
-        } else { // choice == 2
+        } else {
             handleAddRandomFishes(input);
         }
     }

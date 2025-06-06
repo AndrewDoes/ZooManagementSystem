@@ -1,32 +1,20 @@
-package ZooManagementSystem.Animals;
-
-// - age
-// - happiness
-// - Lifespan
-// - Noise
-// - getter setter dari atribut di atas
-// - feed()
-// - toString()
-// - ageOneYear()
-// - makeNoise()
+package ZooManagementSystem.DomainModels;
 
 public abstract class Animal {
     private String name;
     private int age;
     private int happiness = 100;
     private int lifeSpan;
-    
+
     public Animal(String name, int age, int lifeSpan) {
         this.name = name;
         this.age = age;
         this.lifeSpan = lifeSpan;
     }
 
-    public Animal(int age, int lifeSpan){
+    public Animal(int age, int lifeSpan) {
         this(null, age, lifeSpan);
     }
-
-    
 
     public int getAge() {
         return age;
@@ -52,8 +40,8 @@ public abstract class Animal {
         this.lifeSpan = lifeSpan;
     }
 
-    public boolean ageOneYear(){
-        this.age+=1;
+    public boolean ageOneYear() {
+        this.age += 1;
         return this.age <= lifeSpan;
     }
 
@@ -66,8 +54,11 @@ public abstract class Animal {
     }
 
     public abstract String makeNoise();
+
     public abstract double feed();
+
     public abstract String toString();
+
     public abstract String getDeathReport(String cause);
 
 }

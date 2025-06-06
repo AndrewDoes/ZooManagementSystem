@@ -3,9 +3,9 @@ package ZooManagementSystem.Services;
 import java.util.ArrayList;
 import java.util.List;
 
-import ZooManagementSystem.Animals.Animal;
-import ZooManagementSystem.Animals.Lion;
-import ZooManagementSystem.Enums.Gender;
+import ZooManagementSystem.DomainModels.Animal;
+import ZooManagementSystem.DomainModels.Gender;
+import ZooManagementSystem.DomainModels.Lion;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class LionService extends AnimalServices<Lion>{

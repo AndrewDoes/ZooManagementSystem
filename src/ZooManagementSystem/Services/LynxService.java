@@ -3,9 +3,9 @@ package ZooManagementSystem.Services;
 import java.util.ArrayList;
 import java.util.List;
 
-import ZooManagementSystem.Animals.Animal;
-import ZooManagementSystem.Animals.Lynx;
-import ZooManagementSystem.Enums.Gender;
+import ZooManagementSystem.DomainModels.Animal;
+import ZooManagementSystem.DomainModels.Gender;
+import ZooManagementSystem.DomainModels.Lynx;
 import ZooManagementSystem.Repositories.AnimalRepository;
 
 public class LynxService extends AnimalServices<Lynx> {

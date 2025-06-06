@@ -3,12 +3,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import ZooManagementSystem.Animals.Animal;
-import ZooManagementSystem.Animals.AquariumFish;
-import ZooManagementSystem.Animals.Penguin;
-import ZooManagementSystem.Exceptions.AgeException;
-import ZooManagementSystem.Exceptions.HeightException;
+import ZooManagementSystem.DomainModels.Animal;
+import ZooManagementSystem.DomainModels.AquariumFish;
+import ZooManagementSystem.DomainModels.Penguin;
 import ZooManagementSystem.Repositories.AnimalRepository;
+import ZooManagementSystem.Utils.AgeException;
+import ZooManagementSystem.Utils.HeightException;
 
 public class PenguinService extends AnimalServices<Penguin> {
     public PenguinService(AnimalRepository repo) {
