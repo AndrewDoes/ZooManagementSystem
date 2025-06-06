@@ -1,6 +1,4 @@
-package ZooManagementSystem.Animals;
-
-import ZooManagementSystem.Enums.Gender;
+package ZooManagementSystem.DomainModels;
 
 public class Lynx extends CarnivorousAnimal{
 	 

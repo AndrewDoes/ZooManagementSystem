@@ -1,7 +1,4 @@
-package ZooManagementSystem.Animals;
-
-import ZooManagementSystem.Enums.DogType;
-import ZooManagementSystem.Enums.Gender;
+package ZooManagementSystem.DomainModels;
 
 public class Dog extends CarnivorousAnimal{
     private DogType Type;

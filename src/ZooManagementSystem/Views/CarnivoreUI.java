@@ -11,7 +11,7 @@ import ZooManagementSystem.Services.Zoo;
 import ZooManagementSystem.Utils.InputUtil;
 
 public class CarnivoreUI {
-    private Zoo zoo; // Untuk mengakses berbagai service karnivora
+    private Zoo zoo;
 
     public CarnivoreUI(Zoo zoo) {
         this.zoo = zoo;
